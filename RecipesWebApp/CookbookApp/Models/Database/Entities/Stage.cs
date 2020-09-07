@@ -1,5 +1,4 @@
-﻿using KK.Cookbook.Models.Database.Entities.Custom;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace KK.Cookbook.Models.Database.Entities
@@ -14,6 +13,5 @@ namespace KK.Cookbook.Models.Database.Entities
 
         public int Index { get; set; }
         public string Description { get; set; }
-        public Image Image { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using KK.Cookbook.Models.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KK.Cookbook.Models.Database.Migrations
 {
     [DbContext(typeof(CookbookDbContext))]
-    partial class CookbookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200907190019_ReworkDatabase")]
+    partial class ReworkDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,7 +171,7 @@ namespace KK.Cookbook.Models.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CookingTypes");
+                    b.ToTable("CookingType");
                 });
 
             modelBuilder.Entity("KK.Cookbook.Models.Database.Entities.Types.DishType", b =>
@@ -178,12 +180,9 @@ namespace KK.Cookbook.Models.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("DishTypes");
+                    b.ToTable("DishType");
                 });
 
             modelBuilder.Entity("KK.Cookbook.Models.Database.Entities.Types.IngredientType", b =>
@@ -192,12 +191,9 @@ namespace KK.Cookbook.Models.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("IngredientTypes");
+                    b.ToTable("IngredientType");
                 });
 
             modelBuilder.Entity("KK.Cookbook.Models.Database.Entities.Types.RecipeType", b =>
@@ -206,12 +202,9 @@ namespace KK.Cookbook.Models.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("RecipeTypes");
+                    b.ToTable("RecipeType");
                 });
 
             modelBuilder.Entity("KK.Cookbook.Models.Database.Entities.User", b =>

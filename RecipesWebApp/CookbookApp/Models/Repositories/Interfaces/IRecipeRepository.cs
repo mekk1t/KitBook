@@ -15,7 +15,6 @@ namespace KK.Cookbook.Models.Repositories.Interfaces
         IEnumerable<Recipe> GetRecipes(int pageNumber = 1);
         IEnumerable<Recipe> GetRecipesFiltered(RecipeFilter filter);
         IEnumerable<Recipe> GetRecipesByIngredients(List<Guid> ingredientIds);
-        IEnumerable<Recipe> GetRecipesByCategories(List<Guid> categoriesIds);
         IEnumerable<Recipe> SearchRecipesByName_ExactMatch(string searchText);
         IEnumerable<Recipe> SearchRecipesByName_Occurrences(string searchText);
 
@@ -29,9 +28,5 @@ namespace KK.Cookbook.Models.Repositories.Interfaces
         void AddIngredientToRecipe(Guid recipeId, Guid ingredientId);
         void RemoveIngredientFromRecipe(Guid recipeId, Guid ingredientId);
         void EditRecipeIngredientInfo(Guid recipeId, Guid ingredientId, RecipeIngredientInfo info);
-
-        void EditRecipeCategory(Guid recipeId, List<Guid> categoriesIds);
-        void RemoveCategoryFromRecipe(Guid recipeId, Guid categoryId);
-        void AddCategoryToRecipe(Guid recipeId, Guid categoryId);
     }
 }

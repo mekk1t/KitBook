@@ -20,16 +20,6 @@ namespace KK.Cookbook.Models.Repositories
             this.dbContext = dbContext;
         }
 
-        public void AddCategoryToRecipe(Guid recipeId, Guid categoryId)
-        {
-            dbContext.RecipeCategories.Add(new RecipeCategory
-            {
-                RecipeId = recipeId,
-                CategoryId = categoryId
-            });
-            dbContext.SaveChanges();
-        }
-
         public void AddCommentToRecipe(Guid recipeId, Comment newComment)
         {
             var dbRecipe = dbContext.Recipes.FirstOrDefault(r => r.Id == recipeId);
@@ -72,22 +62,6 @@ namespace KK.Cookbook.Models.Repositories
             dbContext.SaveChanges();
         }
 
-        public void EditRecipeCategory(Guid recipeId, List<Guid> categoriesIds)
-        {
-            var recipeCategories = dbContext.RecipeCategories.Where(rc => rc.RecipeId == recipeId).AsEnumerable();
-            dbContext.RecipeCategories.RemoveRange(recipeCategories);
-
-            foreach (var categoryId in categoriesIds)
-            {
-                dbContext.RecipeCategories.Add(new RecipeCategory
-                {
-                    RecipeId = recipeId,
-                    CategoryId = categoryId
-                });
-            }
-            dbContext.SaveChanges();
-        }
-
         public void EditRecipeIngredientInfo(Guid recipeId, Guid ingredientId, RecipeIngredientInfo info)
         {
             var recipeIngredient = dbContext.RecipeIngredients.FirstOrDefault(ri => ri.RecipeId == recipeId && ri.IngredientId == ingredientId);
@@ -109,18 +83,14 @@ namespace KK.Cookbook.Models.Repositories
         {
             return dbContext.Recipes
                 .AsNoTracking()
-                .Include(r => r.Categories)
-                    .ThenInclude(rc => rc.Category)
+                .Include(r => r.RecipeType)
+                .Include(r => r.CookingType)
+                .Include(r => r.DishType)
                 .Include(r => r.Ingredients)
                     .ThenInclude(ri => ri.Ingredient)
                 .Skip((pageNumber - 1) * PAGE_SIZE)
                 .Take(PAGE_SIZE)
                 .AsEnumerable();
-        }
-
-        public IEnumerable<Recipe> GetRecipesByCategories(List<Guid> categoriesIds)
-        {
-            throw new NotImplementedException();
         }
 
         public IEnumerable<Recipe> GetRecipesByIngredients(List<Guid> ingredientIds)
@@ -129,11 +99,6 @@ namespace KK.Cookbook.Models.Repositories
         }
 
         public IEnumerable<Recipe> GetRecipesFiltered(RecipeFilter filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveCategoryFromRecipe(Guid recipeId, Guid categoryId)
         {
             throw new NotImplementedException();
         }

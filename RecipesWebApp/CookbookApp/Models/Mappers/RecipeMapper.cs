@@ -16,10 +16,7 @@ namespace KK.Cookbook.Models.Mappers
                 Id = Guid.NewGuid(),
                 Title = value.Title,
                 Description = value.Description,
-               // CookingTime = value.CookingTime,
-                CookingType = value.CookingType,
-                RecipeType = value.RecipeType,
-                DishType = value.DishType,
+                CookingTimeMinutes = value.Hours * 60 + value.Minutes,
                 SourceURL = value.SourceURL
             };
             return recipe;
@@ -34,10 +31,8 @@ namespace KK.Cookbook.Models.Mappers
                 {
                     Title = recipe.Title,
                     Description = recipe.Description,
-                    DishType = recipe.DishType,
-                   // CookingTime = recipe.CookingTime,
-                    CookingType = recipe.CookingType,
-                    RecipeType = recipe.RecipeType,
+                    Hours = recipe.CookingTimeMinutes / 60,
+                    Minutes = recipe.CookingTimeMinutes % 60,
                     SourceURL = recipe.SourceURL
                 });
             }

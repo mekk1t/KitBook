@@ -1,13 +1,11 @@
 ﻿@model KK.Cookbook.Models.DTO.RecipeDto
-@using KK.Cookbook.Models.Database.Enums
 
 @{
-    ViewData["Title"] = "NewRecipe";
+    ViewData["Title"] = "Создание нового рецепта";
 }
 
-<h1>NewRecipe</h1>
-
-<h4>RecipeDto</h4>
+<h4>Новый рецепт</h4>
+<h5><i>Надо настроить выбор данных из выпадающего списка типов</i></h5>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -23,29 +21,33 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <div class="col-md-10">
-                    <select asp-for="CookingType" asp-items="Html.GetEnumSelectList<CookingType>()">
-                        <option selected="selected" value="">Please select</option>
-                    </select>
-                    <span asp-validation-for="CookingType" class="text-danger" />
+            <div>
+                <i>Время готовки</i>
+                <div class="form-group">
+                    <label asp-for="Hours" class="control-label"></label>
+                    <input asp-for="Hours" class="form-control" />
+                    <span asp-validation-for="Hours" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Minutes" class="control-label"></label>
+                    <input asp-for="Minutes" class="form-control" />
+                    <span asp-validation-for="Minutes" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-md-10">
-                    <select asp-for="RecipeType" asp-items="Html.GetEnumSelectList<RecipeType>()">
-                        <option selected="selected" value="">Please select</option>
-                    </select>
-                    <span asp-validation-for="RecipeType" class="text-danger" />
-                </div>
+                <label asp-for="CookingType" class="control-label"></label>
+                <input asp-for="CookingType" class="form-control" />
+                <span asp-validation-for="CookingType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <div class="col-md-10">
-                    <select asp-for="DishType" asp-items="Html.GetEnumSelectList<DishType>()">
-                        <option selected="selected" value="">Please select</option>
-                    </select>
-                    <span asp-validation-for="DishType" class="text-danger" />
-                </div>
+                <label asp-for="DishType" class="control-label"></label>
+                <input asp-for="DishType" class="form-control" />
+                <span asp-validation-for="DishType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecipeType" class="control-label"></label>
+                <input asp-for="RecipeType" class="form-control" />
+                <span asp-validation-for="RecipeType" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SourceURL" class="control-label"></label>
