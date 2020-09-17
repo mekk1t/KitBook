@@ -1,14 +1,13 @@
-﻿using KK.Cookbook.Models.Commands.Interfaces;
-using KK.Cookbook.Models.DTO;
+﻿using KK.Cookbook.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KK.Cookbook.Controllers
 {
     public class RecipeController : Controller
     {
-        public IActionResult GetAllRecipes([FromServices] IGetAllRecipesCommand command)
+        public IActionResult GetAllRecipes()
         {
-            return View("AllRecipes", command.Execute());
+            return View("AllRecipes");
         }
 
         public IActionResult GetRecipeById()
@@ -23,13 +22,9 @@ namespace KK.Cookbook.Controllers
         }
 
         [HttpPost]
-        public void CreateNewRecipe(
-            [FromServices] ICreateNewRecipeCommand command,
-            RecipeDto newRecipe)
+        public void CreateNewRecipe([FromForm]RecipeDto newRecipe)
         {
-            var result = command.Execute(newRecipe);
-            RedirectToAction(nameof(GetAllRecipes));
-            // RedirectToAction("GetRecipeById", result);
+
         }
     }
 }
