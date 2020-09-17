@@ -101,7 +101,6 @@ namespace KK.Cookbook.Models.Repositories
                 .Select(ri => new { ri.IngredientId, ri.RecipeId })
                 .ToList();
 
-
             for (int i = 0; i < ingredientIds.Count; i++)
             {
                 // TODO: отфильтровать айдишники по входящим гуидам, и выбрать RecipeIds в новую коллекцию. Потом по этим айдишникам выцепить сущности.
@@ -117,12 +116,23 @@ namespace KK.Cookbook.Models.Repositories
 
         public void RemoveCommentFromRecipe(Guid commentId)
         {
-            throw new NotImplementedException();
+            var comment = dbContext.Recipes
+                .Include(r => r.Comments)
+                .Select(r => r.Comments.FirstOrDefault(c => c.Id == commentId))
+                .FirstOrDefault();
+
+            dbContext.Comments.Remove(comment);
+            dbContext.SaveChanges();
         }
 
         public void RemoveIngredientFromRecipe(Guid recipeId, Guid ingredientId)
         {
-            throw new NotImplementedException();
+            dbContext.RecipeIngredients.Remove(new RecipeIngredient
+            {
+                RecipeId = recipeId,
+                IngredientId = ingredientId
+            });
+            dbContext.SaveChanges();
         }
 
         public IEnumerable<Recipe> SearchRecipesByName_ExactMatch(string searchText)
