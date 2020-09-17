@@ -22,7 +22,9 @@ namespace KK.Cookbook.Models.Repositories
 
         public void AddCommentToRecipe(Guid recipeId, Comment newComment)
         {
-            var dbRecipe = dbContext.Recipes.FirstOrDefault(r => r.Id == recipeId);
+            var dbRecipe = dbContext.Recipes
+                .Include(r => r.Comments)
+                .FirstOrDefault(r => r.Id == recipeId);
             dbRecipe.Comments.Add(newComment);
             dbContext.SaveChanges();
         }
@@ -37,11 +39,10 @@ namespace KK.Cookbook.Models.Repositories
             dbContext.SaveChanges();
         }
 
-        public Guid AddNewRecipe(Recipe newRecipe)
+        public void AddNewRecipe(Recipe newRecipe)
         {
             dbContext.Recipes.Add(newRecipe);
             dbContext.SaveChanges();
-            return newRecipe.Id;
         }
 
         public void EditCommentToRecipe(Guid commentId, string newCommentText)
@@ -95,7 +96,18 @@ namespace KK.Cookbook.Models.Repositories
 
         public IEnumerable<Recipe> GetRecipesByIngredients(List<Guid> ingredientIds)
         {
-            throw new NotImplementedException();
+            var IDs = dbContext.RecipeIngredients
+                .AsNoTracking()
+                .Select(ri => new { ri.IngredientId, ri.RecipeId })
+                .ToList();
+
+
+            for (int i = 0; i < ingredientIds.Count; i++)
+            {
+                // TODO: отфильтровать айдишники по входящим гуидам, и выбрать RecipeIds в новую коллекцию. Потом по этим айдишникам выцепить сущности.
+            }
+
+            return null;
         }
 
         public IEnumerable<Recipe> GetRecipesFiltered(RecipeFilter filter)

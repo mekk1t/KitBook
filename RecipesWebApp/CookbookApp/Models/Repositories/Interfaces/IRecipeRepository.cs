@@ -8,7 +8,7 @@ namespace KK.Cookbook.Models.Repositories.Interfaces
 {
     public interface IRecipeRepository
     {
-        Guid AddNewRecipe(Recipe newRecipe);
+        void AddNewRecipe(Recipe newRecipe);
         Recipe GetRecipeById(Guid recipeId);
         void EditRecipeById(Guid recipeId, Recipe editRecipe);
 
