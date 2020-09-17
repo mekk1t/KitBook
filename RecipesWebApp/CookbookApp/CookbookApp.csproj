@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include=".design\css\home.css" />
+    <Content Include="Helpers\.design\css\home.css" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include=".txt\RepositoryMethods.txt" />
-    <None Include=".txt\TZ.txt" />
+    <None Include="Helpers\.txt\RepositoryMethods.txt" />
+    <None Include="Helpers\.txt\TZ.txt" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,8 +8,6 @@ using KK.Cookbook.Models.Mappers.Interfaces;
 using KK.Cookbook.Models.Repositories;
 using KK.Cookbook.Models.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -23,14 +21,6 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddDbContext<CookbookDbContext>(
                 o => o.UseSqlServer(SQL_CONNECTION_STRING));
-            return services;
-        }
-
-        public static IServiceCollection AddCommands(this IServiceCollection services)
-        {
-            services.AddScoped<IGetAllRecipesCommand, GetAllRecipesCommand>();
-            services.AddScoped<ICreateNewRecipeCommand, CreateNewRecipeCommand>();
-
             return services;
         }
 
