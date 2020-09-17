@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace KK.Cookbook.Models.Database.Entities.Types
@@ -8,5 +10,14 @@ namespace KK.Cookbook.Models.Database.Entities.Types
         [Key]
         public Guid Id { get; set; }
         public string Name { get; set; }
+    }
+
+    public class DishTypeConfiguration : IEntityTypeConfiguration<DishType>
+    {
+        public void Configure(EntityTypeBuilder<DishType> builder)
+        {
+            builder.HasIndex(d => d.Name)
+                .IsUnique();
+        }
     }
 }
