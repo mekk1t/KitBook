@@ -7,12 +7,12 @@ using KK.Cookbook.Models.Database.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using KK.Cookbook.Helpers.Extensions;
 
 namespace KK.Cookbook.Models.Repositories
 {
     public class RecipeRepository : IRecipeRepository
     {
-        private const int PAGE_SIZE = 20;
         private readonly CookbookDbContext dbContext;
 
         public RecipeRepository(CookbookDbContext dbContext)
@@ -45,6 +45,13 @@ namespace KK.Cookbook.Models.Repositories
             dbContext.SaveChanges();
         }
 
+        public void AddStagesToRecipe(Guid recipeId, List<Stage> stages)
+        {
+            var recipe = dbContext.Recipes.FirstOrDefault(r => r.Id == recipeId);
+            recipe.Stages = stages;
+            dbContext.SaveChanges();
+        }
+
         public void EditCommentToRecipe(Guid commentId, string newCommentText)
         {
             var recipeComments = dbContext.Recipes.Select(r => r.Comments.FirstOrDefault(c => c.Id == commentId));
@@ -56,11 +63,7 @@ namespace KK.Cookbook.Models.Repositories
 
         public void EditRecipeById(Guid recipeId, Recipe editRecipe)
         {
-            var recipe = dbContext.Recipes.FirstOrDefault(r => r.Id == recipeId);
-            // TODO implement update
-
-            dbContext.Update(recipe);
-            dbContext.SaveChanges();
+            throw new NotImplementedException();
         }
 
         public void EditRecipeIngredientInfo(Guid recipeId, Guid ingredientId, RecipeIngredientInfo info)
@@ -80,7 +83,7 @@ namespace KK.Cookbook.Models.Repositories
                 .FirstOrDefault(r => r.Id == recipeId);
         }
 
-        public IEnumerable<Recipe> GetRecipes(int pageNumber = 1)
+        public IEnumerable<Recipe> GetRecipes()
         {
             return dbContext.Recipes
                 .AsNoTracking()
@@ -89,8 +92,7 @@ namespace KK.Cookbook.Models.Repositories
                 .Include(r => r.DishType)
                 .Include(r => r.Ingredients)
                     .ThenInclude(ri => ri.Ingredient)
-                .Skip((pageNumber - 1) * PAGE_SIZE)
-                .Take(PAGE_SIZE)
+                .Paged()
                 .AsEnumerable();
         }
 
@@ -114,6 +116,15 @@ namespace KK.Cookbook.Models.Repositories
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Stage> GetRecipeStages(Guid recipeId)
+        {
+            var recipe = dbContext.Recipes
+                .AsNoTracking()
+                .Include(r => r.Stages)
+                .FirstOrDefault(r => r.Id == recipeId);
+            return recipe.Stages.AsEnumerable();
+        }
+
         public void RemoveCommentFromRecipe(Guid commentId)
         {
             var comment = dbContext.Recipes
@@ -132,6 +143,13 @@ namespace KK.Cookbook.Models.Repositories
                 RecipeId = recipeId,
                 IngredientId = ingredientId
             });
+            dbContext.SaveChanges();
+        }
+
+        public void RemoveStageFromRecipe(Guid stageId)
+        {
+            var stage = dbContext.Stages.Find(stageId);
+            dbContext.Stages.Remove(stage);
             dbContext.SaveChanges();
         }
 

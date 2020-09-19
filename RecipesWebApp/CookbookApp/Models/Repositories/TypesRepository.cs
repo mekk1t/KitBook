@@ -1,12 +1,11 @@
-﻿using KK.Cookbook.Models.Database;
+﻿using KK.Cookbook.Helpers.Extensions;
+using KK.Cookbook.Models.Database;
 using KK.Cookbook.Models.Database.Entities.Types;
 using KK.Cookbook.Models.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KK.Cookbook.Models.Repositories
 {
@@ -61,6 +60,38 @@ namespace KK.Cookbook.Models.Repositories
             });
 
             dbContext.SaveChanges();
+        }
+
+        public IEnumerable<CookingType> GetCookingTypes()
+        {
+            return dbContext.CookingTypes
+                .AsNoTracking()
+                .Paged()
+                .AsEnumerable();
+        }
+
+        public IEnumerable<DishType> GetDishTypes()
+        {
+            return dbContext.DishTypes
+                .AsNoTracking()
+                .Paged()
+                .AsEnumerable();
+        }
+
+        public IEnumerable<IngredientType> GetIngredientTypes()
+        {
+            return dbContext.IngredientTypes
+                .AsNoTracking()
+                .Paged()
+                .AsEnumerable();
+        }
+
+        public IEnumerable<RecipeType> GetRecipeTypes()
+        {
+            return dbContext.RecipeTypes
+                .AsNoTracking()
+                .Paged()
+                .AsEnumerable();
         }
 
         public void RemoveCookingType(string name)

@@ -1,4 +1,5 @@
-﻿using KK.Cookbook.Models.Database;
+﻿using KK.Cookbook.Helpers.Extensions;
+using KK.Cookbook.Models.Database;
 using KK.Cookbook.Models.Database.Entities;
 using KK.Cookbook.Models.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,7 @@ namespace KK.Cookbook.Models.Repositories
         {
             this.dbContext = dbContext;
         }
+
         public void AddNewIngredient(Ingredient ingredient)
         {
             dbContext.Ingredients.Add(ingredient);
@@ -26,6 +28,7 @@ namespace KK.Cookbook.Models.Repositories
         {
             var ingredients = dbContext.Ingredients
                 .AsNoTracking()
+                .Paged()
                 .AsEnumerable();
 
             return ingredients;
@@ -33,7 +36,13 @@ namespace KK.Cookbook.Models.Repositories
 
         public IEnumerable<Ingredient> GetRecipeIngredients(Guid recipeId)
         {
-            throw new NotImplementedException();
+            return dbContext.RecipeIngredients
+                .Include(ri => ri.Ingredient)
+                .AsNoTracking()
+                .Where(ri => ri.RecipeId == recipeId)
+                .Select(ri => ri.Ingredient)
+                .Paged()
+                .AsEnumerable();
         }
 
         public void RemoveIngredient(Guid ingredientId)
