@@ -33,38 +33,41 @@ namespace CookbookAppUnitTests.Repositories
             dbContext = new CookbookDbContext(dbOptions);
             repository = new TypesRepository(dbContext);
 
-            cookingType = new CookingType
-            {
-                Id = Guid.NewGuid(),
-                Name = SAMPLE_TEXT
-            };
-
-            dishType = new DishType
-            {
-                Id = Guid.NewGuid(),
-                Name = SAMPLE_TEXT
-            };
-
-            recipeType = new RecipeType
-            {
-                Id = Guid.NewGuid(),
-                Name = SAMPLE_TEXT
-            };
-
-            ingredientType = new IngredientType
-            {
-                Id = Guid.NewGuid(),
-                Name = SAMPLE_TEXT
-            };
-
             dbContext.Database.EnsureCreated();
         }
 
         [Test]
         public void Creating_a_new_recipe_type()
         {
-            dbContext.RecipeTypes.Add(recipeType);
-            var expected = dbContext.RecipeTypes.FirstOrDefault(rt => rt.Name == recipeType.Name);
+            repository.AddNewRecipeType(SAMPLE_TEXT);
+            var expected = dbContext.RecipeTypes.FirstOrDefault(rt => rt.Name == SAMPLE_TEXT);
+
+            Assert.IsNotNull(expected);
+        }
+
+        [Test]
+        public void Creating_a_new_cooking_type()
+        {
+            repository.AddNewCookingType(SAMPLE_TEXT);
+            var expected = dbContext.CookingTypes.FirstOrDefault(ct => ct.Name == SAMPLE_TEXT);
+
+            Assert.IsNotNull(expected);
+        }
+
+        [Test]
+        public void Creating_a_new_dish_type()
+        {
+            repository.AddNewDishType(SAMPLE_TEXT);
+            var expected = dbContext.DishTypes.FirstOrDefault(ct => ct.Name == SAMPLE_TEXT);
+
+            Assert.IsNotNull(expected);
+        }
+
+        [Test]
+        public void Creating_a_new_ingredient_type()
+        {
+            repository.AddNewIngredientType(SAMPLE_TEXT);
+            var expected = dbContext.IngredientTypes.FirstOrDefault(ct => ct.Name == SAMPLE_TEXT);
 
             Assert.IsNotNull(expected);
         }
