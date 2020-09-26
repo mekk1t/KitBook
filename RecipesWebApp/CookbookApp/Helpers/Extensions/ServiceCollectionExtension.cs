@@ -1,12 +1,9 @@
 ﻿using KK.Cookbook.Models.Database;
-using KK.Cookbook.Models.Database.Entities;
-using KK.Cookbook.Models.DTO;
 using KK.Cookbook.Models.Mappers;
 using KK.Cookbook.Models.Mappers.Interfaces;
 using KK.Cookbook.Models.Repositories;
 using KK.Cookbook.Models.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -24,8 +21,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IServiceCollection AddMappers(this IServiceCollection services)
         {
-            services.AddScoped<IMapper<RecipeDto, Recipe>, RecipeMapper>();
-            services.AddScoped<IMapper<IEnumerable<Recipe>, IEnumerable<RecipeDto>>, RecipeMapper>();
+            services
+                .AddScoped<IRecipeMapper, RecipeMapper>()
+                .AddScoped<ICommentMapper, CommentMapper>()
+                .AddScoped<IStageMapper, StageMapper>();
 
             return services;
         }

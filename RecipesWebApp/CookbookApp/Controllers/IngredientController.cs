@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KK.Cookbook.Models.DTO
+namespace KK.Cookbook.Controllers
 {
-    public class ImageDto
+    public class IngredientController
     {
         
     }

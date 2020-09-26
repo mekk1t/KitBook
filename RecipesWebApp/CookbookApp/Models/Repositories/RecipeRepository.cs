@@ -66,7 +66,7 @@ namespace KK.Cookbook.Models.Repositories
             throw new NotImplementedException();
         }
 
-        public void EditRecipeIngredientInfo(Guid recipeId, Guid ingredientId, RecipeIngredientInfo info)
+        public void EditRecipeIngredientInfo(Guid recipeId, Guid ingredientId, RecipeIngredientDto info)
         {
             var recipeIngredient = dbContext.RecipeIngredients.FirstOrDefault(ri => ri.RecipeId == recipeId && ri.IngredientId == ingredientId);
             recipeIngredient.G = info.G;

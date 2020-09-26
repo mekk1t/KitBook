@@ -15,7 +15,7 @@ namespace KK.Cookbook.Models.Repositories.Interfaces
         void EditCommentToRecipe(Guid commentId, string newCommentText);
         void AddIngredientToRecipe(Guid recipeId, Guid ingredientId);
         void RemoveIngredientFromRecipe(Guid recipeId, Guid ingredientId);
-        void EditRecipeIngredientInfo(Guid recipeId, Guid ingredientId, RecipeIngredientInfo info);
+        void EditRecipeIngredientInfo(Guid recipeId, Guid ingredientId, RecipeIngredientDto info);
 
         void AddStagesToRecipe(Guid recipeId, List<Stage> stages);
         void RemoveStageFromRecipe(Guid stageId);
