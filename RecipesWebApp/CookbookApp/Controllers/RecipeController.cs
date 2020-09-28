@@ -1,4 +1,4 @@
-﻿using KK.Cookbook.Models.DTO;
+﻿using KK.Cookbook.Models.ViewData;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KK.Cookbook.Controllers
@@ -22,7 +22,7 @@ namespace KK.Cookbook.Controllers
         }
 
         [HttpPost]
-        public void CreateNewRecipe([FromForm]RecipeDto newRecipe)
+        public void CreateNewRecipe([FromForm] RecipeViewData newRecipe)
         {
 
         }

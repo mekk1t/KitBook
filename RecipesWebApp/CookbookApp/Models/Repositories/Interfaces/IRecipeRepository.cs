@@ -1,8 +1,8 @@
-﻿using KK.Cookbook.Models.DTO;
-using KK.Cookbook.Models.Repositories.Filters;
+﻿using KK.Cookbook.Models.Repositories.Filters;
 using KK.Cookbook.Models.Database.Entities;
 using System;
 using System.Collections.Generic;
+using KK.Cookbook.Models.ViewData;
 
 namespace KK.Cookbook.Models.Repositories.Interfaces
 {
@@ -15,7 +15,7 @@ namespace KK.Cookbook.Models.Repositories.Interfaces
         void EditCommentToRecipe(Guid commentId, string newCommentText);
         void AddIngredientToRecipe(Guid recipeId, Guid ingredientId);
         void RemoveIngredientFromRecipe(Guid recipeId, Guid ingredientId);
-        void EditRecipeIngredientInfo(Guid recipeId, Guid ingredientId, RecipeIngredientDto info);
+        void EditRecipeIngredientInfo(RecipeIngredient info);
 
         void AddStagesToRecipe(Guid recipeId, List<Stage> stages);
         void RemoveStageFromRecipe(Guid stageId);
