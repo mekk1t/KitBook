@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace KK.Cookbook.Models.ViewData
 {
     public class RecipeViewData
     {
+        [Display(Name = "Название")]
         public string Title { get; set; }
+        [Display(Name = "Описание")]
         public string Description { get; set; }
 
         public string RecipeType { get; set; }

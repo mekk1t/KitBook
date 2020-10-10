@@ -2,7 +2,6 @@
 using KK.Cookbook.Models.Database.Entities;
 using System;
 using System.Collections.Generic;
-using KK.Cookbook.Models.ViewData;
 
 namespace KK.Cookbook.Models.Repositories.Interfaces
 {
@@ -13,9 +12,7 @@ namespace KK.Cookbook.Models.Repositories.Interfaces
         void AddCommentToRecipe(Guid recipeId, Comment newComment);
         void RemoveCommentFromRecipe(Guid commentId);
         void EditCommentToRecipe(Guid commentId, string newCommentText);
-        void AddIngredientToRecipe(Guid recipeId, Guid ingredientId);
         void RemoveIngredientFromRecipe(Guid recipeId, Guid ingredientId);
-        void EditRecipeIngredientInfo(RecipeIngredient info);
 
         void AddStagesToRecipe(Guid recipeId, List<Stage> stages);
         void RemoveStageFromRecipe(Guid stageId);
