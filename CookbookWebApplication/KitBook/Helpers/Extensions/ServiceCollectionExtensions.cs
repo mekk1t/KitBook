@@ -1,7 +1,9 @@
 ﻿using KitBook.Models.Database;
 using KitBook.Models.Database.Entities;
+using KitBook.Models.Database.Entities.Types;
 using KitBook.Models.Repositories;
 using KitBook.Models.Repositories.Interfaces;
+using KitBook.Models.Repositories.Types;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -23,7 +25,10 @@ namespace Microsoft.Extensions.DependencyInjection
             services
                 .AddScoped<IRepository<Recipe>, RecipeRepository>()
                 .AddScoped<IRepository<Ingredient>, IngredientRepository>()
-                .AddScoped<ITypeRepository, TypeRepository>();
+                .AddScoped<IRepository<RecipeType>, RecipeTypeRepository>()
+                .AddScoped<IRepository<CookingType>, CookingTypeRepository>()
+                .AddScoped<IRepository<DishType>, DishTypeRepository>()
+                .AddScoped<IRepository<IngredientType>, IngredientTypeRepository>();
 
             return services;
         }
