@@ -1,6 +1,5 @@
 ﻿using KitBook.Models.Database;
-using KitBook.Models.Mappers;
-using KitBook.Models.Mappers.Interfaces;
+using KitBook.Models.Database.Entities;
 using KitBook.Models.Repositories;
 using KitBook.Models.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -19,19 +18,12 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-        public static IServiceCollection AddMappers(this IServiceCollection services)
-        {
-            services
-                .AddScoped<IRecipeMapper, RecipeMapper>()
-                .AddScoped<ICommentMapper, CommentMapper>()
-                .AddScoped<IStageMapper, StageMapper>();
-
-            return services;
-        }
-
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IRecipeRepository, RecipeRepository>();
+            services
+                .AddScoped<IRepository<Recipe>, RecipeRepository>()
+                .AddScoped<IRepository<Ingredient>, IngredientRepository>()
+                .AddScoped<ITypeRepository, TypeRepository>();
 
             return services;
         }
