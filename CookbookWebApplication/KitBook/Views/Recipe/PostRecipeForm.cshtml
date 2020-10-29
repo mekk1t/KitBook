@@ -39,17 +39,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="CookingTypeId" class="control-label"></label>
-                <input asp-for="CookingTypeId" class="form-control" />
+                <select asp-for="CookingTypeId" class="form-control" asp-items="ViewBag.CookingTypes"></select>
                 <span asp-validation-for="CookingTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RecipeTypeId" class="control-label"></label>
-                <input asp-for="RecipeTypeId" class="form-control" />
+                <select asp-for="RecipeTypeId" class="form-control" asp-items="ViewBag.RecipeTypes"></select>
                 <span asp-validation-for="RecipeTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DishTypeId" class="control-label"></label>
-                <input asp-for="DishTypeId" class="form-control" />
+                <select asp-for="DishTypeId" class="form-control" asp-items="ViewBag.DishTypes"></select>
                 <span asp-validation-for="DishTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
