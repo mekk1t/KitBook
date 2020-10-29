@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    <AssemblyName>KitBook.AspNetCore.WebApp</AssemblyName>
+    <RootNamespace>KitBook</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Helpers\.design\css\home.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Helpers\.txt\RepositoryMethods.txt" />
+    <None Include="Helpers\.txt\TZ.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="mekk1t.Tools" Version="1.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+</Project>
