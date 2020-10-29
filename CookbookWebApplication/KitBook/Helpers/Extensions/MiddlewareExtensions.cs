@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class MiddlewareExtension
+    public static class MiddlewareExtensions
     {
         public static IApplicationBuilder UseDatabase(this IApplicationBuilder app)
         {

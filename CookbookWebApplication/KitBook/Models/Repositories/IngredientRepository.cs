@@ -1,15 +1,15 @@
-﻿using KitBook.Helpers.Extensions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using KitBook.Helpers.Extensions;
 using KitBook.Models.Database;
 using KitBook.Models.Database.Entities;
 using KitBook.Models.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace KitBook.Models.Repositories
 {
-    public class IngredientRepository : IIngredientRepository
+    public class IngredientRepository : IRepository<Ingredient>
     {
         private readonly CookbookDbContext dbContext;
 
@@ -17,38 +17,33 @@ namespace KitBook.Models.Repositories
         {
             this.dbContext = dbContext;
         }
-
-        public void AddNewIngredient(Ingredient ingredient)
+        public void Create(Ingredient entity)
         {
-            dbContext.Ingredients.Add(ingredient);
+            dbContext.Ingredients.Add(entity);
             dbContext.SaveChanges();
         }
 
-        public IEnumerable<Ingredient> GetIngredients()
+        public void Delete(Guid id)
         {
-            var ingredients = dbContext.Ingredients
-                .AsNoTracking()
-                .Paged()
-                .AsEnumerable();
-
-            return ingredients;
-        }
-
-        public IEnumerable<Ingredient> GetRecipeIngredients(Guid recipeId)
-        {
-            return dbContext.RecipeIngredients
-                .Include(ri => ri.Ingredient)
-                .AsNoTracking()
-                .Where(ri => ri.RecipeId == recipeId)
-                .Select(ri => ri.Ingredient)
-                .Paged()
-                .AsEnumerable();
-        }
-
-        public void RemoveIngredient(Guid ingredientId)
-        {
-            var ingredient = dbContext.Ingredients.FirstOrDefault(i => i.Id == ingredientId);
+            var ingredient = dbContext.Ingredients.FirstOrDefault(i => i.Id == id);
             dbContext.Ingredients.Remove(ingredient);
+            dbContext.SaveChanges();
+        }
+
+        public Ingredient Read(Guid id)
+        {
+            return dbContext.Ingredients.AsNoTracking().FirstOrDefault(i => i.Id == id);
+        }
+
+        public IEnumerable<Ingredient> Read()
+        {
+            return dbContext.Ingredients.AsNoTracking().Paged().AsEnumerable();
+        }
+
+        public void Update(Ingredient entity)
+        {
+            var ingredient = dbContext.Ingredients.FirstOrDefault(i => i.Id == entity.Id);
+            ingredient = entity;
             dbContext.SaveChanges();
         }
     }
