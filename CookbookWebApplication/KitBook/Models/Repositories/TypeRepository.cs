@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using KitBook.Helpers.Extensions;
 using KitBook.Models.Database;
 using KitBook.Models.Database.Entities.Types;

@@ -6,7 +6,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class MiddlewareExtensions
     {
-        public static IApplicationBuilder UseDatabase(this IApplicationBuilder app)
+        public static IApplicationBuilder ApplyDatabaseMigrations(this IApplicationBuilder app)
         {
             using var serviceScope = app.ApplicationServices
                 .GetRequiredService<IServiceScopeFactory>()
