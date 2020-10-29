@@ -1,0 +1,69 @@
+﻿@model KitBook.Models.Database.Entities.Recipe
+
+@{
+    ViewData["Title"] = "Новый рецепт";
+}
+
+<h1>Создание нового рецепта</h1>
+
+<h4>Информация</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PostRecipe">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CookingTimeMinutes" class="control-label"></label>
+                <input asp-for="CookingTimeMinutes" class="form-control" />
+                <span asp-validation-for="CookingTimeMinutes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SourceURL" class="control-label"></label>
+                <input asp-for="SourceURL" class="form-control" />
+                <span asp-validation-for="SourceURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CookingTypeId" class="control-label"></label>
+                <input asp-for="CookingTypeId" class="form-control" />
+                <span asp-validation-for="CookingTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecipeTypeId" class="control-label"></label>
+                <input asp-for="RecipeTypeId" class="form-control" />
+                <span asp-validation-for="RecipeTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DishTypeId" class="control-label"></label>
+                <input asp-for="DishTypeId" class="form-control" />
+                <span asp-validation-for="DishTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetRecipes">К списку</a> |
+    <a asp-controller="Home" asp-action="Index">На главную</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
