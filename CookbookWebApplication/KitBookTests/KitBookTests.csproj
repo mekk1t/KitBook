@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CookbookApp\CookbookApp.csproj" />
+    <ProjectReference Include="..\KitBook\KitBook.csproj" />
   </ItemGroup>
 
 </Project>
