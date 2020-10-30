@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using KitBook.Models.Database.Entities;
 using KitBook.Models.Database.Entities.Types;
 using KitBook.Models.Repositories.Interfaces;
@@ -57,6 +58,11 @@ namespace KitBook.Controllers
         {
             FillViewBagWithTypes();
             return View(nameof(PostRecipeForm));
+        }
+
+        public IActionResult PostStagesForm()
+        {
+            return View(nameof(PostStagesForm));
         }
 
         public void PutRecipe(Recipe entity)
