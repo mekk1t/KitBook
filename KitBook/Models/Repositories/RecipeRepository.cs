@@ -71,9 +71,8 @@ namespace KitBook.Models.Repositories
 
         public void Update(Recipe entity)
         {
-            var recipe = dbContext.Recipes.AsNoTracking().FirstOrDefault(r => r.Id == entity.Id);
-            recipe = entity;
-            dbContext.Update(recipe);
+            var recipe = dbContext.Recipes.FirstOrDefault(r => r.Id == entity.Id);
+            recipe.UpdateOptionalFields(entity);
             dbContext.SaveChanges();
         }
     }
