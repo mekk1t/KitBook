@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
 using KitBook.Models.Database.Entities;
 using KitBook.Models.DTO;
 
@@ -60,6 +62,34 @@ namespace KitBook.Helpers.Extensions
                 Name = dto.Name,
                 IngredientTypeId = dto.IngredientTypeId
             };
+        }
+
+        public static IEnumerable<IngredientDto> AsDtoEnumerable(this IEnumerable<Ingredient> ingredients)
+        {
+            return ingredients.Select(entity => new IngredientDto
+            {
+                Id = entity.Id,
+                IngredientType = entity.Type.Name,
+                IsSour = entity.IsSour,
+                IsSpicy = entity.IsSpicy,
+                IsSugary = entity.IsSugary,
+                Name = entity.Name
+            });
+        }
+
+        public static IEnumerable<RecipeDto> AsDtoEnumerable(this IEnumerable<Recipe> recipes)
+        {
+            return recipes.Select(entity => new RecipeDto
+            {
+                Id = entity.Id,
+                Title = entity.Title,
+                Description = entity.Description,
+                SourceURL = entity.SourceURL,
+                CookingTimeMinutes = entity.CookingTimeMinutes,
+                CookingType = entity.CookingType.Name,
+                DishType = entity.DishType.Name,
+                RecipeType = entity.RecipeType.Name
+            });
         }
     }
 }
