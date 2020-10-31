@@ -42,14 +42,21 @@ namespace KitBook.Models.Repositories
 
         public Ingredient ReadWithRelationships(Guid id)
         {
-            throw new NotImplementedException();
+            return dbContext.Ingredients
+                .AsNoTracking()
+                .Include(i => i.Type)
+                .FirstOrDefault(i => i.Id == id);
         }
 
         public IEnumerable<Ingredient> ReadWithRelationships()
         {
-            throw new NotImplementedException();
+            return dbContext.Ingredients
+                .AsNoTracking()
+                .Include(i => i.Type)
+                .Paged()
+                .AsEnumerable();
         }
-        
+
         public void Update(Ingredient entity)
         {
             var ingredient = dbContext.Ingredients.FirstOrDefault(i => i.Id == entity.Id);
