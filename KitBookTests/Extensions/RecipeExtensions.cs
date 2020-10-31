@@ -16,7 +16,29 @@ namespace KitBookTests.Extensions
         {
             recipe.CookingTypeId.Should().NotBeEmpty();
             recipe.DishTypeId.Should().NotBeEmpty();
-            recipe.CookingTypeId.Should().NotBeEmpty();
+            recipe.RecipeTypeId.Should().NotBeEmpty();
+        }
+
+        public static void HasNoTypes(this Recipe recipe)
+        {
+            recipe.CookingTypeId.Should().BeNull();
+            recipe.DishTypeId.Should().BeNull();
+            recipe.RecipeTypeId.Should().BeNull();
+            recipe.CookingType.Should().BeNull();
+            recipe.RecipeType.Should().BeNull();
+            recipe.DishType.Should().BeNull();
+        }
+
+        public static Recipe Copy(this Recipe recipe)
+        {
+            return new Recipe
+            {
+                Id = recipe.Id,
+                Title = recipe.Title,
+                Description = recipe.Description,
+                CookingTimeMinutes = recipe.CookingTimeMinutes,
+                SourceURL = recipe.SourceURL
+            };
         }
     }
 }
