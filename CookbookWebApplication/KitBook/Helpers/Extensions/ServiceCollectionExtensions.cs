@@ -23,8 +23,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services
-                .AddScoped<IRepository<Recipe>, RecipeRepository>()
-                .AddScoped<IRepository<Ingredient>, IngredientRepository>()
+                .AddScoped<IRepositoryAdvanced<Recipe>, RecipeRepository>()
+                .AddScoped<IRepositoryAdvanced<Ingredient>, IngredientRepository>()
                 .AddScoped<IRepository<RecipeType>, RecipeTypeRepository>()
                 .AddScoped<IRepository<CookingType>, CookingTypeRepository>()
                 .AddScoped<IRepository<DishType>, DishTypeRepository>()

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KitBook.Models.Repositories
 {
-    public class IngredientRepository : IRepository<Ingredient>
+    public class IngredientRepository : IRepositoryAdvanced<Ingredient>
     {
         private readonly CookbookDbContext dbContext;
 
@@ -38,6 +38,16 @@ namespace KitBook.Models.Repositories
         public IEnumerable<Ingredient> Read()
         {
             return dbContext.Ingredients.AsNoTracking().Paged().AsEnumerable();
+        }
+
+        public Ingredient ReadWithRelationships(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Ingredient> ReadWithRelationships()
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Ingredient entity)

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KitBook.Models.Repositories
 {
-    public class RecipeRepository : IRepository<Recipe>
+    public class RecipeRepository : IRepositoryAdvanced<Recipe>
     {
         private readonly CookbookDbContext dbContext;
 
@@ -46,10 +46,34 @@ namespace KitBook.Models.Repositories
                 .AsEnumerable();
         }
 
+        public Recipe ReadWithRelationships(Guid id)
+        {
+            // TODO: implement Ingredients include.
+            return dbContext.Recipes
+                .AsNoTracking()
+                .Include(r => r.CookingType)
+                .Include(r => r.DishType)
+                .Include(r => r.RecipeType)
+                .FirstOrDefault(r => r.Id == id);
+        }
+
+        public IEnumerable<Recipe> ReadWithRelationships()
+        {
+            // TODO: implement Ingredients include.
+            return dbContext.Recipes
+                .AsNoTracking()
+                .Include(r => r.CookingType)
+                .Include(r => r.DishType)
+                .Include(r => r.RecipeType)
+                .Paged()
+                .AsEnumerable();
+        }
+
         public void Update(Recipe entity)
         {
-            var recipe = dbContext.Recipes.FirstOrDefault(r => r.Id == entity.Id);
+            var recipe = dbContext.Recipes.AsNoTracking().FirstOrDefault(r => r.Id == entity.Id);
             recipe = entity;
+            dbContext.Update(recipe);
             dbContext.SaveChanges();
         }
     }
