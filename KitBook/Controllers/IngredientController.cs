@@ -1,27 +1,37 @@
 ﻿using System;
-using KitBook.Models.Database.Entities;
+using KitBook.Models.Database.Entities.Types;
+using KitBook.Models.DTO;
 using KitBook.Models.Repositories.Interfaces;
+using KitBook.Models.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace KitBook.Controllers
 {
     public class IngredientController : Controller
     {
-        private readonly IRepositoryAdvanced<Ingredient> repository;
+        private readonly IIngredientService service;
+        private readonly IRepository<IngredientType> ingredientTypeRepository;
 
-        public IngredientController(IRepositoryAdvanced<Ingredient> repository)
+        public IngredientController(IIngredientService service, IRepository<IngredientType> ingredientTypeRepository)
         {
-            this.repository = repository;
+            this.service = service;
+            this.ingredientTypeRepository = ingredientTypeRepository;
+        }
+
+        private void FillViewBagWithIngredientTypes()
+        {
+            ViewBag.IngredientTypes = new SelectList(ingredientTypeRepository.Read(), "Id", "Name");
         }
 
         public IActionResult GetIngredient(Guid id)
         {
-            return View(nameof(GetIngredient), repository.Read(id));
+            return View(nameof(GetIngredient), service.GetIngredientById(id));
         }
 
         public IActionResult GetIngredients()
         {
-            return View(nameof(GetIngredients), repository.Read());
+            return View(nameof(GetIngredients), service.GetIngredients());
         }
 
         [HttpGet]
@@ -31,10 +41,10 @@ namespace KitBook.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostIngredient(Ingredient ingredient)
+        public IActionResult PostIngredient(IngredientDto dto)
         {
-            repository.Create(ingredient);
-            return RedirectToAction(nameof(GetIngredient), ingredient.Id);
+            service.CreateNewIngredient(dto);
+            return RedirectToAction(nameof(GetIngredient), new { id = dto.Id });
         }
 
         [HttpGet]
@@ -44,15 +54,15 @@ namespace KitBook.Controllers
         }
 
         [HttpPost]
-        public IActionResult PutIngredient(Ingredient ingredient)
+        public IActionResult PutIngredient(IngredientDto dto)
         {
-            repository.Update(ingredient);
+            service.UpdateIngredient(dto);
             return RedirectToAction(nameof(GetIngredients));
         }
 
         public void DeleteIngredient(Guid id)
         {
-            repository.Delete(id);
+            service.DeleteIngredientById(id);
             RedirectToAction(nameof(GetIngredients));
         }
     }

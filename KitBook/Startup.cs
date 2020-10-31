@@ -10,6 +10,7 @@ namespace KitBook
             services.AddControllersWithViews();
             services.AddDatabase();
             services.AddRepositories();
+            services.AddServices();
         }
 
         public void Configure(IApplicationBuilder app)
