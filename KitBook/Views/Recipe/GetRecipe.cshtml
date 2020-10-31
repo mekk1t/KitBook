@@ -55,7 +55,7 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Редактировать", "PutRecipe") |
+    <a asp-action="PutRecipe" asp-route-id="@Model.Id">Редактировать</a> |
     <a asp-action="GetRecipes">К списку</a> |
     <a asp-controller="Home" asp-action="Index">На главную</a>
 </div>
