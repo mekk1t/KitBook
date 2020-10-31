@@ -1,0 +1,77 @@
+﻿@model IEnumerable<KitBook.Models.DTO.RecipeDto>
+
+@{
+    ViewData["Title"] = "Рецепты";
+}
+
+<h1>Список рецептов</h1>
+
+<p>
+    <a asp-action="PostRecipe">Добавить новый</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CookingTimeMinutes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SourceURL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CookingTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipeTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DishTypeId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CookingTimeMinutes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SourceURL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CookingTypeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipeTypeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DishTypeId)
+            </td>
+            <td>
+                <a asp-action="PutRecipe" asp-route-id="@item.Id">Редактировать</a><br />
+                <a asp-action="GetRecipe" asp-route-id="@item.Id"> Подробнее </a><br />
+                <a asp-controller="Recipe" asp-action="DeleteRecipe" asp-route-id="@item.Id"> DELETE (надо сделать вместо этого кнопку)</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
