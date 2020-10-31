@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using KitBook.Models.Database.Entities;
 using KitBook.Models.Database.Entities.Types;
 using KitBook.Models.Repositories.Interfaces;
@@ -10,14 +9,14 @@ namespace KitBook.Controllers
 {
     public class RecipeController : Controller
     {
-        private readonly IRepository<Recipe> repository;
+        private readonly IRepositoryAdvanced<Recipe> repository;
         private readonly IRepository<RecipeType> recipeTypeRepository;
         private readonly IRepository<CookingType> cookingTypeRepository;
         private readonly IRepository<DishType> dishTypeRepository;
         private readonly IRepository<IngredientType> ingredientTypeRepository;
 
         public RecipeController(
-            IRepository<Recipe> repository,
+            IRepositoryAdvanced<Recipe> repository,
             IRepository<RecipeType> recipeTypeRepository,
             IRepository<CookingType> cookingTypeRepository,
             IRepository<IngredientType> ingredientTypeRepository,
@@ -47,9 +46,9 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetRecipe(Guid id)
         {
-            return View(nameof(GetRecipe), repository.Read(id));
+            return View(nameof(GetRecipe), repository.ReadWithRelationships(id));
         }
-        
+
         [HttpPost]
         public IActionResult PostRecipe(Recipe entity)
         {
