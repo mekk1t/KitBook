@@ -49,7 +49,7 @@ namespace KitBook.Models.Repositories
         {
             throw new NotImplementedException();
         }
-
+        
         public void Update(Ingredient entity)
         {
             var ingredient = dbContext.Ingredients.FirstOrDefault(i => i.Id == entity.Id);

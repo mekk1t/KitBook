@@ -49,7 +49,7 @@ namespace KitBook.Controllers
         {
             return View(nameof(GetRecipe), repository.Read(id));
         }
-
+        
         [HttpPost]
         public IActionResult PostRecipe(Recipe entity)
         {
