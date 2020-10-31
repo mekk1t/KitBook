@@ -21,5 +21,9 @@ namespace KitBook.Models.DTO
         public Guid? RecipeTypeId { get; set; }
         [Display(Name = "Тип блюда")]
         public Guid? DishTypeId { get; set; }
+
+        public string CookingType { get; set; }
+        public string RecipeType { get; set; }
+        public string DishType { get; set; }
     }
 }

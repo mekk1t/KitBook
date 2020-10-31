@@ -1,21 +1,15 @@
-﻿@model KitBook.Models.Database.Entities.Recipe
+﻿@model KitBook.Models.DTO.RecipeDto
 
 @{
     ViewData["Title"] = Model.Title;
 }
 
-<h1>О рецепте "@Model.Title"</h1>
+<h1>О рецепте "@Model.Title.Trim()"</h1>
 
 <div>
     <h4>Информация</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
@@ -44,19 +38,19 @@
             @Html.DisplayNameFor(model => model.CookingTypeId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CookingTypeId)
+            @Html.DisplayFor(model => model.CookingType)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.RecipeTypeId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RecipeTypeId)
+            @Html.DisplayFor(model => model.RecipeType)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DishTypeId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DishTypeId)
+            @Html.DisplayFor(model => model.DishType)
         </dd>
     </dl>
 </div>
