@@ -1,0 +1,65 @@
+﻿@model IEnumerable<KitBook.Models.Database.Entities.Ingredient>
+
+@{
+    ViewData["Title"] = "Ингредиенты";
+}
+
+<h1>База ингредиентов</h1>
+
+<p>
+    <a asp-action="PostIngredient">Создать новый</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSpicy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSugary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IngredientTypeId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSpicy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSugary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IngredientTypeId)
+            </td>
+            <td>
+                <a asp-action="GetIngredient" asp-route-id="@item.Id">Подробнее</a><br />
+                <a asp-action="PutIngredient" asp-route-id="@item.Id">Редактировать</a><br />
+                <a asp-action="DeleteIngredient" asp-route-id="@item.Id">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

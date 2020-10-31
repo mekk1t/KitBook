@@ -7,9 +7,9 @@ namespace KitBook.Controllers
 {
     public class IngredientController : Controller
     {
-        private readonly IRepository<Ingredient> repository;
+        private readonly IRepositoryAdvanced<Ingredient> repository;
 
-        public IngredientController(IRepository<Ingredient> repository)
+        public IngredientController(IRepositoryAdvanced<Ingredient> repository)
         {
             this.repository = repository;
         }
@@ -24,26 +24,30 @@ namespace KitBook.Controllers
             return View(nameof(GetIngredients), repository.Read());
         }
 
-        public IActionResult PostIngredientForm()
+        [HttpGet]
+        public IActionResult PostIngredient()
         {
-            return View(nameof(PostIngredientForm));
+            return View(nameof(PostIngredient));
         }
 
-        public void PostIngredient(Ingredient ingredient)
+        [HttpPost]
+        public IActionResult PostIngredient(Ingredient ingredient)
         {
             repository.Create(ingredient);
-            RedirectToAction(nameof(GetIngredient), ingredient.Id);
+            return RedirectToAction(nameof(GetIngredient), ingredient.Id);
         }
 
-        public IActionResult PutIngredientForm()
+        [HttpGet]
+        public IActionResult PutIngredient()
         {
-            return View(nameof(PutIngredientForm));
+            return View(nameof(PutIngredient));
         }
 
-        public void PutIngredient(Ingredient ingredient)
+        [HttpPost]
+        public IActionResult PutIngredient(Ingredient ingredient)
         {
             repository.Update(ingredient);
-            RedirectToAction(nameof(GetIngredients));
+            return RedirectToAction(nameof(GetIngredients));
         }
 
         public void DeleteIngredient(Guid id)
