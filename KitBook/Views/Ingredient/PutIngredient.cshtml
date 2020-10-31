@@ -1,4 +1,4 @@
-﻿@model KitBook.Models.Database.Entities.Ingredient
+﻿@model KitBook.Models.DTO.IngredientDto
 
 @{
     ViewData["Title"] = "Редактирование";
@@ -13,7 +13,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
+                <input asp-for="Id" readonly="readonly" style="font-style:italic" class="form-control" />
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div>
             <div class="form-group">
