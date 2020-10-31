@@ -1,0 +1,25 @@
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace KitBook.Models.DTO
+{
+    public class RecipeDto
+    {
+        public Guid Id { get; set; }
+        [Display(Name = "Название")]
+        public string Title { get; set; }
+        [Display(Name = "Описание")]
+        public string Description { get; set; }
+        [Display(Name = "Время готовки")]
+        public int CookingTimeMinutes { get; set; }
+        [Display(Name = "Источник")]
+        public string SourceURL { get; set; }
+
+        [Display(Name = "Тип готовки")]
+        public Guid? CookingTypeId { get; set; }
+        [Display(Name = "Тип рецепта")]
+        public Guid? RecipeTypeId { get; set; }
+        [Display(Name = "Тип блюда")]
+        public Guid? DishTypeId { get; set; }
+    }
+}
