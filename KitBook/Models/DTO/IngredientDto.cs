@@ -16,5 +16,7 @@ namespace KitBook.Models.DTO
         public bool IsSour { get; set; }
         [Display(Name = "Тип")]
         public Guid IngredientTypeId { get; set; }
+
+        public string IngredientType { get; set; }
     }
 }

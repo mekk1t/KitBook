@@ -1,4 +1,4 @@
-﻿@model KitBook.Models.Database.Entities.Ingredient
+﻿@model KitBook.Models.DTO.IngredientDto
 
 @{
     ViewData["Title"] = Model.Name;
@@ -9,12 +9,6 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -43,7 +37,7 @@
             @Html.DisplayNameFor(model => model.IngredientTypeId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IngredientTypeId)
+            @Html.DisplayFor(model => model.IngredientType)
         </dd>
     </dl>
 </div>
