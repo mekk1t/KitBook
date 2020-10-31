@@ -38,50 +38,52 @@ namespace KitBook.Controllers
             ViewBag.IngredientTypes = new SelectList(ingredientTypeRepository.Read(), "Id", "Name");
         }
 
+        [HttpGet]
         public IActionResult GetRecipes()
         {
             return View(nameof(GetRecipes), repository.Read());
         }
 
+        [HttpGet]
         public IActionResult GetRecipe(Guid id)
         {
             return View(nameof(GetRecipe), repository.Read(id));
         }
 
-        public void PostRecipe(Recipe entity)
+        [HttpPost]
+        public IActionResult PostRecipe(Recipe entity)
         {
             repository.Create(entity);
-            RedirectToAction(nameof(GetRecipes));
+            return RedirectToAction(nameof(GetRecipes));
         }
 
-        public IActionResult PostRecipeForm()
+        [HttpGet]
+        public IActionResult PostRecipe()
         {
             FillViewBagWithTypes();
-            return View(nameof(PostRecipeForm));
+            return View(nameof(PostRecipe));
         }
 
-        public IActionResult PostStagesForm()
-        {
-            return View(nameof(PostStagesForm));
-        }
-
-        public void PutRecipe(Recipe entity)
+        [HttpPost]
+        public IActionResult PutRecipe(Recipe entity)
         {
             repository.Update(entity);
-            RedirectToAction(nameof(GetRecipe), entity.Id);
+            return RedirectToAction(nameof(GetRecipe), new { id = entity.Id });
         }
 
-        public IActionResult PutRecipeForm(Guid id)
+        [HttpGet]
+        public IActionResult PutRecipe(Guid id)
         {
             FillViewBagWithTypes();
             var formData = repository.Read(id);
-            return View(nameof(PutRecipeForm), formData);
+            return View(nameof(PutRecipe), formData);
         }
 
-        public void DeleteRecipe(Guid id)
+        [HttpDelete]
+        public IActionResult DeleteRecipe(Guid id)
         {
             repository.Delete(id);
-            RedirectToAction(nameof(GetRecipes));
+            return RedirectToAction(nameof(GetRecipes));
         }
     }
 }

@@ -12,7 +12,7 @@ namespace KitBook.Helpers.Extensions
         /// <param name="list">List of records to be paged.</param>
         /// <param name="amount">How many records to take.</param>
         /// <param name="pageNumber">Which page to get.</param>
-        /// <returns><see cref="IQueryable{T}"/> list, paged.</returns>
+        /// <returns>A new query with amount of values specified by the <paramref name="amount"/> input variable.</returns>
         public static IQueryable<T> Paged<T>(this IQueryable<T> list, int amount = 10, int pageNumber = 1)
         {
             return list

@@ -67,9 +67,9 @@
                 @Html.DisplayFor(modelItem => item.DishTypeId)
             </td>
             <td>
-                @Html.ActionLink("Редактировать", "PutRecipeForm", new { id = item.Id }) |
-                @Html.ActionLink("Подробнее", "GetRecipe", new { id = item.Id }) |
-                @Html.ActionLink("Удалить", "DeleteRecipe", new { id = item.Id })
+                <a asp-action="PutRecipe" asp-route-id="@item.Id">Редактировать</a><br />
+                <a asp-action="GetRecipe" asp-route-id="@item.Id"> Подробнее </a><br />
+                <a asp-controller="Recipe" asp-action="DeleteRecipe" asp-route-id="@item.Id"> DELETE (надо сделать вместо этого кнопку)</a>
             </td>
         </tr>
 }
