@@ -14,9 +14,9 @@ namespace KitBook.Models.Database.Entities
         public int CookingTimeMinutes { get; set; }
         public string SourceURL { get; set; }
 
-        public Guid CookingTypeId { get; set; }
-        public Guid RecipeTypeId { get; set; }
-        public Guid DishTypeId { get; set; }
+        public Guid? CookingTypeId { get; set; }
+        public Guid? RecipeTypeId { get; set; }
+        public Guid? DishTypeId { get; set; }
 
         public CookingType CookingType { get; set; }
         public RecipeType RecipeType { get; set; }
