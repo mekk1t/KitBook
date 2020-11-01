@@ -34,7 +34,7 @@ namespace KitBook.Models.Repositories.Types
         public void Update(CookingType entity)
         {
             var cookingType = dbContext.CookingTypes.FirstOrDefault(ct => ct.Id == entity.Id);
-            cookingType = entity;
+            cookingType.Name = entity.Name;
             dbContext.SaveChanges();
         }
 
