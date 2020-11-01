@@ -10,48 +10,60 @@
     <h4>Информация</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Title)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CookingTimeMinutes)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CookingTimeMinutes)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.SourceURL)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SourceURL)
+        <dd class="col-sm-10">
+            <a href="@Model.SourceURL">@Model.SourceURL</a>
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CookingTypeId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CookingType)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.RecipeTypeId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.RecipeType)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DishTypeId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DishType)
         </dd>
+        @if (Model.Stages.Count > 0)
+        {
+            for (int i = 0; i < Model.Stages.Count; i++)
+            {
+                <dt class="col-sm-2">
+                    Шаг №@Html.DisplayFor(model => model.Stages[i].Index)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Stages[i].Description)
+                </dd>
+            }
+        }
     </dl>
 </div>
 <div>

@@ -13,13 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CookingTimeMinutes)
@@ -36,6 +30,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.DishTypeId)
             </th>
+            <th>
+                Шагов в рецепте
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -43,28 +40,25 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.CookingTimeMinutes) минут
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CookingTimeMinutes)
+                <a href="https://@item.SourceURL">Ссылка</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SourceURL)
+                @Html.DisplayFor(modelItem => item.CookingType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CookingTypeId)
+                @Html.DisplayFor(modelItem => item.RecipeType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RecipeTypeId)
+                @Html.DisplayFor(modelItem => item.DishType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DishTypeId)
+                @item.Stages?.Count
             </td>
             <td>
                 <a asp-action="PutRecipe" asp-route-id="@item.Id">Редактировать</a><br />
