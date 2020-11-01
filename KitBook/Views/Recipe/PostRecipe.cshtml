@@ -54,39 +54,6 @@
                 <span asp-validation-for="DishTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Stages" class="control-label">Шаги по приготовлению</label>
-                @for (int i = 0; i < 2; i++)
-                {
-                    <div id="stage_@i">
-                        <label asp-for="Stages[i].Index" class="control-label">Порядковый номер</label>
-                        <input asp-for="Stages[i].Index" readonly="readonly" value="@i" class="form-control" />
-                        <label asp-for="Stages[i].Description" class="control-label">Описание</label>
-                        <textarea asp-for="Stages[i].Description" class="form-control"></textarea>
-                        <label asp-for="Stages[i].Id" class="control-label" style="display:none"></label>
-                        <input asp-for="Stages[i].Id" value="@Guid.NewGuid()" readonly="readonly" class="form-control" style="font-style:italic; display:none" />
-                        <label asp-for="Stages[i].RecipeId" class="control-label" style="display:none"></label>
-                        <input asp-for="Stages[i].RecipeId" value="@ID" readonly="readonly" class="form-control" style="font-style:italic; display:none" />
-                    </div>
-                }
-            </div>
-            <div class="form-group">
-                <label asp-for="Ingredients" class="control-label">Ингредиенты</label>
-                @for (int i = 0; i < 3; i++)
-                {
-                    <div>
-                        <label asp-for="Ingredients[i].Name" class="control-label">Название</label>
-                        <select asp-for="Ingredients[i].IngredientId" class="form-control" asp-items="ViewBag.Ingredients"></select>
-                        <label class="control-label">Граммовка</label>
-                        <input asp-for="Ingredients[i].G" class="form-control" />
-                        <label class="control-label">Объем (в мл.)</label>
-                        <input asp-for="Ingredients[i].Ml" class="form-control" />
-                        <label class="control-label">Штук</label>
-                        <input asp-for="Ingredients[i].Amount" class="form-control" />
-                        <input asp-for="Ingredients[i].RecipeId" readonly="readonly" value="@ID" style="display:none" />
-                    </div>
-                }
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Создать" class="btn btn-primary" />
             </div>
         </form>
