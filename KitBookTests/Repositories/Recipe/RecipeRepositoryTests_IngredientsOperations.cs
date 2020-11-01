@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using KitBook.Models.Database.Entities;
 using KitBook.Models.Database.Entities.Types;
@@ -76,13 +73,13 @@ namespace KitBookTests.Repositories
                 {
                     new RecipeIngredient
                     {
-                        Ingredient = ingredient1,
-                        Recipe = recipe
+                        IngredientId = INGREDIENT1_ID,
+                        RecipeId = RECIPE_ID
                     },
                     new RecipeIngredient
                     {
-                        Ingredient = ingredient2,
-                        Recipe = recipe
+                        IngredientId = INGREDIENT2_ID,
+                        RecipeId = RECIPE_ID
                     }
                 }
             };
