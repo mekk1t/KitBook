@@ -11,7 +11,7 @@ using Xunit;
 
 namespace KitBookTests.Repositories
 {
-    public class RecipeRepositoryTests : DatabaseTests
+    public class RecipeRepositoryTests_TypesOperations : DatabaseTests
     {
         private readonly IRepositoryAdvanced<Recipe> sut;
 
@@ -91,7 +91,7 @@ namespace KitBookTests.Repositories
             };
         }
 
-        public RecipeRepositoryTests()
+        public RecipeRepositoryTests_TypesOperations()
         {
             sut = new RecipeRepository(dbContext);
             recipeTypeRepository = new RecipeTypeRepository(dbContext);
