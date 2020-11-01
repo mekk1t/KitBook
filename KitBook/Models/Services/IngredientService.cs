@@ -29,7 +29,7 @@ namespace KitBook.Models.Services
 
         public IngredientDto GetIngredientById(Guid id)
         {
-            return repository.Read(id).AsDto();
+            return repository.ReadWithRelationships(id).AsDto();
         }
 
         public IEnumerable<IngredientDto> GetIngredients()

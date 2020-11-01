@@ -54,6 +54,9 @@ namespace KitBook.Models.Repositories
                 .Include(r => r.CookingType)
                 .Include(r => r.DishType)
                 .Include(r => r.RecipeType)
+                .Include(r => r.Stages)
+                .Include(r => r.Comments)
+                .Include(r => r.Ingredients)
                 .FirstOrDefault(r => r.Id == id);
         }
 
@@ -65,6 +68,7 @@ namespace KitBook.Models.Repositories
                 .Include(r => r.CookingType)
                 .Include(r => r.DishType)
                 .Include(r => r.RecipeType)
+                .Include(r => r.Stages)
                 .Paged()
                 .AsEnumerable();
         }

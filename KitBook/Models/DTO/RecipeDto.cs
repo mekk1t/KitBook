@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace KitBook.Models.DTO
@@ -25,5 +26,8 @@ namespace KitBook.Models.DTO
         public string CookingType { get; set; }
         public string RecipeType { get; set; }
         public string DishType { get; set; }
+
+        [Display(Name = "Этапы")]
+        public List<StageDto> Stages { get; set; }
     }
 }

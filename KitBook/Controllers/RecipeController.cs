@@ -80,7 +80,6 @@ namespace KitBook.Controllers
             return View(nameof(PutRecipe), formData);
         }
 
-        [HttpDelete]
         public IActionResult DeleteRecipe(Guid id)
         {
             service.DeleteRecipeById(id);

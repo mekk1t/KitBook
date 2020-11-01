@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using KitBook.Models.Database.Entities;
 using KitBook.Models.DTO;
 
@@ -19,7 +18,14 @@ namespace KitBook.Helpers.Extensions
                 CookingTimeMinutes = dto.CookingTimeMinutes,
                 CookingTypeId = dto.CookingTypeId,
                 DishTypeId = dto.DishTypeId,
-                RecipeTypeId = dto.RecipeTypeId
+                RecipeTypeId = dto.RecipeTypeId,
+                Stages = dto.Stages?.Select(s => new Stage
+                {
+                    Description = s.Description,
+                    Id = s.Id,
+                    Index = s.Index,
+                    RecipeId = s.RecipeId
+                }).ToList()
             };
         }
 
@@ -34,7 +40,14 @@ namespace KitBook.Helpers.Extensions
                 CookingTimeMinutes = entity.CookingTimeMinutes,
                 CookingType = entity.CookingType.Name,
                 DishType = entity.DishType.Name,
-                RecipeType = entity.RecipeType.Name
+                RecipeType = entity.RecipeType.Name,
+                Stages = entity.Stages?.Select(s => new StageDto
+                {
+                    Description = s.Description,
+                    Id = s.Id,
+                    Index = s.Index,
+                    RecipeId = s.RecipeId
+                }).ToList()
             };
         }
 
@@ -88,7 +101,14 @@ namespace KitBook.Helpers.Extensions
                 CookingTimeMinutes = entity.CookingTimeMinutes,
                 CookingType = entity.CookingType.Name,
                 DishType = entity.DishType.Name,
-                RecipeType = entity.RecipeType.Name
+                RecipeType = entity.RecipeType.Name,
+                Stages = entity.Stages?.Select(s => new StageDto
+                {
+                    Description = s.Description,
+                    Id = s.Id,
+                    Index = s.Index,
+                    RecipeId = s.RecipeId
+                }).ToList()
             });
         }
     }

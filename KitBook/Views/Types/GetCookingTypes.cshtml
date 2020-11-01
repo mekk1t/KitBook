@@ -1,0 +1,41 @@
+﻿@model IEnumerable<KitBook.Models.Database.Entities.Types.CookingType>
+
+@{
+    ViewData["Title"] = "Типы готовки";
+}
+
+<h1>Типы готовки</h1>
+
+<p>
+    <a asp-action="PostCookingType">Добавить новый</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="PutCookingType" asp-route-id="@item.Id">Редактировать</a> |
+                    <a asp-action="GetCookingType" asp-route-id="@item.Id">Подробнее</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

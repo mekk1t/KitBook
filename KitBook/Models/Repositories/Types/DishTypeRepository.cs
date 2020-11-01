@@ -34,7 +34,7 @@ namespace KitBook.Models.Repositories.Types
         public void Update(DishType entity)
         {
             var dishType = dbContext.DishTypes.FirstOrDefault(dt => dt.Id == entity.Id);
-            dishType = entity;
+            dishType.Name = entity.Name;
             dbContext.SaveChanges();
         }
 

@@ -34,7 +34,7 @@ namespace KitBook.Models.Repositories.Types
         public void Update(IngredientType entity)
         {
             var ingredientType = dbContext.IngredientTypes.FirstOrDefault(it => it.Id == entity.Id);
-            ingredientType = entity;
+            ingredientType.Name = entity.Name;
             dbContext.SaveChanges();
         }
 
