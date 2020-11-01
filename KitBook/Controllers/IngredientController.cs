@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 using KitBook.Models.Database.Entities.Types;
 using KitBook.Models.DTO;
 using KitBook.Models.Repositories.Interfaces;
@@ -37,6 +38,7 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult PostIngredient()
         {
+            FillViewBagWithIngredientTypes();
             return View(nameof(PostIngredient));
         }
 
@@ -48,9 +50,10 @@ namespace KitBook.Controllers
         }
 
         [HttpGet]
-        public IActionResult PutIngredient()
+        public IActionResult PutIngredient(Guid id)
         {
-            return View(nameof(PutIngredient));
+            FillViewBagWithIngredientTypes();
+            return View(nameof(PutIngredient), service.GetIngredientById(id));
         }
 
         [HttpPost]
