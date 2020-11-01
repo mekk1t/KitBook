@@ -40,13 +40,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                <a asp-action="GetRecipe" asp-route-id="@item.Id">@item.Title</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CookingTimeMinutes) минут
             </td>
             <td>
-                <a href="https://@item.SourceURL">Ссылка</a>
+                <a href="https://@item.SourceURL">Туц</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CookingType)
@@ -61,9 +61,7 @@
                 @item.Stages?.Count
             </td>
             <td>
-                <a asp-action="PutRecipe" asp-route-id="@item.Id">Редактировать</a><br />
-                <a asp-action="GetRecipe" asp-route-id="@item.Id"> Подробнее </a><br />
-                <a asp-controller="Recipe" asp-action="DeleteRecipe" asp-route-id="@item.Id"> DELETE (надо сделать вместо этого кнопку)</a>
+                <a asp-action="PutRecipe" asp-route-id="@item.Id">Редактировать</a>
             </td>
         </tr>
 }
