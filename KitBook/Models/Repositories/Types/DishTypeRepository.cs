@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using KitBook.Helpers.Extensions;
 using KitBook.Models.Database;
 using KitBook.Models.Database.Entities.Types;
 using KitBook.Models.Repositories.Interfaces;
@@ -45,7 +44,7 @@ namespace KitBook.Models.Repositories.Types
 
         public IEnumerable<DishType> Read()
         {
-            return dbContext.DishTypes.AsNoTracking().Paged().AsEnumerable();
+            return dbContext.DishTypes.AsNoTracking().AsEnumerable();
         }
     }
 }

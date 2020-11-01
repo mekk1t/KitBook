@@ -41,6 +41,9 @@ namespace KitBook.Helpers.Extensions
                 CookingType = entity.CookingType.Name,
                 DishType = entity.DishType.Name,
                 RecipeType = entity.RecipeType.Name,
+                CookingTypeId = entity.CookingTypeId,
+                RecipeTypeId = entity.RecipeTypeId,
+                DishTypeId = entity.DishTypeId,
                 Stages = entity.Stages?.Select(s => new StageDto
                 {
                     Description = s.Description,
@@ -60,7 +63,8 @@ namespace KitBook.Helpers.Extensions
                 IsSour = entity.IsSour,
                 IsSpicy = entity.IsSpicy,
                 IsSugary = entity.IsSugary,
-                Name = entity.Name
+                Name = entity.Name,
+                IngredientTypeId = entity.IngredientTypeId
             };
         }
 

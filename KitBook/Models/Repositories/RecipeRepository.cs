@@ -42,7 +42,6 @@ namespace KitBook.Models.Repositories
         {
             return dbContext.Recipes
                 .AsNoTracking()
-                .Paged()
                 .AsEnumerable();
         }
 
@@ -57,6 +56,7 @@ namespace KitBook.Models.Repositories
                 .Include(r => r.Stages)
                 .Include(r => r.Comments)
                 .Include(r => r.Ingredients)
+                .ThenInclude(ri => ri.Ingredient)
                 .FirstOrDefault(r => r.Id == id);
         }
 
@@ -69,7 +69,6 @@ namespace KitBook.Models.Repositories
                 .Include(r => r.DishType)
                 .Include(r => r.RecipeType)
                 .Include(r => r.Stages)
-                .Paged()
                 .AsEnumerable();
         }
 
@@ -77,6 +76,7 @@ namespace KitBook.Models.Repositories
         {
             var recipe = dbContext.Recipes.FirstOrDefault(r => r.Id == entity.Id);
             recipe.UpdateOptionalFields(entity);
+            recipe.UpdateTypesById(entity);
             dbContext.SaveChanges();
         }
     }

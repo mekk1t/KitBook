@@ -37,7 +37,7 @@ namespace KitBook.Models.Repositories
 
         public IEnumerable<Ingredient> Read()
         {
-            return dbContext.Ingredients.AsNoTracking().Paged().AsEnumerable();
+            return dbContext.Ingredients.AsNoTracking().AsEnumerable();
         }
 
         public Ingredient ReadWithRelationships(Guid id)
@@ -53,14 +53,13 @@ namespace KitBook.Models.Repositories
             return dbContext.Ingredients
                 .AsNoTracking()
                 .Include(i => i.Type)
-                .Paged()
                 .AsEnumerable();
         }
 
         public void Update(Ingredient entity)
         {
             var ingredient = dbContext.Ingredients.FirstOrDefault(i => i.Id == entity.Id);
-            ingredient = entity;
+            ingredient.Update(entity);
             dbContext.SaveChanges();
         }
     }
