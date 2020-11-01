@@ -9,7 +9,7 @@ namespace KitBook.Helpers.Extensions
     {
         public static Recipe AsEntity(this RecipeDto dto)
         {
-            return new Recipe
+            var entity = new Recipe
             {
                 Id = dto.Id,
                 Description = dto.Description,
@@ -25,8 +25,26 @@ namespace KitBook.Helpers.Extensions
                     Id = s.Id,
                     Index = s.Index,
                     RecipeId = s.RecipeId
+                }).ToList(),
+                Ingredients = dto.Ingredients?.Select(i => new RecipeIngredient
+                {
+                    IngredientId = i.IngredientId,
+                    RecipeId = i.RecipeId,
+                    Amount = i.Amount,
+                    G = i.G,
+                    Ml = i.Ml,
+                    IsOptional = i.IsOptional
                 }).ToList()
             };
+
+            if (entity.Ingredients?.Count > 0)
+            {
+                foreach(var ingredient in entity.Ingredients)
+                {
+                    ingredient.RecipeId = entity.Id;
+                }
+            }
+            return entity;
         }
 
         public static RecipeDto AsDto(this Recipe entity)
