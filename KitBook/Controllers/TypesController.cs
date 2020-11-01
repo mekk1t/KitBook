@@ -25,6 +25,11 @@ namespace KitBook.Controllers
             this.ingredientTypeRepository = ingredientTypeRepository;
         }
 
+        public IActionResult Index()
+        {
+            return View(nameof(Index));
+        }
+
         #region RecipeType
         [HttpGet]
         public IActionResult GetRecipeTypes()
