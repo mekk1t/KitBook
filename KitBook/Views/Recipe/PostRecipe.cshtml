@@ -9,9 +9,13 @@
 
 <h4>Информация</h4>
 <hr />
+
+<label>Шагов в рецепте</label>
+<input id="stagesCount" type="number" />
+<button onclick="appendStagesToForm()" class="btn btn-block">Добавить шаги по приготовлению</button>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="PostRecipe" method="post">
+        <form id="postRecipe" asp-action="PostRecipe" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
@@ -53,6 +57,8 @@
                 <select asp-for="DishTypeId" class="form-control" asp-items="ViewBag.DishTypes"></select>
                 <span asp-validation-for="DishTypeId" class="text-danger"></span>
             </div>
+            <div id="stages" class="form-group" />
+            <div id="ingredients" class="form-group" />
             <div class="form-group">
                 <input type="submit" value="Создать" class="btn btn-primary" />
             </div>
