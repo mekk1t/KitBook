@@ -68,5 +68,23 @@ namespace KitBook.Controllers
             service.DeleteIngredientById(id);
             RedirectToAction(nameof(GetIngredients));
         }
+
+        [HttpGet]
+        public string IngredientsSelectList()
+        {
+            return PopulateSelectListWithIngredients();
+        }
+
+        private string PopulateSelectListWithIngredients()
+        {
+            string options = "";
+            var ingredients = service.GetIngredients();
+            foreach (var ingredient in ingredients)
+            {
+                options += $"<option value=\"{ingredient.Id}\">{ingredient.Name}</option>";
+            }
+
+            return options;
+        }
     }
 }
