@@ -5,22 +5,10 @@
     var ID = Guid.NewGuid();
 }
 
-<h1>Создание нового рецепта</h1>
+<h1>Новый рецепт</h1>
 
-<h4>Информация</h4>
 <hr />
 
-<div id="stageInit" class="row">
-    <div class="col-md-10">
-        <label class="col-form-label">Шагов в рецепте</label>
-        <br />
-        <input class="form-control" id="stagesCount" type="number" />
-        <br />
-    </div>
-    <div class="col-md-10">
-        <button onclick="appendStagesToForm()" class="btn btn-outline-success">Добавить</button>
-    </div>
-</div>
 <div class="row">
     <div class="col-md-4">
         <form id="postRecipe" asp-action="PostRecipe" method="post">
@@ -63,16 +51,17 @@
                 <select asp-for="DishTypeId" class="form-control" asp-items="ViewBag.DishTypes"></select>
                 <span asp-validation-for="DishTypeId" class="text-danger"></span>
             </div>
-            <div id="stages" class="form-group">
+            <div class="form-group" id="stages">
 
             </div>
+            <div class="form-group" id="MORE">
+                <button type="button" onclick="moreStages()" class="btn btn-outline-info">+ Шаг</button>
+            </div>
+            <br />
             <div class="form-group">
                 <input type="submit" value="Создать" class="btn btn-outline-success" />
             </div>
         </form>
-        <div id="MORE" class="col-md-4" style="display: none">
-            <button type="button" onclick="moreStages()" class="btn btn-outline-info">Еще</button>
-        </div>
     </div>
 </div>
 
