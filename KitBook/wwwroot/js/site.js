@@ -4,29 +4,52 @@
 // Write your JavaScript code.
 function appendStagesToForm() {
     var stagesNumber = $("#stagesCount").val();
-    var stagesContainer = document.getElementById("stages");
+    var stagesContainer = $("#stages");
+
+    var label = document.createElement("label");
+    label.setAttribute("class", "control-label");
+    label.setAttribute("for", "Stages");
+    label.innerHTML = "Шаги по приготовлению";
+    stagesContainer.append(label);
 
     for (var i = 0; i < stagesNumber; i++) {
 
         var currentStage = "Stages".concat("[", i, "]");
 
+        var stageContainer = document.createElement("div");
+        stageContainer.setAttribute("id", "stage_".concat(i));
+
         var indexLabel = document.createElement("label");
         indexLabel.innerHTML = indexLabel.innerHTML.concat("№", i + 1);
+        indexLabel.setAttribute("class", "control-label");
+        indexLabel.setAttribute("for", currentStage.concat("__Index"));
+
         var indexInput = document.createElement("input");
-        indexInput.setAttribute("readonly", "readonly");
-        indexInput.setAttribute("value", i);
-        var indexName = currentStage.concat(".Index");
-        indexInput.setAttribute("name", indexName);
+        indexInput.setAttribute("value", i + 1);
+        indexInput.setAttribute("class", "form-control");
+        indexInput.setAttribute("class", "invisible");
+        indexInput.setAttribute("type", "number");
+        indexInput.setAttribute("name", currentStage.concat(".Index"));
 
         var descriptionLabel = document.createElement("label");
-        descriptionLabel.innerHTML = "Описание шага";
+        descriptionLabel.innerHTML = "Описание";
+        descriptionLabel.setAttribute("class", "control-label");
 
         var descriptionTextarea = document.createElement("textarea");
         descriptionTextarea.setAttribute("name", currentStage.concat(".Description"));
+        descriptionTextarea.setAttribute("class", "form-control");
 
-        stagesContainer.appendChild(indexLabel);
-        stagesContainer.appendChild(indexInput);
-        stagesContainer.appendChild(descriptionLabel);
-        stagesContainer.appendChild(descriptionTextarea);
+        var recipeIdInput = document.createElement("input");
+        recipeIdInput.setAttribute("class", "invisible");
+        recipeIdInput.setAttribute("name", currentStage.concat(".RecipeId"));
+        recipeIdInput.setAttribute("value", $("#Id").val())
+
+        stageContainer.append(indexLabel);
+        stageContainer.append(indexInput);
+        stageContainer.append(descriptionLabel);
+        stageContainer.append(descriptionTextarea);
+        stageContainer.append(recipeIdInput);
+
+        stagesContainer.append(stageContainer);
     }
 }
