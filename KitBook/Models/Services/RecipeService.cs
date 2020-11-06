@@ -19,7 +19,7 @@ namespace KitBook.Models.Services
 
         public void CreateNewRecipe(RecipeDto dto)
         {
-            repository.Create(dto.AsEntity());
+            repository.Create(dto.AsNewEntity());
         }
 
         public void DeleteRecipeById(Guid id)
