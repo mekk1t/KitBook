@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using KitBook.Helpers.Extensions;
 using KitBook.Models.Database.Entities;
 using KitBook.Models.DTO;
@@ -29,7 +30,10 @@ namespace KitBook.Models.Services
 
         public RecipeDto GetRecipeById(Guid id)
         {
-            return repository.ReadWithRelationships(id).AsDto();
+            var recipe = repository.ReadWithRelationships(id).AsDto();
+            var stages = recipe.Stages;
+            recipe.Stages = stages.OrderBy(s => s.Index).ToList();
+            return recipe;
         }
 
         public IEnumerable<RecipeDto> GetRecipes()
