@@ -2,25 +2,22 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-function appendStagesToForm() {
-    var stagesNumber = $("#stagesCount").val();
-    let stagesContainer = $("#stages");
 
+
+
+function initLabel() {
     var label = document.createElement("label");
     label.setAttribute("class", "control-label");
     label.setAttribute("for", "Stages");
     label.innerHTML = "Шаги по приготовлению";
-    stagesContainer.append(label);
-
-    for (var i = 0; i < stagesNumber; i++) {
-        appendStageToContainer(i, stagesContainer);
-    }
-    $("#stageInit").hide();
-    $("#MORE").show();
+    $("#stages").append(label);
 }
 
 function moreStages() {
     let stagesContainer = $("#stages");
+    if (stagesContainer.length == 0) {
+        initLabel();
+    }
     appendStageToContainer(stagesContainer.children(".count").length, stagesContainer);
 }
 
