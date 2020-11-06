@@ -3,7 +3,10 @@
 
 // Write your JavaScript code.
 
-
+function autosizeDescription() {
+    var desc = $("#Description");
+    autosize(desc);
+}
 
 function initLabel() {
     var label = document.createElement("label");
@@ -15,8 +18,9 @@ function initLabel() {
 
 function moreStages() {
     let stagesContainer = $("#stages");
-    if (stagesContainer.length == 0) {
+    if (stagesContainer.children().length == 0) {
         initLabel();
+        autosizeDescription();
     }
     appendStageToContainer(stagesContainer.children(".count").length, stagesContainer);
 }
@@ -30,7 +34,7 @@ function appendStageToContainer(i, container) {
     stageContainer.setAttribute("class", "count");
 
     var indexLabel = document.createElement("label");
-    indexLabel.innerHTML = indexLabel.innerHTML.concat("№", i + 1);
+    indexLabel.innerHTML = indexLabel.innerHTML.concat("Шаг № ", i + 1);
     indexLabel.setAttribute("class", "control-label");
     indexLabel.setAttribute("for", currentStage.concat("__Index"));
 
@@ -48,6 +52,7 @@ function appendStageToContainer(i, container) {
     var descriptionTextarea = document.createElement("textarea");
     descriptionTextarea.setAttribute("name", currentStage.concat(".Description"));
     descriptionTextarea.setAttribute("class", "form-control");
+    autosize(descriptionTextarea);
 
     var recipeIdInput = document.createElement("input");
     recipeIdInput.setAttribute("class", "invisible");
@@ -57,9 +62,11 @@ function appendStageToContainer(i, container) {
 
     stageContainer.append(indexLabel);
     stageContainer.append(indexInput);
+    stageContainer.append(document.createElement("br"));
     stageContainer.append(descriptionLabel);
     stageContainer.append(descriptionTextarea);
     stageContainer.append(recipeIdInput);
+    stageContainer.append(document.createElement("br"));
 
     container.append(stageContainer);
 }
