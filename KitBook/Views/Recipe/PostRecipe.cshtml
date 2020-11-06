@@ -10,19 +10,23 @@
 <h4>Информация</h4>
 <hr />
 
-<div class="card">
-    <label class="control-label">Шагов в рецепте</label>
-    <input class="form-control" id="stagesCount" type="number" />
-    <button onclick="appendStagesToForm()" class="btn btn-success">Добавить шаги по приготовлению</button>
+<div id="stageInit" class="row">
+    <div class="col-md-10">
+        <label class="col-form-label">Шагов в рецепте</label>
+        <br />
+        <input class="form-control" id="stagesCount" type="number" />
+        <br />
+    </div>
+    <div class="col-md-10">
+        <button onclick="appendStagesToForm()" class="btn btn-outline-success">Добавить</button>
+    </div>
 </div>
 <div class="row">
     <div class="col-md-4">
         <form id="postRecipe" asp-action="PostRecipe" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
                 <input asp-for="Id" value="@ID" class="form-control invisible" />
-                <span asp-validation-for="Id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -62,17 +66,14 @@
             <div id="stages" class="form-group">
 
             </div>
-            <div id="ingredients" class="form-group" />
             <div class="form-group">
-                <input type="submit" value="Создать" class="btn btn-primary" />
+                <input type="submit" value="Создать" class="btn btn-outline-success" />
             </div>
         </form>
+        <div id="MORE" class="col-md-4" style="display: none">
+            <button type="button" onclick="moreStages()" class="btn btn-outline-info">Еще</button>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="GetRecipes">К списку</a> |
-    <a asp-controller="Home" asp-action="Index">На главную</a>
 </div>
 
 @section Scripts {
