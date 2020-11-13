@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Xml.Linq;
 using KitBook.Models.Database.Entities.Types;
 using KitBook.Models.DTO;
 using KitBook.Models.Repositories.Interfaces;
