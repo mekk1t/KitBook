@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KitBook.Models.DTO
 {
@@ -14,6 +10,5 @@ namespace KitBook.Models.DTO
         public int? Amount { get; set; }
         public int? G { get; set; }
         public int? Ml { get; set; }
-        public bool IsOptional { get; set; }
     }
 }
