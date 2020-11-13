@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using KitBook.Helpers.Extensions;
 using KitBook.Models.Database;
 using KitBook.Models.Database.Entities.Types;
 using KitBook.Models.Repositories.Interfaces;
@@ -38,7 +37,7 @@ namespace KitBook.Models.Repositories.Types
 
         public IEnumerable<RecipeType> Read()
         {
-            return dbContext.RecipeTypes.AsNoTracking().Paged().AsEnumerable();
+            return dbContext.RecipeTypes.AsNoTracking().AsEnumerable();
         }
 
         public void Update(RecipeType entity)

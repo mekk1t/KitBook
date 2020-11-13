@@ -16,19 +16,22 @@ namespace KitBook.Controllers
         private readonly IRepository<CookingType> cookingTypeRepository;
         private readonly IRepository<DishType> dishTypeRepository;
         private readonly IRepository<IngredientType> ingredientTypeRepository;
+        private readonly IRepositoryAdvanced<Ingredient> ingredientRepository;
 
         public RecipeController(
             IRecipeService service,
             IRepository<RecipeType> recipeTypeRepository,
             IRepository<CookingType> cookingTypeRepository,
             IRepository<IngredientType> ingredientTypeRepository,
-            IRepository<DishType> dishTypeRepository)
+            IRepository<DishType> dishTypeRepository,
+            IRepositoryAdvanced<Ingredient> ingredientRepository)
         {
             this.service = service;
             this.recipeTypeRepository = recipeTypeRepository;
             this.cookingTypeRepository = cookingTypeRepository;
             this.dishTypeRepository = dishTypeRepository;
             this.ingredientTypeRepository = ingredientTypeRepository;
+            this.ingredientRepository = ingredientRepository;
         }
 
         private void FillViewBagWithTypes()
@@ -37,6 +40,11 @@ namespace KitBook.Controllers
             ViewBag.CookingTypes = new SelectList(cookingTypeRepository.Read(), "Id", "Name");
             ViewBag.DishTypes = new SelectList(dishTypeRepository.Read(), "Id", "Name");
             ViewBag.IngredientTypes = new SelectList(ingredientTypeRepository.Read(), "Id", "Name");
+        }
+
+        private void FillViewBagWithIngredients()
+        {
+            ViewBag.Ingredients = new SelectList(ingredientRepository.Read(), "Id", "Name");
         }
 
         [HttpGet]
@@ -62,6 +70,7 @@ namespace KitBook.Controllers
         public IActionResult PostRecipe()
         {
             FillViewBagWithTypes();
+            FillViewBagWithIngredients();
             return View(nameof(PostRecipe));
         }
 
@@ -76,6 +85,7 @@ namespace KitBook.Controllers
         public IActionResult PutRecipe(Guid id)
         {
             FillViewBagWithTypes();
+            FillViewBagWithIngredients();
             var formData = service.GetRecipeById(id);
             return View(nameof(PutRecipe), formData);
         }

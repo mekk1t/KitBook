@@ -27,7 +27,9 @@ namespace KitBook.Models.DTO
         public string RecipeType { get; set; }
         public string DishType { get; set; }
 
-        [Display(Name = "Этапы")]
         public List<StageDto> Stages { get; set; }
+
+        [Display(Name = "Ингредиенты")]
+        public List<RecipeIngredientDto> Ingredients { get; set; }
     }
 }

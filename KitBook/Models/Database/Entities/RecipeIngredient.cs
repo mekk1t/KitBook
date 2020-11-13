@@ -15,7 +15,6 @@ namespace KitBook.Models.Database.Entities
         public int? Amount { get; set; }
         public int? G { get; set; }
         public int? Ml { get; set; }
-        public bool IsOptional { get; set; }
     }
 
     public class RecipeIngredientConfiguration : IEntityTypeConfiguration<RecipeIngredient>

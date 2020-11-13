@@ -42,13 +42,11 @@ namespace KitBook.Models.Repositories
         {
             return dbContext.Recipes
                 .AsNoTracking()
-                .Paged()
                 .AsEnumerable();
         }
 
         public Recipe ReadWithRelationships(Guid id)
         {
-            // TODO: implement Ingredients include.
             return dbContext.Recipes
                 .AsNoTracking()
                 .Include(r => r.CookingType)
@@ -57,26 +55,40 @@ namespace KitBook.Models.Repositories
                 .Include(r => r.Stages)
                 .Include(r => r.Comments)
                 .Include(r => r.Ingredients)
+                .ThenInclude(ri => ri.Ingredient)
                 .FirstOrDefault(r => r.Id == id);
         }
 
         public IEnumerable<Recipe> ReadWithRelationships()
         {
-            // TODO: implement Ingredients include.
             return dbContext.Recipes
                 .AsNoTracking()
                 .Include(r => r.CookingType)
                 .Include(r => r.DishType)
                 .Include(r => r.RecipeType)
                 .Include(r => r.Stages)
-                .Paged()
                 .AsEnumerable();
         }
 
         public void Update(Recipe entity)
         {
-            var recipe = dbContext.Recipes.FirstOrDefault(r => r.Id == entity.Id);
-            recipe.UpdateOptionalFields(entity);
+            var recipe = dbContext.Recipes
+                .FirstOrDefault(r => r.Id == entity.Id);
+            recipe.Title = entity.Title;
+            recipe.Description = entity.Description;
+            recipe.SourceURL = entity.SourceURL;
+            recipe.CookingTimeMinutes = entity.CookingTimeMinutes;
+            recipe.CookingTypeId = entity.CookingTypeId;
+            recipe.DishTypeId = entity.DishTypeId;
+            recipe.RecipeTypeId = entity.RecipeTypeId;
+
+            var stages = dbContext.Stages.AsNoTracking().Where(s => s.RecipeId == entity.Id);
+            dbContext.Stages.RemoveRange(stages);
+            dbContext.Stages.AddRange(entity.Stages);
+
+            var recipeIngredients = dbContext.RecipeIngredients.AsNoTracking().Where(s => s.RecipeId == entity.Id);
+            dbContext.RecipeIngredients.RemoveRange(recipeIngredients);
+            dbContext.RecipeIngredients.AddRange(entity.Ingredients);
             dbContext.SaveChanges();
         }
     }

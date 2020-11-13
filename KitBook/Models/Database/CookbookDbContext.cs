@@ -15,8 +15,10 @@ namespace KitBook.Models.Database
         public DbSet<RecipeType> RecipeTypes { get; set; }
         public DbSet<CookingType> CookingTypes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<IngredientType> IngredientTypes { get; set; }
         public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
+        public DbSet<RecipeCategory> RecipeCategories { get; set; }
 
         public CookbookDbContext(DbContextOptions<CookbookDbContext> options)
             :base(options)

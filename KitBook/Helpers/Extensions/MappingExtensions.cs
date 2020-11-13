@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using KitBook.Models.Database.Entities;
 using KitBook.Models.DTO;
@@ -7,9 +8,71 @@ namespace KitBook.Helpers.Extensions
 {
     public static class MappingExtensions
     {
-        public static Recipe AsEntity(this RecipeDto dto)
+        public static Recipe AsEditEntity(this RecipeDto dto)
         {
             return new Recipe
+            {
+                Id = dto.Id,
+                Description = dto.Description,
+                Title = dto.Title,
+                SourceURL = dto.SourceURL,
+                CookingTimeMinutes = dto.CookingTimeMinutes,
+                CookingTypeId = dto.CookingTypeId,
+                DishTypeId = dto.DishTypeId,
+                RecipeTypeId = dto.RecipeTypeId,
+                Stages = dto.Stages?.Select(s => new Stage
+                {
+                    Description = s.Description,
+                    Id = s.Id == Guid.Empty
+                    ? Guid.NewGuid()
+                    : s.Id,
+                    Index = s.Index,
+                    RecipeId = s.RecipeId
+                }).ToList(),
+                Ingredients = dto.Ingredients?.Select(i => new RecipeIngredient
+                {
+                    IngredientId = i.IngredientId,
+                    RecipeId = i.RecipeId,
+                    Amount = i.Amount,
+                    G = i.G,
+                    Ml = i.Ml
+                }).ToList()
+            };
+        }
+
+        public static Recipe AsNewEntity(this RecipeDto dto)
+        {
+            return new Recipe
+            {
+                Id = dto.Id,
+                Description = dto.Description,
+                Title = dto.Title,
+                SourceURL = dto.SourceURL,
+                CookingTimeMinutes = dto.CookingTimeMinutes,
+                CookingTypeId = dto.CookingTypeId,
+                DishTypeId = dto.DishTypeId,
+                RecipeTypeId = dto.RecipeTypeId,
+                Stages = dto.Stages?.Select(s => new Stage
+                {
+                    Description = s.Description,
+                    Id = Guid.NewGuid(),
+                    Index = s.Index,
+                    RecipeId = s.RecipeId
+                }).ToList(),
+                Ingredients = dto.Ingredients?.Select(i => new RecipeIngredient
+                {
+                    IngredientId = i.IngredientId,
+                    RecipeId = i.RecipeId,
+                    Amount = i.Amount,
+                    G = i.G,
+                    Ml = i.Ml
+                }).ToList()
+            };
+        }
+
+        public static Recipe AsEntity(this RecipeDto dto)
+        {
+            var entity = new Recipe
             {
                 Id = dto.Id,
                 Description = dto.Description,
@@ -25,8 +88,25 @@ namespace KitBook.Helpers.Extensions
                     Id = s.Id,
                     Index = s.Index,
                     RecipeId = s.RecipeId
+                }).ToList(),
+                Ingredients = dto.Ingredients?.Select(i => new RecipeIngredient
+                {
+                    IngredientId = i.IngredientId,
+                    RecipeId = i.RecipeId,
+                    Amount = i.Amount,
+                    G = i.G,
+                    Ml = i.Ml
                 }).ToList()
             };
+
+            if (entity.Ingredients?.Count() > 0)
+            {
+                foreach(var ingredient in entity.Ingredients)
+                {
+                    ingredient.RecipeId = entity.Id;
+                }
+            }
+            return entity;
         }
 
         public static RecipeDto AsDto(this Recipe entity)
@@ -41,12 +121,24 @@ namespace KitBook.Helpers.Extensions
                 CookingType = entity.CookingType.Name,
                 DishType = entity.DishType.Name,
                 RecipeType = entity.RecipeType.Name,
+                CookingTypeId = entity.CookingTypeId,
+                RecipeTypeId = entity.RecipeTypeId,
+                DishTypeId = entity.DishTypeId,
                 Stages = entity.Stages?.Select(s => new StageDto
                 {
                     Description = s.Description,
                     Id = s.Id,
                     Index = s.Index,
                     RecipeId = s.RecipeId
+                }).ToList(),
+                Ingredients = entity.Ingredients?.Select(i => new RecipeIngredientDto
+                {
+                    IngredientId = i.IngredientId,
+                    RecipeId = i.RecipeId,
+                    Name = i.Ingredient.Name,
+                    G = i.G,
+                    Ml = i.Ml,
+                    Amount = i.Amount
                 }).ToList()
             };
         }
@@ -60,7 +152,8 @@ namespace KitBook.Helpers.Extensions
                 IsSour = entity.IsSour,
                 IsSpicy = entity.IsSpicy,
                 IsSugary = entity.IsSugary,
-                Name = entity.Name
+                Name = entity.Name,
+                IngredientTypeId = entity.IngredientTypeId
             };
         }
 

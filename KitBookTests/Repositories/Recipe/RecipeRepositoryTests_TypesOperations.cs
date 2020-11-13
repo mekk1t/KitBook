@@ -11,7 +11,7 @@ using Xunit;
 
 namespace KitBookTests.Repositories
 {
-    public class RecipeRepositoryTests : DatabaseTests
+    public class RecipeRepositoryTests_TypesOperations : DatabaseTests
     {
         private readonly IRepositoryAdvanced<Recipe> sut;
 
@@ -91,7 +91,7 @@ namespace KitBookTests.Repositories
             };
         }
 
-        public RecipeRepositoryTests()
+        public RecipeRepositoryTests_TypesOperations()
         {
             sut = new RecipeRepository(dbContext);
             recipeTypeRepository = new RecipeTypeRepository(dbContext);
@@ -145,21 +145,6 @@ namespace KitBookTests.Repositories
             Action act = () => sut.Create(newRecipeWithTypesEntities);
 
             act.Should().Throw<ArgumentException>();
-        }
-
-        [Fact]
-        public void Repository_updates_a_record_in_the_database_via_reference()
-        {
-            sut.Create(newRecipeWithTypesEntities);
-            var oldRecipe = sut.Read(newRecipeWithTypesEntities.Id);
-            var editRecipe = oldRecipe.Copy();
-            editRecipe.SourceURL = "www.newsite.ru";
-            editRecipe.Description = "Sample text textovichh";
-            editRecipe.Title = "TESTING RECIPE";
-
-            sut.Update(editRecipe);
-
-            sut.Read(newRecipeWithTypesEntities.Id).Should().NotBeEquivalentTo(oldRecipe);
         }
 
         [Fact]

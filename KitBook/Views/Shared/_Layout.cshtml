@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,7 +23,16 @@
                             <a class="nav-link text-dark" asp-controller="Recipe" asp-action="GetRecipes">Рецепты</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Admin" asp-action="GetActions">Администрирование</a>
+                            <a class="nav-link text-dark" asp-controller="Ingredient" asp-action="GetIngredients">Ингредиенты</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Recipe" asp-action="PostRecipe">+ Рецепт</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Ingredient" asp-action="PostIngredient">+ Ингредиент</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Types" asp-action="Index">Категории</a>
                         </li>
                     </ul>
                 </div>
@@ -38,7 +48,6 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 - Живые Традиции -
-            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> -
             <a href="https://github.com/mekk1t/KitBook">GitHub</a> -
             <a href="https://vk.com/mekk1t">Автор</a>
         </div>
@@ -46,6 +55,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/autosize.min.js"></script>
+    <script src="~/js/ingredients.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

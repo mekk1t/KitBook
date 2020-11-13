@@ -11,5 +11,21 @@ namespace KitBook.Helpers.Extensions
             recipe.Title = edit.Title;
             recipe.SourceURL = edit.SourceURL;
         }
+
+        public static void UpdateTypesById(this Recipe recipe, Recipe edit)
+        {
+            recipe.CookingTypeId = edit.CookingTypeId;
+            recipe.DishTypeId = edit.DishTypeId;
+            recipe.RecipeTypeId = edit.RecipeTypeId;
+        }
+
+        public static void Update(this Ingredient ingredient, Ingredient edit)
+        {
+            ingredient.Name = edit.Name;
+            ingredient.IsSour = edit.IsSour;
+            ingredient.IsSpicy = edit.IsSpicy;
+            ingredient.IsSugary = edit.IsSugary;
+            ingredient.IngredientTypeId = edit.IngredientTypeId;
+        }
     }
 }
