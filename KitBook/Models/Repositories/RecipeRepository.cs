@@ -74,8 +74,6 @@ namespace KitBook.Models.Repositories
         {
             var recipe = dbContext.Recipes
                 .FirstOrDefault(r => r.Id == entity.Id);
-            recipe.Stages = new List<Stage>().AsEnumerable();
-            recipe.Stages.Concat(entity.Stages);
             recipe.Title = entity.Title;
             recipe.Description = entity.Description;
             recipe.SourceURL = entity.SourceURL;
@@ -83,6 +81,14 @@ namespace KitBook.Models.Repositories
             recipe.CookingTypeId = entity.CookingTypeId;
             recipe.DishTypeId = entity.DishTypeId;
             recipe.RecipeTypeId = entity.RecipeTypeId;
+
+            var stages = dbContext.Stages.AsNoTracking().Where(s => s.RecipeId == entity.Id);
+            dbContext.Stages.RemoveRange(stages);
+            dbContext.Stages.AddRange(entity.Stages);
+
+            var recipeIngredients = dbContext.RecipeIngredients.AsNoTracking().Where(s => s.RecipeId == entity.Id);
+            dbContext.RecipeIngredients.RemoveRange(recipeIngredients);
+            dbContext.RecipeIngredients.AddRange(entity.Ingredients);
             dbContext.SaveChanges();
         }
     }
