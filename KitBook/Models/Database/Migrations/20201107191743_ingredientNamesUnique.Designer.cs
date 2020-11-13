@@ -4,34 +4,22 @@ using KitBook.Models.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KitBook.Models.Database.Migrations
 {
     [DbContext(typeof(CookbookDbContext))]
-    partial class CookbookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201107191743_ingredientNamesUnique")]
+    partial class ingredientNamesUnique
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("KitBook.Models.Database.Entities.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
 
             modelBuilder.Entity("KitBook.Models.Database.Entities.Comment", b =>
                 {
@@ -127,21 +115,6 @@ namespace KitBook.Models.Database.Migrations
                     b.ToTable("Recipes");
                 });
 
-            modelBuilder.Entity("KitBook.Models.Database.Entities.RecipeCategory", b =>
-                {
-                    b.Property<Guid>("RecipeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("RecipeId", "CategoryId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("RecipeCategories");
-                });
-
             modelBuilder.Entity("KitBook.Models.Database.Entities.RecipeIngredient", b =>
                 {
                     b.Property<Guid>("RecipeId")
@@ -155,6 +128,9 @@ namespace KitBook.Models.Database.Migrations
 
                     b.Property<int?>("G")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsOptional")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("Ml")
                         .HasColumnType("int");
@@ -327,21 +303,6 @@ namespace KitBook.Models.Database.Migrations
                     b.HasOne("KitBook.Models.Database.Entities.Types.RecipeType", "RecipeType")
                         .WithMany()
                         .HasForeignKey("RecipeTypeId");
-                });
-
-            modelBuilder.Entity("KitBook.Models.Database.Entities.RecipeCategory", b =>
-                {
-                    b.HasOne("KitBook.Models.Database.Entities.Category", "Category")
-                        .WithMany("Recipes")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("KitBook.Models.Database.Entities.Recipe", "Recipe")
-                        .WithMany("Categories")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("KitBook.Models.Database.Entities.RecipeIngredient", b =>
