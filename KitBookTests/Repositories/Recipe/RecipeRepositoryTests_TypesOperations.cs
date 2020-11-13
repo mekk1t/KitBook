@@ -148,21 +148,6 @@ namespace KitBookTests.Repositories
         }
 
         [Fact]
-        public void Repository_updates_a_record_in_the_database_via_reference()
-        {
-            sut.Create(newRecipeWithTypesEntities);
-            var oldRecipe = sut.Read(newRecipeWithTypesEntities.Id);
-            var editRecipe = oldRecipe.Copy();
-            editRecipe.SourceURL = "www.newsite.ru";
-            editRecipe.Description = "Sample text textovichh";
-            editRecipe.Title = "TESTING RECIPE";
-
-            sut.Update(editRecipe);
-
-            sut.Read(newRecipeWithTypesEntities.Id).Should().NotBeEquivalentTo(oldRecipe);
-        }
-
-        [Fact]
         public void Repository_gets_a_record_by_id_from_the_database()
         {
             sut.Create(newRecipeWithTypesEntities);
