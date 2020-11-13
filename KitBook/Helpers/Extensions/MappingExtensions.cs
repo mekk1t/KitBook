@@ -8,6 +8,38 @@ namespace KitBook.Helpers.Extensions
 {
     public static class MappingExtensions
     {
+        public static Recipe AsEditEntity(this RecipeDto dto)
+        {
+            return new Recipe
+            {
+                Id = dto.Id,
+                Description = dto.Description,
+                Title = dto.Title,
+                SourceURL = dto.SourceURL,
+                CookingTimeMinutes = dto.CookingTimeMinutes,
+                CookingTypeId = dto.CookingTypeId,
+                DishTypeId = dto.DishTypeId,
+                RecipeTypeId = dto.RecipeTypeId,
+                Stages = dto.Stages?.Select(s => new Stage
+                {
+                    Description = s.Description,
+                    Id = s.Id == Guid.Empty
+                    ? Guid.NewGuid()
+                    : s.Id,
+                    Index = s.Index,
+                    RecipeId = s.RecipeId
+                }).ToList(),
+                Ingredients = dto.Ingredients?.Select(i => new RecipeIngredient
+                {
+                    IngredientId = i.IngredientId,
+                    RecipeId = i.RecipeId,
+                    Amount = i.Amount,
+                    G = i.G,
+                    Ml = i.Ml
+                }).ToList()
+            };
+        }
+
         public static Recipe AsNewEntity(this RecipeDto dto)
         {
             return new Recipe
@@ -98,6 +130,15 @@ namespace KitBook.Helpers.Extensions
                     Id = s.Id,
                     Index = s.Index,
                     RecipeId = s.RecipeId
+                }).ToList(),
+                Ingredients = entity.Ingredients?.Select(i => new RecipeIngredientDto
+                {
+                    IngredientId = i.IngredientId,
+                    RecipeId = i.RecipeId,
+                    Name = i.Ingredient.Name,
+                    G = i.G,
+                    Ml = i.Ml,
+                    Amount = i.Amount
                 }).ToList()
             };
         }

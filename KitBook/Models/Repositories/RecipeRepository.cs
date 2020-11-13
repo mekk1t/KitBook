@@ -47,7 +47,6 @@ namespace KitBook.Models.Repositories
 
         public Recipe ReadWithRelationships(Guid id)
         {
-            // TODO: implement Ingredients include.
             return dbContext.Recipes
                 .AsNoTracking()
                 .Include(r => r.CookingType)
@@ -62,7 +61,6 @@ namespace KitBook.Models.Repositories
 
         public IEnumerable<Recipe> ReadWithRelationships()
         {
-            // TODO: implement Ingredients include.
             return dbContext.Recipes
                 .AsNoTracking()
                 .Include(r => r.CookingType)
@@ -74,9 +72,17 @@ namespace KitBook.Models.Repositories
 
         public void Update(Recipe entity)
         {
-            var recipe = dbContext.Recipes.FirstOrDefault(r => r.Id == entity.Id);
-            recipe.UpdateOptionalFields(entity);
-            recipe.UpdateTypesById(entity);
+            var recipe = dbContext.Recipes
+                .FirstOrDefault(r => r.Id == entity.Id);
+            recipe.Stages = new List<Stage>().AsEnumerable();
+            recipe.Stages.Concat(entity.Stages);
+            recipe.Title = entity.Title;
+            recipe.Description = entity.Description;
+            recipe.SourceURL = entity.SourceURL;
+            recipe.CookingTimeMinutes = entity.CookingTimeMinutes;
+            recipe.CookingTypeId = entity.CookingTypeId;
+            recipe.DishTypeId = entity.DishTypeId;
+            recipe.RecipeTypeId = entity.RecipeTypeId;
             dbContext.SaveChanges();
         }
     }

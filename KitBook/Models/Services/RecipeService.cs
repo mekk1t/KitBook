@@ -43,7 +43,7 @@ namespace KitBook.Models.Services
 
         public void UpdateRecipe(RecipeDto dto)
         {
-            repository.Update(dto.AsEntity());
+            repository.Update(dto.AsEditEntity());
         }
     }
 }

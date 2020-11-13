@@ -78,40 +78,42 @@
             <div class="form-group" id="ingredients">
                 @if (Model.Ingredients?.Count > 0)
                 {
-                <div class="count">
                     @for (int i = 0; i < Model.Ingredients.Count; i++)
                     {
+                <div class="count">
+                    @{
                         var ingredient = Model.Ingredients[i];
-                        <label asp-for="Ingredients[i].Name" class="control-label">Название</label>
-                        <select asp-for="Ingredients[i].IngredientId" class="form-control" asp-items="ViewBag.Ingredients">
-                            <option selected="selected">@ingredient.IngredientId</option>
-                        </select>
-                        @if (ingredient.Ml != null)
-                        {
-                                string mlLabel = $"mlLabel{i}";
-                        <label class="control-label" id="@mlLabel">Объем (в мл.)</label>
-                                string mlInput = $"mlInput{i}";
-                        <input name="Ingredients[@i].Ml" id="@mlInput" type="number" value="@Model.Ingredients[i].Ml" class="form-control" />
-                        <input asp-for="Ingredients[i].RecipeId" readonly="readonly" value="@Model.Id" class="invisible" />
-                        }
-                        else if (ingredient.G != null)
-                        {
-                                string gLabel = $"gLabel{i}";
-                        <label class="control-label" id="@gLabel">Грамм</label>
-                                string gInput = $"gInput{i}";
-                        <input name="Ingredients[@i].G" id="@gInput" type="number" value="@Model.Ingredients[i].G" class="form-control" />
-                        <input asp-for="Ingredients[i].RecipeId" readonly="readonly" value="@Model.Id" class="invisible" />
-                        }
-                        else if (ingredient.Amount != null)
-                        {
-                                string aLabel = $"aLabel{i}";
-                        <label class="control-label" id="@aLabel">Штук</label>
-                                string aInput = $"aInput{i}";
-                        <input class="form-control"  name="Ingredients[@i].Amount" id="@aInput" type="number" value="@Model.Ingredients[i].Amount"/>
-                        <input asp-for="Ingredients[i].RecipeId" readonly="readonly" value="@Model.Id" class="invisible" />
-                        }
                     }
-                    </div>
+                    <label asp-for="Ingredients[i].Name" class="control-label">Название</label>
+                    <select asp-for="Ingredients[i].IngredientId" disabled class="form-control" asp-items="ViewBag.Ingredients">
+                        <option selected="selected">@ingredient.IngredientId</option>
+                    </select>
+                    @if (ingredient.Ml != null)
+                    {
+                        string mlLabel = $"mlLabel{i}";
+                        <label class="control-label" id="@mlLabel">Объем (в мл.)</label>
+                        string mlInput = $"mlInput{i}";
+                        <input name="Ingredients[@i].Ml" id="@mlInput" readonly="readonly" type="number" value="@Model.Ingredients[i].Ml" class="form-control" />
+                        <input asp-for="Ingredients[i].RecipeId" readonly="readonly" value="@Model.Id" class="invisible" />
+                    }
+                    else if (ingredient.G != null)
+                    {
+                        string gLabel = $"gLabel{i}";
+                        <label class="control-label" id="@gLabel">Грамм</label>
+                        string gInput = $"gInput{i}";
+                        <input name="Ingredients[@i].G" id="@gInput" readonly="readonly" type="number" value="@Model.Ingredients[i].G" class="form-control" />
+                        <input asp-for="Ingredients[i].RecipeId" readonly="readonly" value="@Model.Id" class="invisible" />
+                    }
+                    else if (ingredient.Amount != null)
+                    {
+                        string aLabel = $"aLabel{i}";
+                        <label class="control-label" id="@aLabel">Штук</label>
+                        string aInput = $"aInput{i}";
+                        <input class="form-control" readonly="readonly" name="Ingredients[@i].Amount" id="@aInput" type="number" value="@Model.Ingredients[i].Amount" />
+                        <input asp-for="Ingredients[i].RecipeId" readonly="readonly" value="@Model.Id" class="invisible" />
+                    }
+                </div>
+                    }
                 }
             </div>
             <div class="form-group" id="addIngredient">
