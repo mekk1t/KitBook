@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using KitBook.Models.Database.Entities;
 using KitBook.Models.Database.Entities.Types;
@@ -40,7 +41,7 @@ namespace KitBookTests.Repositories
 
             var result = sut.ReadWithRelationships(RECIPE_ID).Ingredients;
 
-            result.Count.Should().Be(recipe.Ingredients.Count);
+            result.Count().Should().Be(recipe.Ingredients.Count());
         }
 
         private void InitializeEntities()
