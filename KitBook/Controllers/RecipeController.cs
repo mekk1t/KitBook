@@ -85,6 +85,7 @@ namespace KitBook.Controllers
         public IActionResult PutRecipe(Guid id)
         {
             FillViewBagWithTypes();
+            FillViewBagWithIngredients();
             var formData = service.GetRecipeById(id);
             return View(nameof(PutRecipe), formData);
         }
