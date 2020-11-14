@@ -82,13 +82,19 @@ namespace KitBook.Models.Repositories
             recipe.DishTypeId = entity.DishTypeId;
             recipe.RecipeTypeId = entity.RecipeTypeId;
 
-            var stages = dbContext.Stages.AsNoTracking().Where(s => s.RecipeId == entity.Id);
-            dbContext.Stages.RemoveRange(stages);
-            dbContext.Stages.AddRange(entity.Stages);
+            if (entity.Stages?.Count() > 0)
+            {
+                var stages = dbContext.Stages.AsNoTracking().Where(s => s.RecipeId == entity.Id);
+                dbContext.Stages.RemoveRange(stages);
+                dbContext.Stages.AddRange(entity.Stages);
+            }
 
-            var recipeIngredients = dbContext.RecipeIngredients.AsNoTracking().Where(s => s.RecipeId == entity.Id);
-            dbContext.RecipeIngredients.RemoveRange(recipeIngredients);
-            dbContext.RecipeIngredients.AddRange(entity.Ingredients);
+            if (entity.Ingredients?.Count() > 0)
+            {
+                var recipeIngredients = dbContext.RecipeIngredients.AsNoTracking().Where(s => s.RecipeId == entity.Id);
+                dbContext.RecipeIngredients.RemoveRange(recipeIngredients);
+                dbContext.RecipeIngredients.AddRange(entity.Ingredients);
+            }
             dbContext.SaveChanges();
         }
     }
