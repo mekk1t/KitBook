@@ -22,6 +22,8 @@ namespace KitBook.Models.Database.Entities
         public RecipeType RecipeType { get; set; }
         public DishType DishType { get; set; }
 
+        public byte[] Thumbnail { get; set; }
+
         public IEnumerable<RecipeCategory> Categories { get; set; }
         public IEnumerable<RecipeIngredient> Ingredients { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
