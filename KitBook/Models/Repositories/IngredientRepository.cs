@@ -45,6 +45,8 @@ namespace KitBook.Models.Repositories
             return dbContext.Ingredients
                 .AsNoTracking()
                 .Include(i => i.Type)
+                .Include(i => i.Recipes)
+                .ThenInclude(r => r.Recipe)
                 .FirstOrDefault(i => i.Id == id);
         }
 

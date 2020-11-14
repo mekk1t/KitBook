@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using KitBook.Models.Database.Entities;
+using KitBook.Models;
 using KitBook.Models.DTO;
 
 namespace KitBook.Helpers.Extensions
@@ -153,7 +154,12 @@ namespace KitBook.Helpers.Extensions
                 IsSpicy = entity.IsSpicy,
                 IsSugary = entity.IsSugary,
                 Name = entity.Name,
-                IngredientTypeId = entity.IngredientTypeId
+                IngredientTypeId = entity.IngredientTypeId,
+                Mentions = entity.Recipes?.Select(m => new IngredientMention
+                {
+                    RecipeName = m.Recipe.Title,
+                    RecipeId = m.RecipeId
+                })
             };
         }
 

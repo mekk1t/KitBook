@@ -9,38 +9,51 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IsSpicy)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IsSpicy)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IsSugary)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IsSugary)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IsSour)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IsSour)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IngredientTypeId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IngredientType)
         </dd>
     </dl>
 </div>
+@if (Model.Mentions?.Count() > 0)
+{
+    <div>
+        <hr />
+        Встречается в
+        <ul>
+            @foreach (var mention in Model.Mentions)
+            {
+                <li><a asp-controller="Recipe" asp-action="GetRecipe" asp-route-id="@mention.RecipeId">@mention.RecipeName</a></li>
+            }
+        </ul>
+    </div>
+}
 <div>
     <a asp-action="PutIngredient" asp-route-id="@Model.Id">Редактировать</a> |
     <a asp-action="GetIngredients">К списку</a>

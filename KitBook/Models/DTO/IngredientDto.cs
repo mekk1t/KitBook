@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace KitBook.Models.DTO
@@ -16,6 +17,8 @@ namespace KitBook.Models.DTO
         public bool IsSour { get; set; }
         [Display(Name = "Тип")]
         public Guid IngredientTypeId { get; set; }
+
+        public IEnumerable<IngredientMention> Mentions { get; set; }
 
         public string IngredientType { get; set; }
     }
