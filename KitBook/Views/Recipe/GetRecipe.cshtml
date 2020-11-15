@@ -5,15 +5,18 @@
 }
 
 <h1 class="text-center"><a target="_blank" rel="noreferrer" href="@Model.SourceURL">@Model.Title.Trim()</a></h1>
-
+<br />
 @if (Model.ThumbnailBase64 != null)
 {
-    <img class="img-fluid" src="data:image/png;base64,@Model.ThumbnailBase64" />
+<div class="text-center">
+    <img class="img-fluid" src="data:@Model.ThumbnailContentType;base64,@Model.ThumbnailBase64" />
+</div>
 }
 else
 {
     <footer class="text-center"><em><small class="text-muted">Здесь могла быть обложка рецепта</small></em></footer>
 }
+<br />
 
 <p class="lead">
     @Model.Description
@@ -34,12 +37,14 @@ else
             if (Model.Stages[i].ImageBase64 != null)
             {
                 <div class="row">
-                <figure class="figure">
-                    <img class="figure-img img-fluid rounded" src="data:image/png;base64,@Model.Stages[i].ImageBase64" />
-                    <figcaption class="figure-caption">
-                        @Model.Stages[i].Description
-                    </figcaption>
-                </figure>
+                    <div class="col-2">
+                        <img class="img-fluid" src="data:@Model.Stages[i].ImageContentType;base64,@Model.Stages[i].ImageBase64" />
+                    </div>
+                    <div class="col-8">
+                        <p>
+                            @Model.Stages[i].Index. @Model.Stages[i].Description
+                        </p>
+                    </div>
                 </div>
             }
             else
