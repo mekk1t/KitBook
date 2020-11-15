@@ -26,7 +26,7 @@ namespace KitBook.Models.Database.Entities
 
         public IEnumerable<RecipeCategory> Categories { get; set; }
         public IEnumerable<RecipeIngredient> Ingredients { get; set; }
-        public IEnumerable<Comment> Comments { get; set; }
-        public IEnumerable<Stage> Stages { get; set; }
+        public List<Comment> Comments { get; set; }
+        public List<Stage> Stages { get; set; }
     }
 }
