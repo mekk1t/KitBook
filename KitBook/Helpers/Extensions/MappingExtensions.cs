@@ -153,7 +153,7 @@ namespace KitBook.Helpers.Extensions
                     Id = s.Id,
                     Index = s.Index,
                     RecipeId = s.RecipeId,
-                    ImageBase64 = Convert.ToBase64String(s.Image)
+                    ImageBase64 = s.Image != null ? Convert.ToBase64String(s.Image) : null
                 }).ToList(),
                 Ingredients = entity.Ingredients?.Select(i => new RecipeIngredientDto
                 {
@@ -164,7 +164,9 @@ namespace KitBook.Helpers.Extensions
                     Ml = i.Ml,
                     Amount = i.Amount
                 }).ToList(),
-                ThumbnailBase64 = Convert.ToBase64String(entity.Thumbnail)
+                ThumbnailBase64 = entity.Thumbnail != null
+                ? Convert.ToBase64String(entity.Thumbnail)
+                : null
             };
         }
 
