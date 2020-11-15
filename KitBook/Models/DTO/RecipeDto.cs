@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace KitBook.Models.DTO
 {
@@ -26,6 +27,11 @@ namespace KitBook.Models.DTO
         public string CookingType { get; set; }
         public string RecipeType { get; set; }
         public string DishType { get; set; }
+
+        [Display(Name = "Обложка")]
+        public IFormFile Thumbnail { get; set; }
+
+        public string ThumbnailBase64 { get; set; }
 
         public List<StageDto> Stages { get; set; }
 

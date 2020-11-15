@@ -4,6 +4,8 @@ using System.Linq;
 using KitBook.Models.Database.Entities;
 using KitBook.Models;
 using KitBook.Models.DTO;
+using System.IO;
+using System.Text;
 
 namespace KitBook.Helpers.Extensions
 {
@@ -43,7 +45,7 @@ namespace KitBook.Helpers.Extensions
 
         public static Recipe AsNewEntity(this RecipeDto dto)
         {
-            return new Recipe
+            var recipe = new Recipe
             {
                 Id = dto.Id,
                 Description = dto.Description,
@@ -69,6 +71,26 @@ namespace KitBook.Helpers.Extensions
                     Ml = i.Ml
                 }).ToList()
             };
+
+            if (dto.Thumbnail != null)
+            {
+                var temp = dto.Thumbnail;
+                using var ms = new MemoryStream();
+                dto.Thumbnail.CopyTo(ms);
+                recipe.Thumbnail = ms.ToArray();
+            }
+
+            if (dto.Stages?.Count > 0)
+            {
+                for (int i = 0; i < dto.Stages.Count; i++)
+                {
+                    using var ms = new MemoryStream();
+                    dto.Stages[i].Image.CopyTo(ms);
+                    recipe.Stages[i].Image = ms.ToArray();
+                }
+            }
+
+            return recipe;
         }
 
         public static Recipe AsEntity(this RecipeDto dto)
@@ -88,7 +110,7 @@ namespace KitBook.Helpers.Extensions
                     Description = s.Description,
                     Id = s.Id,
                     Index = s.Index,
-                    RecipeId = s.RecipeId
+                    RecipeId = s.RecipeId,
                 }).ToList(),
                 Ingredients = dto.Ingredients?.Select(i => new RecipeIngredient
                 {
@@ -130,7 +152,8 @@ namespace KitBook.Helpers.Extensions
                     Description = s.Description,
                     Id = s.Id,
                     Index = s.Index,
-                    RecipeId = s.RecipeId
+                    RecipeId = s.RecipeId,
+                    ImageBase64 = Convert.ToBase64String(s.Image)
                 }).ToList(),
                 Ingredients = entity.Ingredients?.Select(i => new RecipeIngredientDto
                 {
@@ -140,7 +163,8 @@ namespace KitBook.Helpers.Extensions
                     G = i.G,
                     Ml = i.Ml,
                     Amount = i.Amount
-                }).ToList()
+                }).ToList(),
+                ThumbnailBase64 = Convert.ToBase64String(entity.Thumbnail)
             };
         }
 

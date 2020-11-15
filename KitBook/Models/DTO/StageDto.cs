@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
 
 namespace KitBook.Models.DTO
 {
@@ -9,5 +10,7 @@ namespace KitBook.Models.DTO
 
         public int Index { get; set; }
         public string Description { get; set; }
+        public IFormFile Image { get; set; }
+        public string ImageBase64 { get; set; }
     }
 }

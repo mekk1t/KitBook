@@ -4,14 +4,16 @@ using KitBook.Models.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KitBook.Models.Database.Migrations
 {
     [DbContext(typeof(CookbookDbContext))]
-    partial class CookbookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201114213202_recipeThumbnailSupport")]
+    partial class recipeThumbnailSupport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,9 +179,6 @@ namespace KitBook.Models.Database.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("Index")
                         .HasColumnType("int");
