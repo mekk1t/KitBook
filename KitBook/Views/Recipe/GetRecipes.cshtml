@@ -4,11 +4,8 @@
     ViewData["Title"] = "Рецепты";
 }
 
-<h1>Список рецептов</h1>
-
-<p>
-    <a asp-action="PostRecipe">Добавить новый</a>
-</p>
+<h1>Рецепты</h1>
+<br />
 <table class="table">
     <tbody>
 @foreach (var item in Model) {
@@ -17,10 +14,7 @@
                 <a asp-action="GetRecipe" asp-route-id="@item.Id">@item.Title</a>
             </td>
             <td>
-                Готовить @Html.DisplayFor(modelItem => item.CookingTimeMinutes) минут
-            </td>
-            <td>
-                <a target="_blank" rel="noreferrer" class="btn btn-primary" href="@item.SourceURL">Источник</a>
+                @item.CookingTimeMinutes минут
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CookingType)
@@ -32,10 +26,7 @@
                 @Html.DisplayFor(modelItem => item.DishType)
             </td>
             <td>
-                @item.Stages?.Count этапов
-            </td>
-            <td>
-                <a asp-action="PutRecipe" asp-route-id="@item.Id">Редактировать</a>
+                <a target="_blank" rel="noreferrer" class="btn btn-primary" href="@item.SourceURL">Источник</a>
             </td>
         </tr>
 }
