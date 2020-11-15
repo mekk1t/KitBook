@@ -5,7 +5,6 @@ using KitBook.Models.Database.Entities;
 using KitBook.Models;
 using KitBook.Models.DTO;
 using System.IO;
-using System.Text;
 
 namespace KitBook.Helpers.Extensions
 {
@@ -13,7 +12,7 @@ namespace KitBook.Helpers.Extensions
     {
         public static Recipe AsEditEntity(this RecipeDto dto)
         {
-            return new Recipe
+            var recipe = new Recipe
             {
                 Id = dto.Id,
                 Description = dto.Description,
@@ -41,6 +40,29 @@ namespace KitBook.Helpers.Extensions
                     Ml = i.Ml
                 }).ToList()
             };
+
+
+            if (dto.Thumbnail != null)
+            {
+                var temp = dto.Thumbnail;
+                using var ms = new MemoryStream();
+                dto.Thumbnail.CopyTo(ms);
+                recipe.Thumbnail = ms.ToArray();
+            }
+
+            if (dto.Stages?.Count > 0)
+            {
+                for (int i = 0; i < dto.Stages.Count; i++)
+                {
+                    if (dto.Stages[i].Image != null)
+                    {
+                        using var ms = new MemoryStream();
+                        dto.Stages[i].Image.CopyTo(ms);
+                        recipe.Stages[i].Image = ms.ToArray();
+                    }
+                }
+            }
+            return recipe;
         }
 
         public static Recipe AsNewEntity(this RecipeDto dto)
@@ -84,9 +106,12 @@ namespace KitBook.Helpers.Extensions
             {
                 for (int i = 0; i < dto.Stages.Count; i++)
                 {
-                    using var ms = new MemoryStream();
-                    dto.Stages[i].Image.CopyTo(ms);
-                    recipe.Stages[i].Image = ms.ToArray();
+                    if (dto.Stages[i].Image != null)
+                    {
+                        using var ms = new MemoryStream();
+                        dto.Stages[i].Image.CopyTo(ms);
+                        recipe.Stages[i].Image = ms.ToArray();
+                    }
                 }
             }
 

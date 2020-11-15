@@ -81,6 +81,10 @@ namespace KitBook.Models.Repositories
             recipe.CookingTypeId = entity.CookingTypeId;
             recipe.DishTypeId = entity.DishTypeId;
             recipe.RecipeTypeId = entity.RecipeTypeId;
+            if (entity.Thumbnail != null)
+            {
+                recipe.Thumbnail = entity.Thumbnail;
+            }
 
             if (entity.Stages?.Count() > 0)
             {
