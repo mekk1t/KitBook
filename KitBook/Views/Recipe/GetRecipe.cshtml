@@ -33,12 +33,14 @@ else
         {
             if (Model.Stages[i].ImageBase64 != null)
             {
+                <div class="row">
                 <figure class="figure">
                     <img class="figure-img img-fluid rounded" src="data:image/png;base64,@Model.Stages[i].ImageBase64" />
                     <figcaption class="figure-caption">
                         @Model.Stages[i].Description
                     </figcaption>
                 </figure>
+                </div>
             }
             else
             {
