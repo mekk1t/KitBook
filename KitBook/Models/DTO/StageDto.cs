@@ -12,5 +12,6 @@ namespace KitBook.Models.DTO
         public string Description { get; set; }
         public IFormFile Image { get; set; }
         public string ImageBase64 { get; set; }
+        public string ImageContentType { get; set; }
     }
 }

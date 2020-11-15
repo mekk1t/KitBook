@@ -32,6 +32,7 @@ namespace KitBook.Models.DTO
         public IFormFile Thumbnail { get; set; }
 
         public string ThumbnailBase64 { get; set; }
+        public string ThumbnailContentType { get; set; }
 
         public List<StageDto> Stages { get; set; }
 

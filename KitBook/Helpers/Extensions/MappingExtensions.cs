@@ -48,6 +48,7 @@ namespace KitBook.Helpers.Extensions
                 using var ms = new MemoryStream();
                 dto.Thumbnail.CopyTo(ms);
                 recipe.Thumbnail = ms.ToArray();
+                recipe.ThumbnailContentType = dto.Thumbnail.ContentType;
             }
 
             if (dto.Stages?.Count > 0)
@@ -59,6 +60,7 @@ namespace KitBook.Helpers.Extensions
                         using var ms = new MemoryStream();
                         dto.Stages[i].Image.CopyTo(ms);
                         recipe.Stages[i].Image = ms.ToArray();
+                        recipe.Stages[i].ImageContentType = dto.Stages[i].Image.ContentType;
                     }
                 }
             }
@@ -100,6 +102,7 @@ namespace KitBook.Helpers.Extensions
                 using var ms = new MemoryStream();
                 dto.Thumbnail.CopyTo(ms);
                 recipe.Thumbnail = ms.ToArray();
+                recipe.ThumbnailContentType = dto.Thumbnail.ContentType;
             }
 
             if (dto.Stages?.Count > 0)
@@ -111,6 +114,7 @@ namespace KitBook.Helpers.Extensions
                         using var ms = new MemoryStream();
                         dto.Stages[i].Image.CopyTo(ms);
                         recipe.Stages[i].Image = ms.ToArray();
+                        recipe.Stages[i].ImageContentType = dto.Stages[i].Image.ContentType;
                     }
                 }
             }
@@ -172,12 +176,14 @@ namespace KitBook.Helpers.Extensions
                 CookingTypeId = entity.CookingTypeId,
                 RecipeTypeId = entity.RecipeTypeId,
                 DishTypeId = entity.DishTypeId,
+                ThumbnailContentType = entity.ThumbnailContentType,
                 Stages = entity.Stages?.Select(s => new StageDto
                 {
                     Description = s.Description,
                     Id = s.Id,
                     Index = s.Index,
                     RecipeId = s.RecipeId,
+                    ImageContentType = s.ImageContentType,
                     ImageBase64 = s.Image != null ? Convert.ToBase64String(s.Image) : null
                 }).ToList(),
                 Ingredients = entity.Ingredients?.Select(i => new RecipeIngredientDto
