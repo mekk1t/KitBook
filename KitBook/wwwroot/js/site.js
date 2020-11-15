@@ -43,6 +43,16 @@ function appendStageToContainer(i, container) {
     descriptionTextarea.setAttribute("class", "form-control");
     autosize(descriptionTextarea);
 
+    var imageLabel = document.createElement("label");
+    imageLabel.innerHTML = "Картинка";
+    imageLabel.setAttribute("class", "control-label");
+    imageLabel.setAttribute("for", currentStage.concat(".Image"));
+
+    var imageInput = document.createElement("input");
+    imageInput.setAttribute("type", "file");
+    imageInput.setAttribute("class", "form-control");
+    imageInput.setAttribute("name", currentStage.concat(".Image"));
+
     var recipeIdInput = document.createElement("input");
     recipeIdInput.setAttribute("class", "invisible");
     recipeIdInput.setAttribute("name", currentStage.concat(".RecipeId"));
@@ -54,6 +64,8 @@ function appendStageToContainer(i, container) {
     stageContainer.append(document.createElement("br"));
     stageContainer.append(descriptionLabel);
     stageContainer.append(descriptionTextarea);
+    stageContainer.append(imageLabel);
+    stageContainer.append(imageInput);
     stageContainer.append(recipeIdInput);
     stageContainer.append(document.createElement("br"));
 

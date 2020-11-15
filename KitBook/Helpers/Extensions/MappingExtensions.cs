@@ -80,6 +80,16 @@ namespace KitBook.Helpers.Extensions
                 recipe.Thumbnail = ms.ToArray();
             }
 
+            if (dto.Stages?.Count > 0)
+            {
+                for (int i = 0; i < dto.Stages.Count; i++)
+                {
+                    using var ms = new MemoryStream();
+                    dto.Stages[i].Image.CopyTo(ms);
+                    recipe.Stages[i].Image = ms.ToArray();
+                }
+            }
+
             return recipe;
         }
 
@@ -100,7 +110,7 @@ namespace KitBook.Helpers.Extensions
                     Description = s.Description,
                     Id = s.Id,
                     Index = s.Index,
-                    RecipeId = s.RecipeId
+                    RecipeId = s.RecipeId,
                 }).ToList(),
                 Ingredients = dto.Ingredients?.Select(i => new RecipeIngredient
                 {
@@ -142,7 +152,8 @@ namespace KitBook.Helpers.Extensions
                     Description = s.Description,
                     Id = s.Id,
                     Index = s.Index,
-                    RecipeId = s.RecipeId
+                    RecipeId = s.RecipeId,
+                    ImageBase64 = Convert.ToBase64String(s.Image)
                 }).ToList(),
                 Ingredients = entity.Ingredients?.Select(i => new RecipeIngredientDto
                 {
