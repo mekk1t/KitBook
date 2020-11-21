@@ -5,26 +5,18 @@
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
     <AssemblyName>KitBook.AspNetCore.WebApp</AssemblyName>
     <RootNamespace>KitBook</RootNamespace>
+    <UserSecretsId>0a0b05d5-8d77-4cb8-a2fb-9c6286134d5b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Helpers\.design\css\home.css" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Helpers\.txt\RepositoryMethods.txt" />
-    <None Include="Helpers\.txt\TZ.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="mekk1t.Tools" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationServices\ApplicationServices.csproj" />
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj" />
+    <ProjectReference Include="..\Dal\Dal.csproj" />
   </ItemGroup>
 
 </Project>
