@@ -1,4 +1,4 @@
-﻿@model KitBook.Models.DTO.RecipeDto
+﻿@model KitBook.Models.ViewModels.Recipe.EditRecipe
 
 @{
     ViewData["Title"] = "Редактирование рецепта";
@@ -90,7 +90,7 @@
                             @{
                                 var ingredient = Model.Ingredients[i];
                             }
-                            <label asp-for="Ingredients[i].Name" class="control-label">Название</label>
+                            <label asp-for="Ingredients[i].IngredientName" class="control-label">Название</label>
                             <select asp-for="Ingredients[i].IngredientId" class="form-control" asp-items="ViewBag.Ingredients">
                                 <option selected="selected">@ingredient.IngredientId</option>
                             </select>

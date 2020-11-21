@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
+using BusinessLogic.Interfaces;
+using KitBook.Handlers.Interfaces;
+using KitBook.Mappers.Interfaces;
 using KitBook.Models.Database.Entities;
-using KitBook.Models.Database.Entities.Types;
-using KitBook.Models.DTO;
-using KitBook.Models.Repositories.Interfaces;
 using KitBook.Models.Services.Interfaces;
+using KitBook.Models.ViewModels.Recipe;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -11,58 +13,57 @@ namespace KitBook.Controllers
 {
     public class RecipeController : Controller
     {
+        private readonly IRecipeMapper mapper;
         private readonly IRecipeService service;
-        private readonly IRepository<RecipeType> recipeTypeRepository;
-        private readonly IRepository<CookingType> cookingTypeRepository;
-        private readonly IRepository<DishType> dishTypeRepository;
-        private readonly IRepository<IngredientType> ingredientTypeRepository;
+        private readonly ITypeHandler typeHandler;
         private readonly IRepositoryAdvanced<Ingredient> ingredientRepository;
 
         public RecipeController(
+            IRecipeMapper mapper,
             IRecipeService service,
-            IRepository<RecipeType> recipeTypeRepository,
-            IRepository<CookingType> cookingTypeRepository,
-            IRepository<IngredientType> ingredientTypeRepository,
-            IRepository<DishType> dishTypeRepository,
+            ITypeHandler typeHandler,
             IRepositoryAdvanced<Ingredient> ingredientRepository)
         {
+            this.mapper = mapper;
             this.service = service;
-            this.recipeTypeRepository = recipeTypeRepository;
-            this.cookingTypeRepository = cookingTypeRepository;
-            this.dishTypeRepository = dishTypeRepository;
-            this.ingredientTypeRepository = ingredientTypeRepository;
+            this.typeHandler = typeHandler;
             this.ingredientRepository = ingredientRepository;
         }
 
         private void FillViewBagWithTypes()
         {
-            ViewBag.RecipeTypes = new SelectList(recipeTypeRepository.Read(), "Id", "Name");
-            ViewBag.CookingTypes = new SelectList(cookingTypeRepository.Read(), "Id", "Name");
-            ViewBag.DishTypes = new SelectList(dishTypeRepository.Read(), "Id", "Name");
-            ViewBag.IngredientTypes = new SelectList(ingredientTypeRepository.Read(), "Id", "Name");
+            ViewBag.RecipeTypes = new SelectList(typeHandler.GetRecipeTypes(), "Id", "Name");
+            ViewBag.CookingTypes = new SelectList(typeHandler.GetCookingTypes(), "Id", "Name");
+            ViewBag.DishTypes = new SelectList(typeHandler.GetDishTypes(), "Id", "Name");
+            ViewBag.IngredientTypes = new SelectList(typeHandler.GetIngredientTypes(), "Id", "Name");
         }
 
         private void FillViewBagWithIngredients()
         {
-            ViewBag.Ingredients = new SelectList(ingredientRepository.Read(), "Id", "Name");
+            ViewBag.Ingredients = new SelectList(ingredientRepository.GetList(), "Id", "Name");
         }
 
         [HttpGet]
         public IActionResult GetRecipes()
         {
-            return View(nameof(GetRecipes), service.GetRecipes());
+            var recipes = service.GetRecipes();
+            var viewModel = recipes.Select(r => mapper.Map(r));
+            return View(nameof(GetRecipes), viewModel);
         }
 
         [HttpGet]
         public IActionResult GetRecipe(Guid id)
         {
-            return View(nameof(GetRecipe), service.GetRecipeById(id));
+            var recipe = service.GetRecipeById(id);
+            var viewModel = mapper.Map(recipe);
+            return View(nameof(GetRecipe), viewModel);
         }
 
         [HttpPost]
-        public IActionResult PostRecipe(RecipeDto dto)
+        public IActionResult PostRecipe(NewRecipe model)
         {
-            service.CreateNewRecipe(dto);
+            var recipe = mapper.Map(model);
+            service.CreateNewRecipe(recipe);
             return RedirectToAction(nameof(GetRecipes));
         }
 
@@ -75,10 +76,11 @@ namespace KitBook.Controllers
         }
 
         [HttpPost]
-        public IActionResult PutRecipe(RecipeDto dto)
+        public IActionResult PutRecipe(EditRecipe model)
         {
-            service.UpdateRecipe(dto);
-            return RedirectToAction(nameof(GetRecipe), new { id = dto.Id });
+            var recipe = mapper.Map(model);
+            service.UpdateRecipe(recipe);
+            return RedirectToAction(nameof(GetRecipe), new { id = model.Id });
         }
 
         [HttpGet]
@@ -86,8 +88,9 @@ namespace KitBook.Controllers
         {
             FillViewBagWithTypes();
             FillViewBagWithIngredients();
-            var formData = service.GetRecipeById(id);
-            return View(nameof(PutRecipe), formData);
+            var recipe = service.GetRecipeById(id);
+            var viewModel = mapper.Map(recipe);
+            return View(nameof(PutRecipe), viewModel);
         }
 
         public IActionResult DeleteRecipe(Guid id)

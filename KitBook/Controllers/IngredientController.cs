@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using BusinessLogic.Interfaces;
 using KitBook.Mappers.Interfaces;
 using KitBook.Models.Database.Entities.Types;
@@ -20,6 +21,7 @@ namespace KitBook.Controllers
             IIngredientMapper mapper,
             IRepository<IngredientType> ingredientTypeRepository)
         {
+            this.mapper = mapper;
             this.service = service;
             this.ingredientTypeRepository = ingredientTypeRepository;
         }
@@ -31,12 +33,16 @@ namespace KitBook.Controllers
 
         public IActionResult GetIngredient(Guid id)
         {
-            return View(nameof(GetIngredient), service.GetIngredientById(id));
+            var ingredient = service.GetIngredientById(id);
+            var viewModel = mapper.Map(ingredient);
+            return View(nameof(GetIngredient), viewModel);
         }
 
         public IActionResult GetIngredients()
         {
-            return View(nameof(GetIngredients), service.GetIngredients());
+            var ingredients = service.GetIngredients();
+            var viewModel = ingredients.Select(i => mapper.Map(i));
+            return View(nameof(GetIngredients), viewModel);
         }
 
         [HttpGet]
@@ -47,22 +53,24 @@ namespace KitBook.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostIngredient(IngredientViewModel viewModel)
+        public IActionResult PostIngredient(NewIngredient viewModel)
         {
             var ingredient = mapper.Map(viewModel);
             service.CreateNewIngredient(ingredient);
-            return RedirectToAction(nameof(GetIngredient), new { id = viewModel.Id });
+            return RedirectToAction(nameof(GetIngredient), new { id = ingredient.Id });
         }
 
         [HttpGet]
         public IActionResult PutIngredient(Guid id)
         {
+            var ingredient = service.GetIngredientById(id);
+            var viewModel = mapper.Map(ingredient);
             FillViewBagWithIngredientTypes();
-            return View(nameof(PutIngredient), service.GetIngredientById(id));
+            return View(nameof(PutIngredient), viewModel);
         }
 
         [HttpPost]
-        public IActionResult PutIngredient(IngredientViewModel viewModel)
+        public IActionResult PutIngredient(EditIngredient viewModel)
         {
             var ingredient = mapper.Map(viewModel);
             service.UpdateIngredient(ingredient);

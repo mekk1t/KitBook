@@ -1,4 +1,8 @@
+using KitBook.Handlers;
+using KitBook.Handlers.Interface;
+using KitBook.Handlers.Interfaces;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace KitBook
@@ -11,6 +15,9 @@ namespace KitBook
             services.AddDatabase();
             services.AddRepositories();
             services.AddServices();
+            services.AddMappers();
+            services.AddScoped<IFileHandler<IFormFile>, FormFileHandler>();
+            services.AddScoped<ITypeHandler, TypeHandler>();
         }
 
         public void Configure(IApplicationBuilder app)

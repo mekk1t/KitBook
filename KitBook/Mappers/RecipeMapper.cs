@@ -24,7 +24,7 @@ namespace KitBook.Mappers
 
         public RecipeViewModel Map(Recipe model)
         {
-            return new RecipeViewModel
+            var viewModel = new RecipeViewModel
             {
                 Id = Guid.NewGuid(),
                 Description = model.Description,
@@ -35,10 +35,16 @@ namespace KitBook.Mappers
                 Ingredients = model.Ingredients?.Select(i => ingredientMapper.Map(i)).ToList(),
                 DishType = model.DishType?.Name,
                 CookingType = model.CookingType?.Name,
-                RecipeType = model.RecipeType?.Name,
-                ThumbnailBase64 = Convert.ToBase64String(model.Thumbnail),
-                ThumbnailContentType = model.ThumbnailContentType
+                RecipeType = model.RecipeType?.Name
             };
+
+            if (model.Thumbnail != null)
+            {
+                viewModel.ThumbnailBase64 = Convert.ToBase64String(model.Thumbnail);
+                viewModel.ThumbnailContentType = model.ThumbnailContentType;
+            };
+
+            return viewModel;
         }
 
         public Recipe Map(NewRecipe model)

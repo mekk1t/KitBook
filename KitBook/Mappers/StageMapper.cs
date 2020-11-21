@@ -19,14 +19,19 @@ namespace KitBook.Mappers
 
         public StageViewModel Map(Stage model)
         {
-            return new StageViewModel
+            var viewModel = new StageViewModel
             {
                 Description = model.Description,
                 Index = model.Index,
-                RecipeId = model.RecipeId,
-                ImageBase64 = Convert.ToBase64String(model.Image),
-                ImageContentType = model.ImageContentType
+                RecipeId = model.RecipeId
             };
+
+            if (model.Image != null)
+            {
+                viewModel.ImageBase64 = Convert.ToBase64String(model.Image);
+                viewModel.ImageContentType = model.ImageContentType;
+            }
+            return viewModel;
         }
 
         public Stage Map(NewStage model)

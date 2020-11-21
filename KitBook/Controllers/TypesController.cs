@@ -1,6 +1,6 @@
 ﻿using System;
+using BusinessLogic.Interfaces;
 using KitBook.Models.Database.Entities.Types;
-using KitBook.Models.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KitBook.Controllers
@@ -34,13 +34,13 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetRecipeTypes()
         {
-            return View(nameof(GetRecipeTypes), recipeTypeRepository.Read());
+            return View(nameof(GetRecipeTypes), recipeTypeRepository.GetList());
         }
 
         [HttpGet]
         public IActionResult GetRecipeType(Guid id)
         {
-            return View(nameof(GetRecipeType), recipeTypeRepository.Read(id));
+            return View(nameof(GetRecipeType), recipeTypeRepository.GetById(id));
         }
 
         [HttpPost]
@@ -66,13 +66,13 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult PutRecipeType(Guid id)
         {
-            var formData = recipeTypeRepository.Read(id);
+            var formData = recipeTypeRepository.GetById(id);
             return View(nameof(PutRecipeType), formData);
         }
 
         public IActionResult DeleteRecipeType(Guid id)
         {
-            recipeTypeRepository.Delete(id);
+            recipeTypeRepository.DeleteById(id);
             return RedirectToAction(nameof(GetRecipeTypes));
         }
         #endregion
@@ -81,13 +81,13 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetCookingTypes()
         {
-            return View(nameof(GetCookingTypes), cookingTypeRepository.Read());
+            return View(nameof(GetCookingTypes), cookingTypeRepository.GetList());
         }
 
         [HttpGet]
         public IActionResult GetCookingType(Guid id)
         {
-            return View(nameof(GetCookingType), cookingTypeRepository.Read(id));
+            return View(nameof(GetCookingType), cookingTypeRepository.GetById(id));
         }
 
         [HttpPost]
@@ -113,13 +113,13 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult PutCookingType(Guid id)
         {
-            var formData = cookingTypeRepository.Read(id);
+            var formData = cookingTypeRepository.GetById(id);
             return View(nameof(PutCookingType), formData);
         }
 
         public IActionResult DeleteCookingType(Guid id)
         {
-            cookingTypeRepository.Delete(id);
+            cookingTypeRepository.DeleteById(id);
             return RedirectToAction(nameof(GetCookingTypes));
         }
         #endregion
@@ -128,13 +128,13 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetDishTypes()
         {
-            return View(nameof(GetDishTypes), dishTypeRepository.Read());
+            return View(nameof(GetDishTypes), dishTypeRepository.GetList());
         }
 
         [HttpGet]
         public IActionResult GetDishType(Guid id)
         {
-            return View(nameof(GetDishType), dishTypeRepository.Read(id));
+            return View(nameof(GetDishType), dishTypeRepository.GetById(id));
         }
 
         [HttpPost]
@@ -160,13 +160,13 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult PutDishType(Guid id)
         {
-            var formData = dishTypeRepository.Read(id);
+            var formData = dishTypeRepository.GetById(id);
             return View(nameof(PutDishType), formData);
         }
 
         public IActionResult DeleteDishType(Guid id)
         {
-            dishTypeRepository.Delete(id);
+            dishTypeRepository.DeleteById(id);
             return RedirectToAction(nameof(GetDishTypes));
         }
         #endregion
@@ -175,13 +175,13 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetIngredientTypes()
         {
-            return View(nameof(GetIngredientTypes), ingredientTypeRepository.Read());
+            return View(nameof(GetIngredientTypes), ingredientTypeRepository.GetList());
         }
 
         [HttpGet]
         public IActionResult GetIngredientType(Guid id)
         {
-            return View(nameof(GetIngredientType), ingredientTypeRepository.Read(id));
+            return View(nameof(GetIngredientType), ingredientTypeRepository.GetById(id));
         }
 
         [HttpPost]
@@ -207,13 +207,13 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult PutIngredientType(Guid id)
         {
-            var formData = ingredientTypeRepository.Read(id);
+            var formData = ingredientTypeRepository.GetById(id);
             return View(nameof(PutIngredientType), formData);
         }
 
         public IActionResult DeleteIngredientType(Guid id)
         {
-            ingredientTypeRepository.Delete(id);
+            ingredientTypeRepository.DeleteById(id);
             return RedirectToAction(nameof(GetIngredientTypes));
         }
         #endregion

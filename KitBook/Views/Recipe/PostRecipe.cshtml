@@ -1,4 +1,4 @@
-﻿@model KitBook.Models.DTO.RecipeDto
+﻿@model KitBook.Models.ViewModels.Recipe.NewRecipe
 
 @{
     ViewData["Title"] = "Новый рецепт";
@@ -13,9 +13,6 @@
     <div class="col-md-4">
         <form id="postRecipe" enctype="multipart/form-data" asp-action="PostRecipe" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input asp-for="Id" value="@ID" class="form-control invisible" />
-            </div>
             <div class="form-group">
                 <label asp-for="Thumbnail" class="control-label"></label>
                 <input asp-for="Thumbnail" type="file" class="form-control" />
