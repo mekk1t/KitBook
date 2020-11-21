@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace KitBook.Models.DTO
+namespace KitBook.Models.ViewModels
 {
-    public class RecipeIngredientDto
+    public class RecipeIngredientViewModel
     {
         public Guid RecipeId { get; set; }
         public Guid IngredientId { get; set; }
-        public string Name { get; set; }
+        public string IngredientName { get; set; }
         public int? Amount { get; set; }
         public int? G { get; set; }
         public int? Ml { get; set; }

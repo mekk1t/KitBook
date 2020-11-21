@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KitBook.Models.DTO;
+using KitBook.Models.Database.Entities;
 
 namespace KitBook.Models.Services.Interfaces
 {
     public interface IRecipeService
     {
-        void CreateNewRecipe(RecipeDto dto);
-        void UpdateRecipe(RecipeDto dto);
+        void CreateNewRecipe(Recipe recipe);
+        void UpdateRecipe(Recipe recipe);
         void DeleteRecipeById(Guid id);
-        RecipeDto GetRecipeById(Guid id);
-        IEnumerable<RecipeDto> GetRecipes();
+        Recipe GetRecipeById(Guid id);
+        IEnumerable<Recipe> GetRecipes();
     }
 }

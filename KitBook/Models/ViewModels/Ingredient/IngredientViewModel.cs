@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace KitBook.Models.DTO
+namespace KitBook.Models.ViewModels.Ingredient
 {
-    public class IngredientDto
+    public class IngredientViewModel
     {
         public Guid Id { get; set; }
         [Display(Name = "Название")]
@@ -18,7 +18,7 @@ namespace KitBook.Models.DTO
         [Display(Name = "Тип")]
         public Guid IngredientTypeId { get; set; }
 
-        public IEnumerable<IngredientMention> Mentions { get; set; }
+        public IEnumerable<IngredientRecipeReference> References { get; set; }
 
         public string IngredientType { get; set; }
     }

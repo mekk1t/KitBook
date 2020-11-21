@@ -4,7 +4,6 @@ using System.Linq;
 using BusinessLogic.Interfaces;
 using KitBook.Models.Database;
 using KitBook.Models.Database.Entities.Types;
-using KitBook.Models.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace KitBook.Models.Repositories.Types

@@ -1,4 +1,6 @@
 ﻿using BusinessLogic.Interfaces;
+using KitBook.Mappers;
+using KitBook.Mappers.Interfaces;
 using KitBook.Models.Database;
 using KitBook.Models.Database.Entities;
 using KitBook.Models.Database.Entities.Types;
@@ -40,6 +42,16 @@ namespace Microsoft.Extensions.DependencyInjection
             services
                 .AddScoped<IRecipeService, RecipeService>()
                 .AddScoped<IIngredientService, IngredientService>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddMappers(this IServiceCollection services)
+        {
+            services
+                .AddScoped<IRecipeMapper, RecipeMapper>()
+                .AddScoped<IIngredientMapper, IngredientMapper>()
+                .AddScoped<IStageMapper, StageMapper>();
 
             return services;
         }

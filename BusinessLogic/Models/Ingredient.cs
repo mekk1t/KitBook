@@ -12,7 +12,7 @@ namespace KitBook.Models.Database.Entities
         public bool IsSugary{ get; set; }
         public bool IsSour { get; set; }
         public ICollection<RecipeIngredient> Recipes { get; set; }
-        public Guid IngredientTypeId { get; set; }
+        public Guid? IngredientTypeId { get; set; }
         public IngredientType Type { get; set; }
     }
 }

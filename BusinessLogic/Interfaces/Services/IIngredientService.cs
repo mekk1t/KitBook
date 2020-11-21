@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using KitBook.Models.DTO;
+using KitBook.Models.Database.Entities;
 
 namespace KitBook.Models.Services.Interfaces
 {
     public interface IIngredientService
     {
-        void CreateNewIngredient(IngredientDto dto);
-        void UpdateIngredient(IngredientDto dto);
+        void CreateNewIngredient(Ingredient ingredient);
+        void UpdateIngredient(Ingredient ingredient);
         void DeleteIngredientById(Guid id);
-        IngredientDto GetIngredientById(Guid id);
-        IEnumerable<IngredientDto> GetIngredients();
+        Ingredient GetIngredientById(Guid id);
+        IEnumerable<Ingredient> GetIngredients(int pageSize = 10, int pageNumber = 1);
     }
 }

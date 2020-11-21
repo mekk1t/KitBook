@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using KitBook.Helpers.Extensions;
+using BusinessLogic.Interfaces;
 using KitBook.Models.Database.Entities;
-using KitBook.Models.DTO;
-using KitBook.Models.Repositories.Interfaces;
 using KitBook.Models.Services.Interfaces;
 
 namespace KitBook.Models.Services
@@ -17,29 +15,29 @@ namespace KitBook.Models.Services
             this.repository = repository;
         }
 
-        public void CreateNewIngredient(IngredientDto dto)
+        public void CreateNewIngredient(Ingredient ingredient)
         {
-            repository.Create(dto.AsEntity());
+            repository.Create(ingredient);
         }
 
         public void DeleteIngredientById(Guid id)
         {
-            repository.Delete(id);
+            repository.DeleteById(id);
         }
 
-        public IngredientDto GetIngredientById(Guid id)
+        public Ingredient GetIngredientById(Guid id)
         {
-            return repository.ReadWithRelationships(id).AsDto();
+            return repository.GetByIdWithRelationships(id);
         }
 
-        public IEnumerable<IngredientDto> GetIngredients()
+        public IEnumerable<Ingredient> GetIngredients(int pageSize = 10, int pageNumber = 1)
         {
-            return repository.ReadWithRelationships().AsDtoEnumerable();
+            return repository.GetListWithRelationships();
         }
 
-        public void UpdateIngredient(IngredientDto dto)
+        public void UpdateIngredient(Ingredient ingredient)
         {
-            repository.Update(dto.AsEntity());
+            repository.Update(ingredient);
         }
     }
 }

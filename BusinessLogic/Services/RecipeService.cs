@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using KitBook.Helpers.Extensions;
+using BusinessLogic.Interfaces;
 using KitBook.Models.Database.Entities;
-using KitBook.Models.DTO;
-using KitBook.Models.Repositories.Interfaces;
 using KitBook.Models.Services.Interfaces;
 
 namespace KitBook.Models.Services
@@ -18,32 +16,32 @@ namespace KitBook.Models.Services
             this.repository = repository;
         }
 
-        public void CreateNewRecipe(RecipeDto dto)
+        public void CreateNewRecipe(Recipe recipe)
         {
-            repository.Create(dto.AsNewEntity());
+            repository.Create(recipe);
         }
 
         public void DeleteRecipeById(Guid id)
         {
-            repository.Delete(id);
+            repository.DeleteById(id);
         }
 
-        public RecipeDto GetRecipeById(Guid id)
+        public Recipe GetRecipeById(Guid id)
         {
-            var recipe = repository.ReadWithRelationships(id).AsDto();
+            var recipe = repository.GetByIdWithRelationships(id);
             var stages = recipe.Stages;
             recipe.Stages = stages.OrderBy(s => s.Index).ToList();
             return recipe;
         }
 
-        public IEnumerable<RecipeDto> GetRecipes()
+        public IEnumerable<Recipe> GetRecipes()
         {
-            return repository.ReadWithRelationships().AsDtoEnumerable();
+            return repository.GetListWithRelationships();
         }
 
-        public void UpdateRecipe(RecipeDto dto)
+        public void UpdateRecipe(Recipe recipe)
         {
-            repository.Update(dto.AsEditEntity());
+            repository.Update(recipe);
         }
     }
 }
