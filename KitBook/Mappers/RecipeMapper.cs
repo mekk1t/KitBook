@@ -114,10 +114,11 @@ namespace KitBook.Mappers
 
             if (model.Thumbnail != null)
             {
-                using var ms = new IO.MemoryStream(model.Thumbnail.Content);
+                editRecipe.ExistingImage = new ExistingImageViewModel
                 {
-                    editRecipe.Thumbnail = new FormFile(ms, 0, model.Thumbnail.Content.Length, "name", $"{model.Title}.{model.Thumbnail.Extension}");
-                }
+                    Base64String = Convert.ToBase64String(model.Thumbnail.Content),
+                    Extension = model.Thumbnail.Extension
+                };
             }
 
             return editRecipe;

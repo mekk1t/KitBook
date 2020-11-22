@@ -83,11 +83,11 @@ namespace KitBook.Mappers
 
             if (model.Image != null)
             {
-                var imageBytes = model.Image.Content;
-                using var ms = new MemoryStream(imageBytes);
+                editStage.ExistingImage = new ExistingImageViewModel
                 {
-                    editStage.Image = new FormFile(ms, 0, imageBytes.Length, "name", $"{model.Index}.{model.Image.Extension}");
-                }
+                    Base64String = Convert.ToBase64String(model.Image.Content),
+                    Extension = model.Image.Extension
+                };
             }
 
             return editStage;
