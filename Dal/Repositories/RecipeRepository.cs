@@ -84,14 +84,20 @@ namespace KitBook.Models.Repositories
             recipe.RecipeTypeId = entity.RecipeTypeId;
             if (entity.Thumbnail != null)
             {
-                recipe.Thumbnail = entity.Thumbnail;
+                // для оптимизации нужен другой подход к поиску такого же файла. Например, по хэшу файла
+                var imageFile = dbContext.Files.AsNoTracking().FirstOrDefault(f => f.Content == entity.Thumbnail.Content);
+                if (imageFile != null)
+                {
+                    recipe.Thumbnail = imageFile;
+                }
+                else
+                {
+                    recipe.Thumbnail = entity.Thumbnail;
+                }
             }
-
             if (entity.Stages?.Count > 0)
             {
-                var stages = dbContext.Stages.AsNoTracking().Where(s => s.RecipeId == entity.Id);
-                dbContext.Stages.RemoveRange(stages);
-                dbContext.Stages.AddRange(entity.Stages);
+                UpdateStages(entity.Stages);
             }
 
             if (entity.Ingredients?.Count() > 0)
@@ -101,6 +107,35 @@ namespace KitBook.Models.Repositories
                 dbContext.RecipeIngredients.AddRange(entity.Ingredients);
             }
             dbContext.SaveChanges();
+        }
+
+        private void UpdateStages(IEnumerable<Stage> stages)
+        {
+            foreach (var stage in stages)
+            {
+                var dbStage = dbContext.Stages.FirstOrDefault(s => s.Id == stage.Id);
+                if (dbStage == null)
+                {
+                    dbContext.Stages.Add(stage);
+                }
+                else
+                {
+                    dbStage.Index = stage.Index;
+                    dbStage.Description = stage.Description;
+                    if (stage.Image != null)
+                    {
+                        var file = dbContext.Files.AsNoTracking().FirstOrDefault(f => f.Content == stage.Image.Content);
+                        if (file == null)
+                        {
+                            dbStage.Image = stage.Image;
+                        }
+                        else
+                        {
+                            dbStage.Image = file;
+                        }
+                    }
+                }
+            }
         }
     }
 }

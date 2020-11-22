@@ -92,6 +92,14 @@ namespace KitBook.Mappers
             {
                 recipe.Thumbnail = GetThumbnail(model.Thumbnail);
             }
+            else if (model.ExistingImage != null)
+            {
+                recipe.Thumbnail = new File
+                {
+                    Content = Convert.FromBase64String(model.ExistingImage.Base64String),
+                    Extension = model.ExistingImage.Extension
+                };
+            }
 
             return recipe;
         }

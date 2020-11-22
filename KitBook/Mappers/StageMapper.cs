@@ -65,7 +65,15 @@ namespace KitBook.Mappers
 
             if (model.Image != null)
             {
-                GetImage(stage, model.Image);
+                stage.Image = GetImage(stage, model.Image);
+            }
+            else if (model.ExistingImage != null)
+            {
+                stage.Image = new BusinessLogic.Models.Files.File
+                {
+                    Content = Convert.FromBase64String(model.ExistingImage.Base64String),
+                    Extension = model.ExistingImage.Extension
+                };
             }
 
             return stage;
@@ -93,9 +101,9 @@ namespace KitBook.Mappers
             return editStage;
         }
 
-        private void GetImage(Stage stage, IFormFile file)
+        private BusinessLogic.Models.Files.File GetImage(Stage stage, IFormFile file)
         {
-            stage.Image = new BusinessLogic.Models.Files.File
+            return new BusinessLogic.Models.Files.File
             {
                 Content = fileHandler.GetBytes(file),
                 Extension = fileHandler.GetExtension(file)
