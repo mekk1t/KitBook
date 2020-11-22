@@ -61,7 +61,11 @@ namespace KitBook.Models.Repositories
         public void Update(Ingredient entity)
         {
             var ingredient = dbContext.Ingredients.FirstOrDefault(i => i.Id == entity.Id);
-            ingredient.Update(entity);
+            ingredient.Name = entity.Name;
+            ingredient.IsSour = entity.IsSour;
+            ingredient.IsSpicy = entity.IsSpicy;
+            ingredient.IsSugary = entity.IsSugary;
+            ingredient.IngredientTypeId = entity.IngredientTypeId;
             dbContext.SaveChanges();
         }
     }
