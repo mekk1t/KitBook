@@ -81,5 +81,14 @@ namespace Dal.Database
                     .HasForeignKey(c => c.IngredientId);
             }
         }
+
+        public class UserConfiguration : IEntityTypeConfiguration<User>
+        {
+            public void Configure(EntityTypeBuilder<User> builder)
+            {
+                builder.HasOne(u => u.Avatar)
+                    .WithOne();
+            }
+        }
     }
 }
