@@ -14,7 +14,7 @@ namespace KitBook.Models.ViewModels.Recipe
         [Display(Name = "Описание")]
         public string Description { get; set; }
         [Display(Name = "Время готовки")]
-        public int CookingTimeMinutes { get; set; }
+        public int? CookingTimeMinutes { get; set; }
         [Display(Name = "Источник")]
         public string SourceURL { get; set; }
 

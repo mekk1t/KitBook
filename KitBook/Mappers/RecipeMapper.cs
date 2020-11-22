@@ -26,7 +26,7 @@ namespace KitBook.Mappers
         {
             var viewModel = new RecipeViewModel
             {
-                Id = Guid.NewGuid(),
+                Id = model.Id,
                 Description = model.Description,
                 Title = model.Title,
                 SourceURL = model.SourceURL,
@@ -40,8 +40,8 @@ namespace KitBook.Mappers
 
             if (model.Thumbnail != null)
             {
-                viewModel.ThumbnailBase64 = Convert.ToBase64String(model.Thumbnail);
-                viewModel.ThumbnailContentType = model.ThumbnailContentType;
+                viewModel.ThumbnailBase64 = Convert.ToBase64String(model.Thumbnail.Content);
+                viewModel.ThumbnailExtension = model.Thumbnail.Extension;
             };
 
             return viewModel;
@@ -74,7 +74,7 @@ namespace KitBook.Mappers
         {
             var recipe = new Recipe
             {
-                Id = Guid.NewGuid(),
+                Id = model.Id,
                 Description = model.Description,
                 Title = model.Title,
                 SourceURL = model.SourceURL,
@@ -96,8 +96,11 @@ namespace KitBook.Mappers
 
         private void GetThumbnail(Recipe recipe, IFormFile file)
         {
-            recipe.Thumbnail = fileHandler.GetBytes(file);
-            recipe.ThumbnailContentType = fileHandler.GetContentType(file);
+            recipe.Thumbnail = new BusinessLogic.Models.Files.File
+            {
+                Content = fileHandler.GetBytes(file),
+                Extension = fileHandler.GetExtension(file)
+            };
         }
     }
 }

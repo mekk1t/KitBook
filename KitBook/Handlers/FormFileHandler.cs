@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using KitBook.Handlers.Interface;
 using Microsoft.AspNetCore.Http;
 
@@ -15,9 +16,9 @@ namespace KitBook.Handlers
             }
         }
 
-        public string GetContentType(IFormFile file)
+        public string GetExtension(IFormFile file)
         {
-            return file.ContentType;
+            return file.FileName.Split('.').Last();
         }
     }
 }

@@ -8,6 +8,6 @@ namespace KitBook.Models.ViewModels
         public int Index { get; set; }
         public string Description { get; set; }
         public string ImageBase64 { get; set; }
-        public string ImageContentType { get; set; }
+        public string ImageExtension{ get; set; }
     }
 }

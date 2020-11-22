@@ -9,7 +9,7 @@
 @if (Model.ThumbnailBase64 != null)
 {
 <div class="text-center">
-    <img class="img-fluid" src="data:@Model.ThumbnailContentType;base64,@Model.ThumbnailBase64" />
+    <img class="img-fluid" src="data:image/@Model.ThumbnailExtension;base64,@Model.ThumbnailBase64" />
 </div>
 }
 else
@@ -38,7 +38,7 @@ else
             {
                 <div class="row">
                     <div class="col-2">
-                        <img class="img-fluid" src="data:@Model.Stages[i].ImageContentType;base64,@Model.Stages[i].ImageBase64" />
+                        <img class="img-fluid" src="data:image/@Model.Stages[i].ImageExtension;base64,@Model.Stages[i].ImageBase64" />
                     </div>
                     <div class="col-8">
                         <p>

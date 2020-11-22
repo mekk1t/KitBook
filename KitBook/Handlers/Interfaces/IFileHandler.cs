@@ -4,6 +4,6 @@
         where TFile : class
     {
         byte[] GetBytes(TFile file);
-        string GetContentType(TFile file);
+        string GetExtension(TFile file);
     }
 }

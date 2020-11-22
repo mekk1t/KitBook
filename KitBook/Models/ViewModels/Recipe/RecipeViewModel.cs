@@ -12,7 +12,7 @@ namespace KitBook.Models.ViewModels
         [Display(Name = "Описание")]
         public string Description { get; set; }
         [Display(Name = "Время готовки")]
-        public int CookingTimeMinutes { get; set; }
+        public int? CookingTimeMinutes { get; set; }
         [Display(Name = "Источник")]
         public string SourceURL { get; set; }
         public string CookingType { get; set; }
@@ -20,7 +20,7 @@ namespace KitBook.Models.ViewModels
         public string DishType { get; set; }
 
         public string ThumbnailBase64 { get; set; }
-        public string ThumbnailContentType { get; set; }
+        public string ThumbnailExtension { get; set; }
 
         public List<StageViewModel> Stages { get; set; }
         public List<RecipeIngredientViewModel> Ingredients { get; set; }

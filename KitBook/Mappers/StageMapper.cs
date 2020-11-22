@@ -28,8 +28,8 @@ namespace KitBook.Mappers
 
             if (model.Image != null)
             {
-                viewModel.ImageBase64 = Convert.ToBase64String(model.Image);
-                viewModel.ImageContentType = model.ImageContentType;
+                viewModel.ImageBase64 = Convert.ToBase64String(model.Image.Content);
+                viewModel.ImageExtension = model.Image.Extension;
             }
             return viewModel;
         }
@@ -56,7 +56,7 @@ namespace KitBook.Mappers
         {
             var stage = new Stage
             {
-                Id = Guid.NewGuid(),
+                Id = model.Id,
                 Description = model.Description,
                 Index = model.Index,
                 RecipeId = model.RecipeId
@@ -72,8 +72,11 @@ namespace KitBook.Mappers
 
         private void GetImage(Stage stage, IFormFile file)
         {
-            stage.Image = fileHandler.GetBytes(file);
-            stage.ImageContentType = fileHandler.GetContentType(file);
+            stage.Image = new BusinessLogic.Models.Files.File
+            {
+                Content = fileHandler.GetBytes(file),
+                Extension = fileHandler.GetExtension(file)
+            };
         }
     }
 }

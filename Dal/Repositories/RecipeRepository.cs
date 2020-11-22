@@ -48,10 +48,12 @@ namespace KitBook.Models.Repositories
         {
             return dbContext.Recipes
                 .AsNoTracking()
+                .Include(r => r.Thumbnail)
                 .Include(r => r.CookingType)
                 .Include(r => r.DishType)
                 .Include(r => r.RecipeType)
                 .Include(r => r.Stages)
+                .ThenInclude(r => r.Image)
                 .Include(r => r.Comments)
                 .Include(r => r.Ingredients)
                 .ThenInclude(ri => ri.Ingredient)
