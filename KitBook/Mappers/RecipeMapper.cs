@@ -1,5 +1,7 @@
 ﻿using System;
+using IO = System.IO;
 using System.Linq;
+using BusinessLogic.Models.Files;
 using KitBook.Handlers.Interface;
 using KitBook.Mappers.Interfaces;
 using KitBook.Models.Database.Entities;
@@ -65,7 +67,7 @@ namespace KitBook.Mappers
 
             if (model.Thumbnail != null)
             {
-                GetThumbnail(recipe, model.Thumbnail);
+                GetThumbnail(model.Thumbnail);
             }
             return recipe;
         }
@@ -88,15 +90,42 @@ namespace KitBook.Mappers
 
             if (model.Thumbnail != null)
             {
-                GetThumbnail(recipe, model.Thumbnail);
+                recipe.Thumbnail = GetThumbnail(model.Thumbnail);
             }
 
             return recipe;
         }
 
-        private void GetThumbnail(Recipe recipe, IFormFile file)
+        public EditRecipe MapToEdit(Recipe model)
         {
-            recipe.Thumbnail = new BusinessLogic.Models.Files.File
+            var editRecipe = new EditRecipe
+            {
+                Id = model.Id,
+                Description = model.Description,
+                Title = model.Title,
+                SourceURL = model.SourceURL,
+                CookingTimeMinutes = model.CookingTimeMinutes,
+                CookingTypeId = model.CookingTypeId,
+                DishTypeId = model.DishTypeId,
+                RecipeTypeId = model.RecipeTypeId,
+                Stages = model.Stages?.Select(s => stageMapper.MapToEdit(s)).ToList(),
+                Ingredients = model.Ingredients?.Select(i => ingredientMapper.Map(i)).ToList()
+            };
+
+            if (model.Thumbnail != null)
+            {
+                using var ms = new IO.MemoryStream(model.Thumbnail.Content);
+                {
+                    editRecipe.Thumbnail = new FormFile(ms, 0, model.Thumbnail.Content.Length, "name", $"{model.Title}.{model.Thumbnail.Extension}");
+                }
+            }
+
+            return editRecipe;
+        }
+
+        private File GetThumbnail(IFormFile file)
+        {
+            return new File
             {
                 Content = fileHandler.GetBytes(file),
                 Extension = fileHandler.GetExtension(file)

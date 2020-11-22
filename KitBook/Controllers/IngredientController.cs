@@ -64,7 +64,7 @@ namespace KitBook.Controllers
         public IActionResult PutIngredient(Guid id)
         {
             var ingredient = service.GetIngredientById(id);
-            var viewModel = mapper.Map(ingredient);
+            var viewModel = mapper.MapToEdit(ingredient);
             FillViewBagWithIngredientTypes();
             return View(nameof(PutIngredient), viewModel);
         }

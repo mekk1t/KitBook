@@ -83,5 +83,18 @@ namespace KitBook.Mappers
                 Ml = model.Ml
             };
         }
+
+        public EditIngredient MapToEdit(Ingredient model)
+        {
+            return new EditIngredient
+            {
+                Id = model.Id,
+                Name = model.Name,
+                IsSour = model.IsSour,
+                IsSpicy = model.IsSpicy,
+                IsSugary = model.IsSugary,
+                IngredientTypeId = model.IngredientTypeId
+            };
+        }
     }
 }

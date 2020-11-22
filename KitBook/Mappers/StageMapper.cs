@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using KitBook.Handlers.Interface;
 using KitBook.Mappers.Interfaces;
 using KitBook.Models.Database.Entities;
@@ -68,6 +69,28 @@ namespace KitBook.Mappers
             }
 
             return stage;
+        }
+
+        public EditStage MapToEdit(Stage model)
+        {
+            var editStage = new EditStage
+            {
+                Id = model.Id,
+                Description = model.Description,
+                Index = model.Index,
+                RecipeId = model.RecipeId
+            };
+
+            if (model.Image != null)
+            {
+                var imageBytes = model.Image.Content;
+                using var ms = new MemoryStream(imageBytes);
+                {
+                    editStage.Image = new FormFile(ms, 0, imageBytes.Length, "name", $"{model.Index}.{model.Image.Extension}");
+                }
+            }
+
+            return editStage;
         }
 
         private void GetImage(Stage stage, IFormFile file)

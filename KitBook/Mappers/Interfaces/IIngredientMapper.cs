@@ -10,6 +10,8 @@ namespace KitBook.Mappers.Interfaces
         IMapper<RecipeIngredient, RecipeIngredientViewModel>,
         IMapper<EditIngredient, Ingredient>,
         IMapper<NewIngredient, Ingredient>,
-        IMapper<RecipeIngredientViewModel, RecipeIngredient>
-    {}
+        IMapper<RecipeIngredientViewModel, RecipeIngredient>,
+        IEditMapper<Ingredient, EditIngredient>
+    {
+    }
 }

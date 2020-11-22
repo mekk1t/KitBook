@@ -87,7 +87,7 @@ namespace KitBook.Models.Repositories
                 recipe.Thumbnail = entity.Thumbnail;
             }
 
-            if (entity.Stages?.Count() > 0)
+            if (entity.Stages?.Count > 0)
             {
                 var stages = dbContext.Stages.AsNoTracking().Where(s => s.RecipeId == entity.Id);
                 dbContext.Stages.RemoveRange(stages);

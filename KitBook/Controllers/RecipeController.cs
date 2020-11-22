@@ -89,7 +89,7 @@ namespace KitBook.Controllers
             FillViewBagWithTypes();
             FillViewBagWithIngredients();
             var recipe = service.GetRecipeById(id);
-            var viewModel = mapper.Map(recipe);
+            var viewModel = mapper.MapToEdit(recipe);
             return View(nameof(PutRecipe), viewModel);
         }
 
