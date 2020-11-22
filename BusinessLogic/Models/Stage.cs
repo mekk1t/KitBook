@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using BusinessLogic.Models.Files;
 
 namespace KitBook.Models.Database.Entities
 {
@@ -13,7 +14,7 @@ namespace KitBook.Models.Database.Entities
 
         public int Index { get; set; }
         public string Description { get; set; }
-        public byte[] Image { get; set; }
-        public string ImageContentType { get; set; }
+        public Guid? ImageId { get; set; }
+        public File Image { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using KitBook.Models.Database.Entities;
 using System.Reflection;
 using KitBook.Models.Database.Entities.Types;
+using BusinessLogic.Models.Files;
 
 namespace KitBook.Models.Database
 {
@@ -16,6 +17,7 @@ namespace KitBook.Models.Database
         public DbSet<CookingType> CookingTypes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<File> Files { get; set; }
         public DbSet<IngredientType> IngredientTypes { get; set; }
         public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
         public DbSet<RecipeCategory> RecipeCategories { get; set; }

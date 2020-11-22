@@ -1,4 +1,5 @@
-﻿using KitBook.Models.Database.Entities.Types;
+﻿using BusinessLogic.Models.Files;
+using KitBook.Models.Database.Entities.Types;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,19 +12,18 @@ namespace KitBook.Models.Database.Entities
         public Guid Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public int CookingTimeMinutes { get; set; }
+        public int? CookingTimeMinutes { get; set; }
         public string SourceURL { get; set; }
 
         public Guid? CookingTypeId { get; set; }
         public Guid? RecipeTypeId { get; set; }
         public Guid? DishTypeId { get; set; }
+        public Guid? ThumbnailId { get; set; }
 
+        public File Thumbnail { get; set; }
         public CookingType CookingType { get; set; }
         public RecipeType RecipeType { get; set; }
         public DishType DishType { get; set; }
-
-        public byte[] Thumbnail { get; set; }
-        public string ThumbnailContentType { get; set; }
 
         public IEnumerable<RecipeCategory> Categories { get; set; }
         public IEnumerable<RecipeIngredient> Ingredients { get; set; }
