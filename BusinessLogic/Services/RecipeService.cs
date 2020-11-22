@@ -29,8 +29,13 @@ namespace KitBook.Models.Services
         public Recipe GetRecipeById(Guid id)
         {
             var recipe = repository.GetByIdWithRelationships(id);
-            var stages = recipe.Stages;
-            recipe.Stages = stages.OrderBy(s => s.Index).ToList();
+
+            if (recipe.Stages?.Count > 0)
+            {
+                var stages = recipe.Stages;
+                recipe.Stages = stages.OrderBy(s => s.Index).ToList();
+            }
+
             return recipe;
         }
 
