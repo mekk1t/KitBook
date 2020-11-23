@@ -11,6 +11,11 @@ a.navbar-brand {
     display: none;
 }
 
+.little {
+    height:5%;
+    width:5%;
+}
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
