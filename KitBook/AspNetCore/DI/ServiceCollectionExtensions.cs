@@ -30,6 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddScoped<IRepositoryAdvanced<Recipe>, RecipeRepository>()
                 .AddScoped<IRepositoryAdvanced<Ingredient>, IngredientRepository>()
                 .AddScoped<IRepository<RecipeType>, RecipeTypeRepository>()
+                .AddScoped<IRepository<CookingType>, CookingTypeRepository>()
                 .AddScoped<IRepositoryAdvanced<CookingType>, CookingTypeRepository>()
                 .AddScoped<IRepository<DishType>, DishTypeRepository>()
                 .AddScoped<IRepository<IngredientType>, IngredientTypeRepository>();
