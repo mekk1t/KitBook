@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddScoped<IRepositoryAdvanced<Recipe>, RecipeRepository>()
                 .AddScoped<IRepositoryAdvanced<Ingredient>, IngredientRepository>()
                 .AddScoped<IRepository<RecipeType>, RecipeTypeRepository>()
-                .AddScoped<IRepository<CookingType>, CookingTypeRepository>()
+                .AddScoped<IRepositoryAdvanced<CookingType>, CookingTypeRepository>()
                 .AddScoped<IRepository<DishType>, DishTypeRepository>()
                 .AddScoped<IRepository<IngredientType>, IngredientTypeRepository>();
 
@@ -49,6 +49,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddMappers(this IServiceCollection services)
         {
             services
+                .AddScoped<ITypeMapper, TypeMapper>()
                 .AddScoped<IRecipeMapper, RecipeMapper>()
                 .AddScoped<IIngredientMapper, IngredientMapper>()
                 .AddScoped<IStageMapper, StageMapper>();
