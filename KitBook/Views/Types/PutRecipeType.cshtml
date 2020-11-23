@@ -21,6 +21,14 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+            @if (Model.ExistingIcon != null)
+            {
+                <div class="invisible">
+                    <input asp-for="ExistingIcon.Base64String" type="text" value="@Model.ExistingIcon.Base64String" />
+                    <input asp-for="ExistingIcon.Extension" type="text" value="@Model.ExistingIcon.Extension" />
+                </div>
+                <img class="img-fluid" src="data:image/@Model.ExistingIcon.Extension;base64,@Model.ExistingIcon.Base64String" />
+            }
             <div class="form-group">
                 <label asp-for="Icon" class="control-label"></label>
                 <input asp-for="Icon" type="file" class="form-control" />
