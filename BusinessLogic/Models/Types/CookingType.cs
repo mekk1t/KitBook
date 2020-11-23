@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using BusinessLogic.Models.Files;
+using BusinessLogic.Models.Types.Interface;
 
 namespace KitBook.Models.Database.Entities.Types
 {
-    public class CookingType
+    public class CookingType : IType
     {
         [Key]
         public Guid Id { get; set; }
