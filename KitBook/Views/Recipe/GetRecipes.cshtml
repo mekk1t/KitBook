@@ -12,10 +12,20 @@
         <tr>
             <td>
                 <a asp-action="GetRecipe" asp-route-id="@item.Id">@item.Title</a>
+                @if (item.ThumbnailBase64 != null)
+                {
+                    <img class="little img-fluid" src="data:image/@item.ThumbnailExtension;base64,@item.ThumbnailBase64" />
+                }
             </td>
             <td>
                 @item.CookingTimeMinutes минут
             </td>
+            @if (item.CookingTypeIconBase64 != null)
+            {
+                <td>
+                    <img src="data:image/@item.CookingTypeIconExtension;base64,@item.CookingTypeIconBase64" class="little img-fluid"/>
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.CookingType)
             </td>

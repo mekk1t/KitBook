@@ -46,6 +46,12 @@ namespace KitBook.Mappers
                 viewModel.ThumbnailExtension = model.Thumbnail.Extension;
             };
 
+            if (model.CookingType?.Icon != null)
+            {
+                viewModel.CookingTypeIconBase64 = Convert.ToBase64String(model.CookingType.Icon.Content);
+                viewModel.CookingTypeIconExtension = model.CookingType.Icon.Extension;
+            }
+
             return viewModel;
         }
 
