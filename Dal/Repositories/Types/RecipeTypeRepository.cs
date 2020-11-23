@@ -44,6 +44,18 @@ namespace KitBook.Models.Repositories.Types
         {
             var recipeType = dbContext.RecipeTypes.FirstOrDefault(rt => rt.Id == entity.Id);
             recipeType.Name = entity.Name;
+            if (entity.Icon != null)
+            {
+                var file = dbContext.Files.AsNoTracking().FirstOrDefault(f => f.Content == entity.Icon.Content);
+                if (file == null)
+                {
+                    recipeType.Icon = entity.Icon;
+                }
+                else
+                {
+                    recipeType.Icon = file;
+                }
+            }
             dbContext.SaveChanges();
         }
     }

@@ -34,6 +34,18 @@ namespace KitBook.Models.Repositories.Types
         {
             var dishType = dbContext.DishTypes.FirstOrDefault(dt => dt.Id == entity.Id);
             dishType.Name = entity.Name;
+            if (entity.Icon != null)
+            {
+                var file = dbContext.Files.AsNoTracking().FirstOrDefault(f => f.Content == entity.Icon.Content);
+                if (file == null)
+                {
+                    dishType.Icon = entity.Icon;
+                }
+                else
+                {
+                    dishType.Icon = file;
+                }
+            }
             dbContext.SaveChanges();
         }
 
