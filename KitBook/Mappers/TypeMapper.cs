@@ -32,5 +32,25 @@ namespace KitBook.Mappers
                 }
             };
         }
+
+        public TypeViewModel Map<T>(T typeModel) where T : IType, new()
+        {
+            var viewModel = new TypeViewModel
+            {
+                Id = typeModel.Id,
+                Name = typeModel.Name
+            };
+
+            if (typeModel.Icon != null)
+            {
+                viewModel.ExistingIcon = new ExistingImageViewModel
+                {
+                    Base64String = Convert.ToBase64String(typeModel.Icon.Content),
+                    Extension = typeModel.Icon.Extension
+                };
+            }
+
+            return viewModel;
+        }
     }
 }

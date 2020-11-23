@@ -7,5 +7,7 @@ namespace KitBook.Mappers.Interfaces
     {
         T Map<T>(TypeViewModel viewModel)
             where T : IType, new();
+        TypeViewModel Map<T>(T typeModel)
+            where T : IType, new();
     }
 }
