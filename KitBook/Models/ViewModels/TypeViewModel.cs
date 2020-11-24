@@ -10,5 +10,7 @@ namespace KitBook.Models.ViewModels
         public IFormFile Icon { get; set; }
 
         public ImageViewModel ExistingIcon { get; set; }
+        public string KindOfType { get; set; }
+        public string KindOfTypeTranslated { get; set; }
     }
 }

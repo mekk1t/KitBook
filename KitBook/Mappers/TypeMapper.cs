@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using BusinessLogic.Attributes;
 using BusinessLogic.Models.Types.Interface;
 using KitBook.Handlers.Interface;
 using KitBook.Mappers.Interfaces;
@@ -38,14 +40,16 @@ namespace KitBook.Mappers
             var viewModel = new TypeViewModel
             {
                 Id = typeModel.Id,
-                Name = typeModel.Name
+                Name = typeModel.Name,
+                KindOfType = typeof(T).Name,
+                KindOfTypeTranslated = (Attribute.GetCustomAttribute(typeof(T), typeof(TranslationAttribute)) as TranslationAttribute).Translation
             };
 
             if (typeModel.Icon != null)
             {
-                viewModel.ExistingIcon = new ExistingImageViewModel
+                viewModel.ExistingIcon = new ImageViewModel
                 {
-                    Base64String = Convert.ToBase64String(typeModel.Icon.Content),
+                    Base64 = Convert.ToBase64String(typeModel.Icon.Content),
                     Extension = typeModel.Icon.Extension
                 };
             }
