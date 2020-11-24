@@ -29,11 +29,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services
                 .AddScoped<IRepositoryAdvanced<Recipe>, RecipeRepository>()
                 .AddScoped<IRepositoryAdvanced<Ingredient>, IngredientRepository>()
-                .AddScoped<IRepository<RecipeType>, RecipeTypeRepository>()
-                .AddScoped<IRepository<CookingType>, CookingTypeRepository>()
+                .AddScoped<IRepositoryAdvanced<RecipeType>, RecipeTypeRepository>()
                 .AddScoped<IRepositoryAdvanced<CookingType>, CookingTypeRepository>()
-                .AddScoped<IRepository<DishType>, DishTypeRepository>()
-                .AddScoped<IRepository<IngredientType>, IngredientTypeRepository>();
+                .AddScoped<IRepositoryAdvanced<CookingType>, CookingTypeRepository>()
+                .AddScoped<IRepositoryAdvanced<DishType>, DishTypeRepository>()
+                .AddScoped<IRepositoryAdvanced<IngredientType>, IngredientTypeRepository>();
 
             return services;
         }

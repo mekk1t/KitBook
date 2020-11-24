@@ -7,16 +7,16 @@ namespace KitBook.Handlers
 {
     public class TypeHandler : ITypeHandler
     {
-        private readonly IRepository<CookingType> cookingTypeRepository;
-        private readonly IRepository<DishType> dishTypeRepository;
-        private readonly IRepository<RecipeType> recipeTypeRepository;
-        private readonly IRepository<IngredientType> ingredientTypeRepository;
+        private readonly IRepositoryAdvanced<CookingType> cookingTypeRepository;
+        private readonly IRepositoryAdvanced<DishType> dishTypeRepository;
+        private readonly IRepositoryAdvanced<RecipeType> recipeTypeRepository;
+        private readonly IRepositoryAdvanced<IngredientType> ingredientTypeRepository;
 
         public TypeHandler(
-            IRepository<CookingType> cookingTypeRepository,
-            IRepository<DishType> dishTypeRepository,
-            IRepository<IngredientType> ingredientTypeRepository,
-            IRepository<RecipeType> recipeTypeRepository)
+            IRepositoryAdvanced<CookingType> cookingTypeRepository,
+            IRepositoryAdvanced<DishType> dishTypeRepository,
+            IRepositoryAdvanced<IngredientType> ingredientTypeRepository,
+            IRepositoryAdvanced<RecipeType> recipeTypeRepository)
         {
             this.cookingTypeRepository = cookingTypeRepository;
             this.dishTypeRepository = dishTypeRepository;

@@ -11,10 +11,10 @@ namespace KitBook.Controllers
 {
     public class TypesController : Controller
     {
-        private readonly IRepository<RecipeType> recipeTypeRepository;
-        private readonly IRepository<DishType> dishTypeRepository;
-        private readonly IRepository<CookingType> cookingTypeRepository;
-        private readonly IRepository<IngredientType> ingredientTypeRepository;
+        private readonly IRepositoryAdvanced<RecipeType> recipeTypeRepository;
+        private readonly IRepositoryAdvanced<DishType> dishTypeRepository;
+        private readonly IRepositoryAdvanced<CookingType> cookingTypeRepository;
+        private readonly IRepositoryAdvanced<IngredientType> ingredientTypeRepository;
         private readonly ITypeMapper mapper;
 
         private const string GET = "GET";
@@ -24,10 +24,10 @@ namespace KitBook.Controllers
 
         // ЗДЕСЬ НУЖНО ИСПОЛЬЗОВАТЬ AJAX, ТК ОПЕРАЦИИ НЕЗНАЧИТЕЛЬНЫЕ и могут пригодиться при редактировании / создании
         public TypesController(
-            IRepository<RecipeType> recipeTypeRepository,
-            IRepository<CookingType> cookingTypeRepository,
-            IRepository<IngredientType> ingredientTypeRepository,
-            IRepository<DishType> dishTypeRepository,
+            IRepositoryAdvanced<RecipeType> recipeTypeRepository,
+            IRepositoryAdvanced<CookingType> cookingTypeRepository,
+            IRepositoryAdvanced<IngredientType> ingredientTypeRepository,
+            IRepositoryAdvanced<DishType> dishTypeRepository,
             ITypeMapper mapper)
         {
             this.mapper = mapper;
@@ -46,14 +46,14 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetRecipeTypes()
         {
-            var viewModel = recipeTypeRepository.GetList().Select(rt => mapper.Map(rt));
+            var viewModel = recipeTypeRepository.GetListWithRelationships().Select(rt => mapper.Map(rt));
             return View(GET_LIST, viewModel);
         }
 
         [HttpGet]
         public IActionResult GetRecipeType(Guid id)
         {
-            var viewModel = mapper.Map(recipeTypeRepository.GetById(id));
+            var viewModel = mapper.Map(recipeTypeRepository.GetByIdWithRelationships(id));
             return View(GET, viewModel);
         }
 
@@ -98,14 +98,14 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetCookingTypes()
         {
-            var viewModel = cookingTypeRepository.GetList().Select(ct => mapper.Map(ct));
+            var viewModel = cookingTypeRepository.GetListWithRelationships().Select(ct => mapper.Map(ct));
             return View(GET_LIST, viewModel);
         }
 
         [HttpGet]
         public IActionResult GetCookingType(Guid id)
         {
-            var viewModel = mapper.Map(cookingTypeRepository.GetById(id));
+            var viewModel = mapper.Map(cookingTypeRepository.GetByIdWithRelationships(id));
             return View(GET, viewModel);
         }
 
@@ -150,14 +150,14 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetDishTypes()
         {
-            var viewModel = dishTypeRepository.GetList().Select(dt => mapper.Map(dt));
+            var viewModel = dishTypeRepository.GetListWithRelationships().Select(dt => mapper.Map(dt));
             return View(GET_LIST, viewModel);
         }
 
         [HttpGet]
         public IActionResult GetDishType(Guid id)
         {
-            var viewModel = mapper.Map(dishTypeRepository.GetById(id));
+            var viewModel = mapper.Map(dishTypeRepository.GetByIdWithRelationships(id));
             return View(GET, viewModel);
         }
 
@@ -202,14 +202,14 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetIngredientTypes()
         {
-            var viewModel = ingredientTypeRepository.GetList().Select(it => mapper.Map(it));
+            var viewModel = ingredientTypeRepository.GetListWithRelationships().Select(it => mapper.Map(it));
             return View(GET_LIST, viewModel);
         }
 
         [HttpGet]
         public IActionResult GetIngredientType(Guid id)
         {
-            var viewModel = mapper.Map(ingredientTypeRepository.GetById(id));
+            var viewModel = mapper.Map(ingredientTypeRepository.GetByIdWithRelationships(id));
             return View(GET, viewModel);
         }
 

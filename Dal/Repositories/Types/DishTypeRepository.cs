@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KitBook.Models.Repositories.Types
 {
-    public class DishTypeRepository : IRepository<DishType>
+    public class DishTypeRepository : IRepositoryAdvanced<DishType>
     {
         private readonly CookbookDbContext dbContext;
 
@@ -57,6 +57,16 @@ namespace KitBook.Models.Repositories.Types
         public IEnumerable<DishType> GetList(int pageSize = 10, int pageNumber = 1)
         {
             return dbContext.DishTypes.AsNoTracking().AsEnumerable();
+        }
+
+        public DishType GetByIdWithRelationships(Guid id)
+        {
+            return dbContext.DishTypes.AsNoTracking().Include(dt => dt.Icon).FirstOrDefault(dt => dt.Id == id);
+        }
+
+        public IEnumerable<DishType> GetListWithRelationships(int pageSize = 10, int pageNumber = 1)
+        {
+            return dbContext.DishTypes.AsNoTracking().Include(dt => dt.Icon).AsEnumerable();
         }
     }
 }
