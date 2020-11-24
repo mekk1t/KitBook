@@ -31,6 +31,6 @@ namespace KitBook.Models.ViewModels.Recipe
         public List<EditStage> Stages { get; set; }
         public List<RecipeIngredientViewModel> Ingredients { get; set; }
 
-        public ExistingImageViewModel ExistingImage { get; set; }
+        public ImageViewModel ExistingImage { get; set; }
     }
 }

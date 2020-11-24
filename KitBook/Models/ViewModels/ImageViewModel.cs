@@ -1,8 +1,8 @@
 ﻿namespace KitBook.Models.ViewModels
 {
-    public class ExistingImageViewModel
+    public class ImageViewModel
     {
-        public string Base64String { get; set; }
+        public string Base64 { get; set; }
         public string Extension { get; set; }
     }
 }

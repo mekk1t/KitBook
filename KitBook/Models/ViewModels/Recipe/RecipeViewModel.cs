@@ -19,11 +19,8 @@ namespace KitBook.Models.ViewModels
         public string RecipeType { get; set; }
         public string DishType { get; set; }
 
-        public string ThumbnailBase64 { get; set; }
-        public string ThumbnailExtension { get; set; }
-
-        public string CookingTypeIconBase64 { get; set; }
-        public string CookingTypeIconExtension { get; set; }
+        public ImageViewModel Thumbnail { get; set; }
+        public ImageViewModel CookingTypeIcon { get; set; }
 
         public List<StageViewModel> Stages { get; set; }
         public List<RecipeIngredientViewModel> Ingredients { get; set; }

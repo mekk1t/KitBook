@@ -11,6 +11,6 @@ namespace KitBook.Models.ViewModels.Stage
         public string Description { get; set; }
         public IFormFile Image { get; set; }
 
-        public ExistingImageViewModel ExistingImage { get; set; }
+        public ImageViewModel ExistingImage { get; set; }
     }
 }

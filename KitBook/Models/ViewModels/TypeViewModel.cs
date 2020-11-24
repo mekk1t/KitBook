@@ -9,6 +9,6 @@ namespace KitBook.Models.ViewModels
         public string Name { get; set; }
         public IFormFile Icon { get; set; }
 
-        public ExistingImageViewModel ExistingIcon { get; set; }
+        public ImageViewModel ExistingIcon { get; set; }
     }
 }
