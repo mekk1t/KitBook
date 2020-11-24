@@ -11,25 +11,37 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                <a asp-action="GetRecipe" asp-route-id="@item.Id">@item.Title</a>
-                @if (item.Thumbnail != null)
-                {
-                    await Html.RenderPartialAsync("_ImagePartial", item.Thumbnail);
-                }
+                <div class="row row-cols-1">
+                    <div class="col">
+                        <a asp-action="GetRecipe" asp-route-id="@item.Id">@item.Title</a>
+                    </div>
+                    @if (item.Thumbnail != null)
+                    {
+                        <div class="col">
+                            <div class="w-25">
+                                @{await Html.RenderPartialAsync("_ImagePartial", item.Thumbnail);}
+                            </div>
+                        </div>
+                    }
+                </div>
             </td>
             <td>
                 @item.CookingTimeMinutes минут
             </td>
-            @if (item.CookingTypeIcon != null)
-            {
-                <td>
-                    @{
-                        await Html.RenderPartialAsync("_ImagePartial", item.CookingTypeIcon);
-                    }
-                </td>
-            }
             <td>
-                @Html.DisplayFor(modelItem => item.CookingType)
+                <div class="row row-cols-1">
+                    <div class="col">
+                        <span>@item.CookingType</span>
+                    </div>
+                    @if (item.CookingTypeIcon != null)
+                     {
+                    <div class="col">
+                        <div class="w-25">
+                            @{await Html.RenderPartialAsync("_ImagePartial", item.CookingTypeIcon);}
+                        </div>
+                    </div>
+                     }
+                </div>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RecipeType)
