@@ -66,10 +66,11 @@ namespace KitBook.Models.Repositories
             return dbContext.Recipes
                 .AsNoTracking()
                 .Include(r => r.CookingType)
-                .ThenInclude(ct => ct.Icon)
+                    .ThenInclude(ct => ct.Icon)
                 .Include(r => r.DishType)
+                    .ThenInclude(dt => dt.Icon)
                 .Include(r => r.RecipeType)
-                .Include(r => r.Stages)
+                    .ThenInclude(rt => rt.Icon)
                 .Include(r => r.Thumbnail)
                 .AsEnumerable();
         }

@@ -44,10 +44,34 @@
                 </div>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RecipeType)
+                <div class="row row-cols-1">
+                    <div class="col">
+                        <span>@item.RecipeType</span>
+                    </div>
+                    @if (item.RecipeTypeIcon != null)
+                    {
+                        <div class="col">
+                            <div class="w-25">
+                                @{await Html.RenderPartialAsync("_ImagePartial", item.RecipeTypeIcon);}
+                            </div>
+                        </div>
+                    }
+                </div>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DishType)
+                <div class="row row-cols-1">
+                    <div class="col">
+                        <span>@item.DishType</span>
+                    </div>
+                    @if (item.DishTypeIcon != null)
+                    {
+                        <div class="col">
+                            <div class="w-25">
+                                @{await Html.RenderPartialAsync("_ImagePartial", item.DishTypeIcon);}
+                            </div>
+                        </div>
+                    }
+                </div>
             </td>
             <td>
                 <a target="_blank" rel="noreferrer" class="btn btn-primary" href="@item.SourceURL">Источник</a>
