@@ -6,10 +6,12 @@
 
 <h1 class="text-center"><a target="_blank" rel="noreferrer" href="@Model.SourceURL">@Model.Title.Trim()</a></h1>
 <br />
-@if (Model.ThumbnailBase64 != null)
+@if (Model.Thumbnail != null)
 {
 <div class="text-center">
-    <img class="img-fluid" src="data:image/@Model.ThumbnailExtension;base64,@Model.ThumbnailBase64" />
+    @{
+        await Html.RenderPartialAsync("_ImagePartial", Model.Thumbnail);
+    }
 </div>
 }
 else
@@ -34,13 +36,15 @@ else
         </p>
         @for (int i = 0; i < Model.Stages.Count; i++)
         {
-            if (Model.Stages[i].ImageBase64 != null)
+            if (Model.Stages[i].Image != null)
             {
                 <div class="row">
                     <div class="col-2">
-                        <img class="img-fluid" src="data:image/@Model.Stages[i].ImageExtension;base64,@Model.Stages[i].ImageBase64" />
+                        @{
+                            await Html.RenderPartialAsync("_ImagePartial", Model.Stages[i].Image);
+                        }
                     </div>
-                    <div class="col-8">
+                    <div class="col-8 text-center">
                         <p>
                             @Model.Stages[i].Index. @Model.Stages[i].Description
                         </p>

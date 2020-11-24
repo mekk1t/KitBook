@@ -12,18 +12,20 @@
         <tr>
             <td>
                 <a asp-action="GetRecipe" asp-route-id="@item.Id">@item.Title</a>
-                @if (item.ThumbnailBase64 != null)
+                @if (item.Thumbnail != null)
                 {
-                    <img class="little img-fluid" src="data:image/@item.ThumbnailExtension;base64,@item.ThumbnailBase64" />
+                    await Html.RenderPartialAsync("_ImagePartial", item.Thumbnail);
                 }
             </td>
             <td>
                 @item.CookingTimeMinutes минут
             </td>
-            @if (item.CookingTypeIconBase64 != null)
+            @if (item.CookingTypeIcon != null)
             {
                 <td>
-                    <img src="data:image/@item.CookingTypeIconExtension;base64,@item.CookingTypeIconBase64" class="little img-fluid"/>
+                    @{
+                        await Html.RenderPartialAsync("_ImagePartial", item.CookingTypeIcon);
+                    }
                 </td>
             }
             <td>
