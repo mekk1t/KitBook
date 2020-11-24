@@ -1,0 +1,38 @@
+﻿@model IEnumerable<KitBook.Models.ViewModels.TypeViewModel>
+
+@{
+    ViewData["Title"] = "Блюда";
+    string postAction = $"Post{Model.First().KindOfType}";
+    string getAction = $"Get{Model.First().KindOfType}";
+    string putAction = $"Put{Model.First().KindOfType}";
+}
+
+<h1>Разновидности категории "@Model.First().KindOfTypeTranslated"</h1>
+
+<p>
+    <a asp-action="@postAction">Добавить новый</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="@putAction" asp-route-id="@item.Id">Редактировать</a> |
+                    <a asp-action="@getAction" asp-route-id="@item.Id">Подробнее</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

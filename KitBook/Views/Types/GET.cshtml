@@ -1,10 +1,10 @@
-﻿@model KitBook.Models.Database.Entities.Types.DishType
+﻿@model KitBook.Models.ViewModels.TypeViewModel
 
 @{
     ViewData["Title"] = "Детали";
 }
 
-<h1>О типе блюд "@Model.Name"</h1>
+<h1>О типе ингредиентов "@Model.Name"</h1>
 
 <div>
     <hr />
@@ -18,6 +18,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="PutDishType" asp-route-id="@Model.Id">Редактировать</a> |
-    <a asp-action="GetDishTypes">К списку</a>
+    <a asp-action="Put@(Model.KindOfType)" asp-route-id="@Model.Id">Редактировать</a> |
+    <a asp-action="Get@(Model.KindOfType)s">К списку</a>
 </div>

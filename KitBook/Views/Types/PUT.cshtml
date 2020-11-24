@@ -2,16 +2,17 @@
 
 @{
     ViewData["Title"] = "Редактирование";
+    string action = $"Put{Model.KindOfType}";
 }
 
-<h1>Редактирование типа блюд</h1>
+<h1>Редактировать @($"{Model.KindOfTypeTranslated.ToLower()} \"{Model.Name}\"")</h1>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="PutDishType" enctype="multipart/form-data" method="post">
+        <form asp-action="@action" enctype="multipart/form-data" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="invisible form-group">
                 <label asp-for="Id" class="control-label"></label>
                 <input asp-for="Id" readonly="readonly" style="font-style:italic" class="form-control" />
                 <span asp-validation-for="Id" class="text-danger"></span>
@@ -24,10 +25,12 @@
             @if (Model.ExistingIcon != null)
             {
                 <div class="invisible">
-                    <input asp-for="ExistingIcon.Base64String" type="text" value="@Model.ExistingIcon.Base64String" />
+                    <input asp-for="ExistingIcon.Base64" type="text" value="@Model.ExistingIcon.Base64" />
                     <input asp-for="ExistingIcon.Extension" type="text" value="@Model.ExistingIcon.Extension" />
                 </div>
-                <img class="img-fluid" src="data:image/@Model.ExistingIcon.Extension;base64,@Model.ExistingIcon.Base64String" />
+                {
+                    await Html.RenderPartialAsync("_ImagePartial", Model.ExistingIcon);
+                }
             }
             <div class="form-group">
                 <label asp-for="Icon" class="control-label"></label>
@@ -42,7 +45,7 @@
 </div>
 
 <div>
-    <a asp-action="GetDishTypes">К списку</a>
+    <a asp-action="Get@(Model.KindOfType)s">К списку</a>
 </div>
 
 @section Scripts {
