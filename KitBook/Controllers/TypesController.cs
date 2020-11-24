@@ -1,6 +1,5 @@
 ﻿using System;
 using BusinessLogic.Interfaces;
-using KitBook.Handlers.Interfaces;
 using KitBook.Mappers.Interfaces;
 using KitBook.Models.Database.Entities.Types;
 using KitBook.Models.ViewModels;
