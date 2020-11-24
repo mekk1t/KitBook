@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using KitBook.Handlers.Interface;
 using KitBook.Mappers.Interfaces;
 using KitBook.Models.Database.Entities;
@@ -29,8 +28,11 @@ namespace KitBook.Mappers
 
             if (model.Image != null)
             {
-                viewModel.ImageBase64 = Convert.ToBase64String(model.Image.Content);
-                viewModel.ImageExtension = model.Image.Extension;
+                viewModel.Image = new ImageViewModel
+                {
+                    Base64 = Convert.ToBase64String(model.Image.Content),
+                    Extension = model.Image.Extension
+                };
             }
             return viewModel;
         }
@@ -71,7 +73,7 @@ namespace KitBook.Mappers
             {
                 stage.Image = new BusinessLogic.Models.Files.File
                 {
-                    Content = Convert.FromBase64String(model.ExistingImage.Base64String),
+                    Content = Convert.FromBase64String(model.ExistingImage.Base64),
                     Extension = model.ExistingImage.Extension
                 };
             }
@@ -91,9 +93,9 @@ namespace KitBook.Mappers
 
             if (model.Image != null)
             {
-                editStage.ExistingImage = new ExistingImageViewModel
+                editStage.ExistingImage = new ImageViewModel
                 {
-                    Base64String = Convert.ToBase64String(model.Image.Content),
+                    Base64 = Convert.ToBase64String(model.Image.Content),
                     Extension = model.Image.Extension
                 };
             }

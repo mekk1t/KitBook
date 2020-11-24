@@ -1,5 +1,4 @@
 ﻿using System;
-using IO = System.IO;
 using System.Linq;
 using BusinessLogic.Models.Files;
 using KitBook.Handlers.Interface;
@@ -42,14 +41,20 @@ namespace KitBook.Mappers
 
             if (model.Thumbnail != null)
             {
-                viewModel.ThumbnailBase64 = Convert.ToBase64String(model.Thumbnail.Content);
-                viewModel.ThumbnailExtension = model.Thumbnail.Extension;
+                viewModel.Thumbnail = new ImageViewModel
+                {
+                    Base64 = Convert.ToBase64String(model.Thumbnail.Content),
+                    Extension = model.Thumbnail.Extension
+                };
             };
 
             if (model.CookingType?.Icon != null)
             {
-                viewModel.CookingTypeIconBase64 = Convert.ToBase64String(model.CookingType.Icon.Content);
-                viewModel.CookingTypeIconExtension = model.CookingType.Icon.Extension;
+                viewModel.CookingTypeIcon = new ImageViewModel
+                {
+                    Base64 = Convert.ToBase64String(model.CookingType.Icon.Content),
+                    Extension = model.CookingType.Icon.Extension
+                };
             }
 
             return viewModel;
@@ -102,7 +107,7 @@ namespace KitBook.Mappers
             {
                 recipe.Thumbnail = new File
                 {
-                    Content = Convert.FromBase64String(model.ExistingImage.Base64String),
+                    Content = Convert.FromBase64String(model.ExistingImage.Base64),
                     Extension = model.ExistingImage.Extension
                 };
             }
@@ -128,9 +133,9 @@ namespace KitBook.Mappers
 
             if (model.Thumbnail != null)
             {
-                editRecipe.ExistingImage = new ExistingImageViewModel
+                editRecipe.ExistingImage = new ImageViewModel
                 {
-                    Base64String = Convert.ToBase64String(model.Thumbnail.Content),
+                    Base64 = Convert.ToBase64String(model.Thumbnail.Content),
                     Extension = model.Thumbnail.Extension
                 };
             }
