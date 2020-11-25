@@ -24,6 +24,14 @@ else
     @Model.Description
 </p>
 <br />
+@if (Model.SourceURL.Contains("youtube"))
+{
+    string link = Model.SourceURL.Replace("watch?v=", "embed/");
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="@link" allowfullscreen></iframe>
+    </div>
+    <br />
+}
 <p class="font-weight-light">
     Готовится <strong>@Model.CookingTimeMinutes</strong> минут в @Model.Stages?.Count этапа
 </p>
