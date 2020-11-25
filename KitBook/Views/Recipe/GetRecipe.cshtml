@@ -4,15 +4,24 @@
     ViewData["Title"] = Model.Title;
 }
 
-<h1 class="text-center"><a target="_blank" rel="noreferrer" href="@Model.SourceURL">@Model.Title.Trim()</a></h1>
+<h1 class="text-center">
+    <a target="_blank" rel="noreferrer" href="@Model.SourceURL">
+        @Model.Title.Trim()
+    </a>
+</h1>
+<div class="m-2 h1 text-center">
+    <span class="m-2 badge badge-pill badge-info">@Model.CookingType</span>
+    <span class="m-2 badge badge-pill badge-success">@Model.DishType</span>
+    <span class="m-2 badge badge-pill badge-warning">@Model.RecipeType</span>
+</div>
 <br />
 @if (Model.Thumbnail != null)
 {
-<div class="text-center">
-    @{
-        await Html.RenderPartialAsync("_ImagePartial", Model.Thumbnail);
-    }
-</div>
+    <div class="text-center">
+        @{
+            await Html.RenderPartialAsync("_ImagePartial", Model.Thumbnail);
+        }
+    </div>
 }
 else
 {
@@ -32,9 +41,6 @@ else
     </div>
     <br />
 }
-<p class="font-weight-light">
-    Готовится <strong>@Model.CookingTimeMinutes</strong> минут в @Model.Stages?.Count этапа
-</p>
 
 <div>
     @if (Model.Stages?.Count > 0)
@@ -66,6 +72,10 @@ else
                 </p>
             }
         }
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">Автор не предоставил шагов по приготовлению :(</div>
     }
 </div>
 <div>
