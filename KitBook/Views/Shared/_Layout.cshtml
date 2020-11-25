@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,16 +10,28 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <a class="navbar-brand" href="/">
+                    <img src="~/icons/cookbook.png" class="d-inline-block little mr-5" alt="Kitbook Logo" />
+                    <span class="h3">Живые традиции</span>
+            </a>
             <div class="container">
-                <img src="~/icons/cookbook.png" class="little img-fluid mr-5" />
-                <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Recipe" asp-action="GetRecipes">Рецепты</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Рецепты
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Recipe" asp-action="GetRecipes">Общий список</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Праздничные</a>
+                                <a class="dropdown-item" href="#">Без сахара</a>
+                                <a class="dropdown-item" href="#">На скорую руку</a>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Ingredient" asp-action="GetIngredients">Ингредиенты</a>
