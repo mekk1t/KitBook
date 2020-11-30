@@ -1,3 +1,10 @@
 ﻿@model KitBook.Models.ViewModels.ImageViewModel
 
-<img class="card-img-top" src="data:image/@(Model.Extension);base64,@(Model.Base64)" />
+@if (Model?.Base64 != null && Model?.Extension != null)
+{
+    <img class="card-img-top" src="data:image/@(Model.Extension);base64,@(Model.Base64)" alt="card image"/>
+}
+else
+{
+    <img class="card-img-top" src="~/images/placeholder.png" alt="placeholder image"/>
+}
