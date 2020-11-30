@@ -2,81 +2,49 @@
 
 @{
     ViewData["Title"] = "Рецепты";
+    var ModelList = Model.ToList();
 }
 
 <h1>Рецепты</h1>
 <br />
-<table class="table">
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <div class="row row-cols-1">
-                    <div class="col">
-                        <a asp-action="GetRecipe" asp-route-id="@item.Id">@item.Title</a>
-                    </div>
-                    @if (item.Thumbnail != null)
-                    {
-                        <div class="col">
-                            <div class="w-25">
-                                @{await Html.RenderPartialAsync("_ImagePartial", item.Thumbnail);}
-                            </div>
-                        </div>
-                    }
+<div class="row">
+    @for (int i = 0; i < ModelList.Count; i++)
+    {
+        var recipe = ModelList[i];
+        <div class="col-3">
+            <div class="card">
+                <a asp-action="GetRecipe" asp-route-id="@recipe.Id">
+                    @{ await Html.RenderPartialAsync("_ImageCardPartial", recipe.Thumbnail);}
+                </a>
+                <div class="card-body">
+                    <h5>@recipe.Title</h5>
+                    @{ RenderDescription(recipe.Description); }
+                    <a target="_blank" rel="noreferrer" href="@recipe.SourceURL" class="btn btn-primary">Источник</a>
                 </div>
-            </td>
-            <td>
-                @item.CookingTimeMinutes минут
-            </td>
-            <td>
-                <div class="row row-cols-1">
-                    <div class="col">
-                        <span>@item.CookingType</span>
-                    </div>
-                    @if (item.CookingTypeIcon != null)
-                     {
-                    <div class="col">
-                        <div class="w-25">
-                            @{await Html.RenderPartialAsync("_ImagePartial", item.CookingTypeIcon);}
-                        </div>
-                    </div>
-                     }
-                </div>
-            </td>
-            <td>
-                <div class="row row-cols-1">
-                    <div class="col">
-                        <span>@item.RecipeType</span>
-                    </div>
-                    @if (item.RecipeTypeIcon != null)
-                    {
-                        <div class="col">
-                            <div class="w-25">
-                                @{await Html.RenderPartialAsync("_ImagePartial", item.RecipeTypeIcon);}
-                            </div>
-                        </div>
-                    }
-                </div>
-            </td>
-            <td>
-                <div class="row row-cols-1">
-                    <div class="col">
-                        <span>@item.DishType</span>
-                    </div>
-                    @if (item.DishTypeIcon != null)
-                    {
-                        <div class="col">
-                            <div class="w-25">
-                                @{await Html.RenderPartialAsync("_ImagePartial", item.DishTypeIcon);}
-                            </div>
-                        </div>
-                    }
-                </div>
-            </td>
-            <td>
-                <a target="_blank" rel="noreferrer" class="btn btn-primary" href="@item.SourceURL">Источник</a>
-            </td>
-        </tr>
+            </div>
+        </div>
+        if (i+1 % 3 == 0 && i > 0)
+        {
+            <div class="w-100"></div>
+        }
+    }
+</div>
+
+
+@functions{
+    void RenderDescription(string description)
+    {
+        if (!string.IsNullOrEmpty(description))
+        {
+            <p class="card-text">
+                @description.Split('.')[0]
+            </p>
+        }
+        else
+        {
+            <p class="card-text text-muted">
+                Описание не предоставлено
+            </p>
+        }
+    }
 }
-    </tbody>
-</table>
