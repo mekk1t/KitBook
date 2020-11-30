@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
+using BusinessLogic.Interfaces;
+using KitBook.Mappers.Interfaces;
 using KitBook.Models.Database.Entities.Types;
-using KitBook.Models.DTO;
-using KitBook.Models.Repositories.Interfaces;
 using KitBook.Models.Services.Interfaces;
+using KitBook.Models.ViewModels.Ingredient;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -10,28 +12,37 @@ namespace KitBook.Controllers
 {
     public class IngredientController : Controller
     {
+        private readonly IIngredientMapper mapper;
         private readonly IIngredientService service;
         private readonly IRepository<IngredientType> ingredientTypeRepository;
 
-        public IngredientController(IIngredientService service, IRepository<IngredientType> ingredientTypeRepository)
+        public IngredientController(
+            IIngredientService service,
+            IIngredientMapper mapper,
+            IRepository<IngredientType> ingredientTypeRepository)
         {
+            this.mapper = mapper;
             this.service = service;
             this.ingredientTypeRepository = ingredientTypeRepository;
         }
 
         private void FillViewBagWithIngredientTypes()
         {
-            ViewBag.IngredientTypes = new SelectList(ingredientTypeRepository.Read(), "Id", "Name");
+            ViewBag.IngredientTypes = new SelectList(ingredientTypeRepository.GetList(), "Id", "Name");
         }
 
         public IActionResult GetIngredient(Guid id)
         {
-            return View(nameof(GetIngredient), service.GetIngredientById(id));
+            var ingredient = service.GetIngredientById(id);
+            var viewModel = mapper.Map(ingredient);
+            return View(nameof(GetIngredient), viewModel);
         }
 
         public IActionResult GetIngredients()
         {
-            return View(nameof(GetIngredients), service.GetIngredients());
+            var ingredients = service.GetIngredients();
+            var viewModel = ingredients.Select(i => mapper.Map(i));
+            return View(nameof(GetIngredients), viewModel);
         }
 
         [HttpGet]
@@ -42,23 +53,27 @@ namespace KitBook.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostIngredient(IngredientDto dto)
+        public IActionResult PostIngredient(NewIngredient viewModel)
         {
-            service.CreateNewIngredient(dto);
-            return RedirectToAction(nameof(GetIngredient), new { id = dto.Id });
+            var ingredient = mapper.Map(viewModel);
+            service.CreateNewIngredient(ingredient);
+            return RedirectToAction(nameof(GetIngredient), new { id = ingredient.Id });
         }
 
         [HttpGet]
         public IActionResult PutIngredient(Guid id)
         {
+            var ingredient = service.GetIngredientById(id);
+            var viewModel = mapper.MapToEdit(ingredient);
             FillViewBagWithIngredientTypes();
-            return View(nameof(PutIngredient), service.GetIngredientById(id));
+            return View(nameof(PutIngredient), viewModel);
         }
 
         [HttpPost]
-        public IActionResult PutIngredient(IngredientDto dto)
+        public IActionResult PutIngredient(EditIngredient viewModel)
         {
-            service.UpdateIngredient(dto);
+            var ingredient = mapper.Map(viewModel);
+            service.UpdateIngredient(ingredient);
             return RedirectToAction(nameof(GetIngredients));
         }
 

@@ -1,4 +1,4 @@
-﻿@model KitBook.Models.DTO.IngredientDto
+﻿@model KitBook.Models.ViewModels.Ingredient.IngredientViewModel
 
 @{
     ViewData["Title"] = Model.Name;
@@ -41,15 +41,15 @@
         </dd>
     </dl>
 </div>
-@if (Model.Mentions?.Count() > 0)
+@if (Model.References?.Count() > 0)
 {
     <div>
         <hr />
         Встречается в
         <ul>
-            @foreach (var mention in Model.Mentions)
+            @foreach (var reference in Model.References)
             {
-                <li><a asp-controller="Recipe" asp-action="GetRecipe" asp-route-id="@mention.RecipeId">@mention.RecipeName</a></li>
+                <li><a asp-controller="Recipe" asp-action="GetRecipe" asp-route-id="@reference.RecipeId">@reference.RecipeTitle</a></li>
             }
         </ul>
     </div>

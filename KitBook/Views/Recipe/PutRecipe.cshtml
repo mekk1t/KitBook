@@ -1,21 +1,35 @@
-﻿@model KitBook.Models.DTO.RecipeDto
+﻿@model KitBook.Models.ViewModels.Recipe.EditRecipe
 
 @{
     ViewData["Title"] = "Редактирование рецепта";
 }
 
-<h1>Редактирование рецепта "@Model.Title"</h1>
+<h1>Редактирование рецепта " @Model.Title "</h1>
 
 <h4>Информация</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="PutRecipe" method="post">
+        <form asp-action="PutRecipe" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
                 <input asp-for="Id" readonly="readonly" style="font-style:italic" class="form-control" />
                 <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            @if (Model.ExistingImage != null)
+            {
+                <div class="invisible">
+                    <input asp-for="ExistingImage.Base64" type="text" value="@Model.ExistingImage.Base64" />
+                    <input asp-for="ExistingImage.Extension" type="text" value="@Model.ExistingImage.Extension" />
+                </div>
+                {
+                    await Html.RenderPartialAsync("_ImagePartial", Model.ExistingImage);
+                }
+            }
+            <div class="form-group">
+                <label asp-for="Thumbnail" class="control-label"></label>
+                <input asp-for="Thumbnail" type="file" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -66,6 +80,19 @@
                             <input value="@step" class="invisible" type="number" name="Stages[@i].Index" /> <br />
                             <label class="control-label">Описание</label>
                             <textarea name="Stages[@i].Description" class="form-control" id="Description">@Model.Stages[i].Description</textarea>
+                            <label name="Stages[@i].Image" class="control-label">Картинка</label>
+                            @if (Model.Stages[i].ExistingImage != null)
+                            {
+                                <div class="invisible">
+                                    <input asp-for="Stages[i].ExistingImage.Base64" type="text" value="@Model.Stages[i].ExistingImage.Base64" />
+                                    <input asp-for="Stages[i].ExistingImage.Extension" type="text" value="@Model.Stages[i].ExistingImage.Extension" />
+                                </div>
+                                {
+                                    await Html.RenderPartialAsync("_ImagePartial", Model.Stages[i].ExistingImage);
+                                }
+                            }
+                            <input name="Stages[@i].Image" type="file" class="form-control" />
+
                             <input class="invisible" name="Stages[@i].RecipeId" value="@Model.Id" /> <br />
                             <input class="invisible" name="Stages[@i].Id" value="@Model.Stages[i].Id" />
                         </div>
@@ -80,39 +107,39 @@
                 {
                     @for (int i = 0; i < Model.Ingredients.Count; i++)
                     {
-                <div class="count">
-                    @{
-                        var ingredient = Model.Ingredients[i];
-                    }
-                    <label asp-for="Ingredients[i].Name" class="control-label">Название</label>
-                    <select asp-for="Ingredients[i].IngredientId" class="form-control" asp-items="ViewBag.Ingredients">
-                        <option selected="selected">@ingredient.IngredientId</option>
-                    </select>
-                    @if (ingredient.Ml != null)
-                    {
-                        string mlLabel = $"mlLabel{i}";
-                        <label class="control-label" id="@mlLabel">Объем (в мл.)</label>
-                        string mlInput = $"mlInput{i}";
-                        <input name="Ingredients[@i].Ml" id="@mlInput" type="number" value="@Model.Ingredients[i].Ml" class="form-control" />
-                        <input asp-for="Ingredients[i].RecipeId" readonly="readonly" value="@Model.Id" class="invisible" />
-                    }
-                    else if (ingredient.G != null)
-                    {
-                        string gLabel = $"gLabel{i}";
-                        <label class="control-label" id="@gLabel">Грамм</label>
-                        string gInput = $"gInput{i}";
-                        <input name="Ingredients[@i].G" id="@gInput" type="number" value="@Model.Ingredients[i].G" class="form-control" />
-                        <input asp-for="Ingredients[i].RecipeId" readonly="readonly" value="@Model.Id" class="invisible" />
-                    }
-                    else if (ingredient.Amount != null)
-                    {
-                        string aLabel = $"aLabel{i}";
-                        <label class="control-label" id="@aLabel">Штук</label>
-                        string aInput = $"aInput{i}";
-                        <input class="form-control" name="Ingredients[@i].Amount" id="@aInput" type="number" value="@Model.Ingredients[i].Amount" />
-                        <input asp-for="Ingredients[i].RecipeId" readonly="readonly" value="@Model.Id" class="invisible" />
-                    }
-                </div>
+                        <div class="count">
+                            @{
+                                var ingredient = Model.Ingredients[i];
+                            }
+                            <label asp-for="Ingredients[i].IngredientName" class="control-label">Название</label>
+                            <select asp-for="Ingredients[i].IngredientId" class="form-control" asp-items="ViewBag.Ingredients">
+                                <option selected="selected">@ingredient.IngredientId</option>
+                            </select>
+                            @if (ingredient.Ml != null)
+                            {
+                                string mlLabel = $"mlLabel{i}";
+                                <label class="control-label" id="@mlLabel">Объем (в мл.)</label>
+                                string mlInput = $"mlInput{i}";
+                                <input name="Ingredients[@i].Ml" id="@mlInput" type="number" value="@Model.Ingredients[i].Ml" class="form-control" />
+                                <input asp-for="Ingredients[i].RecipeId" readonly="readonly" value="@Model.Id" class="invisible" />
+                            }
+                            else if (ingredient.G != null)
+                            {
+                                string gLabel = $"gLabel{i}";
+                                <label class="control-label" id="@gLabel">Грамм</label>
+                                string gInput = $"gInput{i}";
+                                <input name="Ingredients[@i].G" id="@gInput" type="number" value="@Model.Ingredients[i].G" class="form-control" />
+                                <input asp-for="Ingredients[i].RecipeId" readonly="readonly" value="@Model.Id" class="invisible" />
+                            }
+                            else if (ingredient.Amount != null)
+                            {
+                                string aLabel = $"aLabel{i}";
+                                <label class="control-label" id="@aLabel">Штук</label>
+                                string aInput = $"aInput{i}";
+                                <input class="form-control" name="Ingredients[@i].Amount" id="@aInput" type="number" value="@Model.Ingredients[i].Amount" />
+                                <input asp-for="Ingredients[i].RecipeId" readonly="readonly" value="@Model.Id" class="invisible" />
+                            }
+                        </div>
                     }
                 }
             </div>

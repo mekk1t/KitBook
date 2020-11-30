@@ -1,51 +1,76 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using BusinessLogic.Attributes;
+using BusinessLogic.Interfaces;
+using BusinessLogic.Models.Types.Interface;
+using KitBook.Mappers.Interfaces;
 using KitBook.Models.Database.Entities.Types;
-using KitBook.Models.Repositories.Interfaces;
+using KitBook.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KitBook.Controllers
 {
     public class TypesController : Controller
     {
-        private readonly IRepository<RecipeType> recipeTypeRepository;
-        private readonly IRepository<DishType> dishTypeRepository;
-        private readonly IRepository<CookingType> cookingTypeRepository;
-        private readonly IRepository<IngredientType> ingredientTypeRepository;
+        private readonly IRepositoryAdvanced<RecipeType> recipeTypeRepository;
+        private readonly IRepositoryAdvanced<DishType> dishTypeRepository;
+        private readonly IRepositoryAdvanced<CookingType> cookingTypeRepository;
+        private readonly IRepositoryAdvanced<IngredientType> ingredientTypeRepository;
+        private readonly ITypeMapper mapper;
+
+        private const string GET = "GET";
+        private const string POST = "POST";
+        private const string PUT = "PUT";
+        private const string GET_LIST = "GET_LIST";
 
         // ЗДЕСЬ НУЖНО ИСПОЛЬЗОВАТЬ AJAX, ТК ОПЕРАЦИИ НЕЗНАЧИТЕЛЬНЫЕ и могут пригодиться при редактировании / создании
         public TypesController(
-            IRepository<RecipeType> recipeTypeRepository,
-            IRepository<CookingType> cookingTypeRepository,
-            IRepository<IngredientType> ingredientTypeRepository,
-            IRepository<DishType> dishTypeRepository)
+            IRepositoryAdvanced<RecipeType> recipeTypeRepository,
+            IRepositoryAdvanced<CookingType> cookingTypeRepository,
+            IRepositoryAdvanced<IngredientType> ingredientTypeRepository,
+            IRepositoryAdvanced<DishType> dishTypeRepository,
+            ITypeMapper mapper)
         {
+            this.mapper = mapper;
             this.recipeTypeRepository = recipeTypeRepository;
             this.cookingTypeRepository = cookingTypeRepository;
             this.dishTypeRepository = dishTypeRepository;
             this.ingredientTypeRepository = ingredientTypeRepository;
         }
 
+        private void SetTypeInViewBag(Type type)
+        {
+            ViewBag.Type = type.Name;
+        }
+
         public IActionResult Index()
         {
-            return View(nameof(Index));
+            return View();
         }
 
         #region RecipeType
         [HttpGet]
         public IActionResult GetRecipeTypes()
         {
-            return View(nameof(GetRecipeTypes), recipeTypeRepository.Read());
+            var types = recipeTypeRepository.GetListWithRelationships();
+            var viewModel = types.Select(rt => mapper.Map(rt));
+            var type = types.GetType().GetGenericArguments().First();
+            SetTypeInViewBag(type);
+            return View(GET_LIST, viewModel);
         }
 
         [HttpGet]
         public IActionResult GetRecipeType(Guid id)
         {
-            return View(nameof(GetRecipeType), recipeTypeRepository.Read(id));
+            var viewModel = mapper.Map(recipeTypeRepository.GetByIdWithRelationships(id));
+            return View(GET, viewModel);
         }
 
         [HttpPost]
-        public IActionResult PostRecipeType(RecipeType type)
+        public IActionResult PostRecipeType(TypeViewModel viewModel)
         {
+            var type = mapper.Map<RecipeType>(viewModel);
             recipeTypeRepository.Create(type);
             return RedirectToAction(nameof(GetRecipeTypes));
         }
@@ -53,12 +78,14 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult PostRecipeType()
         {
-            return View(nameof(PostRecipeType));
+            var viewModel = GeneratePostViewModel<RecipeType>();
+            return View(POST, viewModel);
         }
 
         [HttpPost]
-        public IActionResult PutRecipeType(RecipeType type)
+        public IActionResult PutRecipeType(TypeViewModel viewModel)
         {
+            var type = mapper.Map<RecipeType>(viewModel);
             recipeTypeRepository.Update(type);
             return RedirectToAction(nameof(GetRecipeType), new { id = type.Id });
         }
@@ -66,13 +93,14 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult PutRecipeType(Guid id)
         {
-            var formData = recipeTypeRepository.Read(id);
-            return View(nameof(PutRecipeType), formData);
+            var type = recipeTypeRepository.GetById(id);
+            var viewModel = mapper.Map(type);
+            return View(PUT, viewModel);
         }
 
         public IActionResult DeleteRecipeType(Guid id)
         {
-            recipeTypeRepository.Delete(id);
+            recipeTypeRepository.DeleteById(id);
             return RedirectToAction(nameof(GetRecipeTypes));
         }
         #endregion
@@ -81,18 +109,24 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetCookingTypes()
         {
-            return View(nameof(GetCookingTypes), cookingTypeRepository.Read());
+            var types = cookingTypeRepository.GetListWithRelationships();
+            var viewModel = types.Select(rt => mapper.Map(rt));
+            var type = types.GetType().GetGenericArguments().First();
+            SetTypeInViewBag(type);
+            return View(GET_LIST, viewModel);
         }
 
         [HttpGet]
         public IActionResult GetCookingType(Guid id)
         {
-            return View(nameof(GetCookingType), cookingTypeRepository.Read(id));
+            var viewModel = mapper.Map(cookingTypeRepository.GetByIdWithRelationships(id));
+            return View(GET, viewModel);
         }
 
         [HttpPost]
-        public IActionResult PostCookingType(CookingType type)
+        public IActionResult PostCookingType(TypeViewModel viewModel)
         {
+            var type = mapper.Map<CookingType>(viewModel);
             cookingTypeRepository.Create(type);
             return RedirectToAction(nameof(GetCookingTypes));
         }
@@ -100,12 +134,14 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult PostCookingType()
         {
-            return View(nameof(PostCookingType));
+            var viewModel = GeneratePostViewModel<CookingType>();
+            return View(POST, viewModel);
         }
 
         [HttpPost]
-        public IActionResult PutCookingType(CookingType type)
+        public IActionResult PutCookingType(TypeViewModel viewModel)
         {
+            var type = mapper.Map<CookingType>(viewModel);
             cookingTypeRepository.Update(type);
             return RedirectToAction(nameof(GetCookingType), new { id = type.Id });
         }
@@ -113,13 +149,14 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult PutCookingType(Guid id)
         {
-            var formData = cookingTypeRepository.Read(id);
-            return View(nameof(PutCookingType), formData);
+            var type = cookingTypeRepository.GetById(id);
+            var viewModel = mapper.Map(type);
+            return View(PUT, viewModel);
         }
 
         public IActionResult DeleteCookingType(Guid id)
         {
-            cookingTypeRepository.Delete(id);
+            cookingTypeRepository.DeleteById(id);
             return RedirectToAction(nameof(GetCookingTypes));
         }
         #endregion
@@ -128,18 +165,24 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetDishTypes()
         {
-            return View(nameof(GetDishTypes), dishTypeRepository.Read());
+            var types = dishTypeRepository.GetListWithRelationships();
+            var viewModel = types.Select(rt => mapper.Map(rt));
+            var type = types.GetType().GetGenericArguments().First();
+            SetTypeInViewBag(type);
+            return View(GET_LIST, viewModel);
         }
 
         [HttpGet]
         public IActionResult GetDishType(Guid id)
         {
-            return View(nameof(GetDishType), dishTypeRepository.Read(id));
+            var viewModel = mapper.Map(dishTypeRepository.GetByIdWithRelationships(id));
+            return View(GET, viewModel);
         }
 
         [HttpPost]
-        public IActionResult PostDishType(DishType type)
+        public IActionResult PostDishType(TypeViewModel viewModel)
         {
+            var type = mapper.Map<DishType>(viewModel);
             dishTypeRepository.Create(type);
             return RedirectToAction(nameof(GetDishTypes));
         }
@@ -147,12 +190,14 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult PostDishType()
         {
-            return View(nameof(PostDishType));
+            var viewModel = GeneratePostViewModel<DishType>();
+            return View(POST, viewModel);
         }
 
         [HttpPost]
-        public IActionResult PutDishType(DishType type)
+        public IActionResult PutDishType(TypeViewModel viewModel)
         {
+            var type = mapper.Map<DishType>(viewModel);
             dishTypeRepository.Update(type);
             return RedirectToAction(nameof(GetDishType), new { id = type.Id });
         }
@@ -160,13 +205,14 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult PutDishType(Guid id)
         {
-            var formData = dishTypeRepository.Read(id);
-            return View(nameof(PutDishType), formData);
+            var type = dishTypeRepository.GetById(id);
+            var viewModel = mapper.Map(type);
+            return View(PUT, viewModel);
         }
 
         public IActionResult DeleteDishType(Guid id)
         {
-            dishTypeRepository.Delete(id);
+            dishTypeRepository.DeleteById(id);
             return RedirectToAction(nameof(GetDishTypes));
         }
         #endregion
@@ -175,18 +221,24 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetIngredientTypes()
         {
-            return View(nameof(GetIngredientTypes), ingredientTypeRepository.Read());
+            var types = ingredientTypeRepository.GetListWithRelationships();
+            var viewModel = types.Select(rt => mapper.Map(rt));
+            var type = types.GetType().GetGenericArguments().First();
+            SetTypeInViewBag(type);
+            return View(GET_LIST, viewModel);
         }
 
         [HttpGet]
         public IActionResult GetIngredientType(Guid id)
         {
-            return View(nameof(GetIngredientType), ingredientTypeRepository.Read(id));
+            var viewModel = mapper.Map(ingredientTypeRepository.GetByIdWithRelationships(id));
+            return View(GET, viewModel);
         }
 
         [HttpPost]
-        public IActionResult PostIngredientType(IngredientType type)
+        public IActionResult PostIngredientType(TypeViewModel viewModel)
         {
+            var type = mapper.Map<IngredientType>(viewModel);
             ingredientTypeRepository.Create(type);
             return RedirectToAction(nameof(GetIngredientTypes));
         }
@@ -194,12 +246,14 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult PostIngredientType()
         {
-            return View(nameof(PostIngredientType));
+            var viewModel = GeneratePostViewModel<IngredientType>();
+            return View(POST, viewModel);
         }
 
         [HttpPost]
-        public IActionResult PutIngredientType(IngredientType type)
+        public IActionResult PutIngredientType(TypeViewModel viewModel)
         {
+            var type = mapper.Map<IngredientType>(viewModel);
             ingredientTypeRepository.Update(type);
             return RedirectToAction(nameof(GetIngredientType), new { id = type.Id });
         }
@@ -207,15 +261,29 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult PutIngredientType(Guid id)
         {
-            var formData = ingredientTypeRepository.Read(id);
-            return View(nameof(PutIngredientType), formData);
+            var type = ingredientTypeRepository.GetById(id);
+            var viewModel = mapper.Map(type);
+            return View(PUT, viewModel);
         }
 
         public IActionResult DeleteIngredientType(Guid id)
         {
-            ingredientTypeRepository.Delete(id);
+            ingredientTypeRepository.DeleteById(id);
             return RedirectToAction(nameof(GetIngredientTypes));
         }
         #endregion
+
+        private TypeViewModel GeneratePostViewModel<T>()
+            where T: IType
+        {
+            return new TypeViewModel
+            {
+                KindOfType = typeof(T).Name,
+                KindOfTypeTranslated = (Attribute.GetCustomAttribute(
+                    typeof(T),
+                    typeof(TranslationAttribute)) as TranslationAttribute)
+                    .Translation
+            };
+        }
     }
 }

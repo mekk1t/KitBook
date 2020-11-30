@@ -1,0 +1,66 @@
+﻿@model IEnumerable<KitBook.Models.ViewModels.TypeViewModel>
+
+@{
+    var type = ViewBag.Type;
+    string postAction = $"Post{type}";
+    string getAction = $"Get{type}";
+    string putAction = $"Put{type}";
+    var ModelList = Model.ToList();
+}
+@if (Model.Count() > 0)
+{
+    <h1>Разновидности категории "@type"</h1>
+    <p>
+        <a asp-action="@postAction">Добавить новый</a>
+    </p>
+    <table class="table">
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @if (item.ExistingIcon != null)
+                        {
+                            <div class="w-25">
+                                @{ await Html.RenderPartialAsync("_ImagePartial", item.ExistingIcon);}
+                            </div>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="@putAction" asp-route-id="@item.Id">Редактировать</a> |
+                        <a asp-action="@getAction" asp-route-id="@item.Id">Подробнее</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="lead">Что-то здесь пусто. Давайте добавим новую категорию?</p><br />
+    <p class="h2 lead">
+        <a asp-action="@postAction">Добавить новый</a>
+    </p>
+}
+
+<div class="row">
+    @for (int i = 0; i < ModelList.Count; i++)
+    {
+        <div class="col-3">
+            <div class="card">
+                @{ await Html.RenderPartialAsync("_ImageCardPartial", ModelList[i].ExistingIcon);}
+                <div class="card-body">
+                    <h5>@ModelList[i].Name</h5>
+                    <a class="btn btn-primary">Здесь будет вывод всех рецептов в этой категории</a>
+                </div>
+            </div>
+        </div>
+        if (i+1 % 3 == 0 && i > 0)
+        {
+            <div class="w-100"></div>
+        }
+    }
+</div>
