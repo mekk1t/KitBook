@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using BusinessLogic.Attributes;
 using BusinessLogic.Models.Types.Interface;
 using KitBook.Handlers.Interface;

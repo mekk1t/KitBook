@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using BusinessLogic.Attributes;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Models.Types.Interface;
 using KitBook.Mappers.Interfaces;
@@ -37,6 +39,11 @@ namespace KitBook.Controllers
             this.ingredientTypeRepository = ingredientTypeRepository;
         }
 
+        private void SetTypeInViewBag(Type type)
+        {
+            ViewBag.Type = type.Name;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -46,7 +53,10 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetRecipeTypes()
         {
-            var viewModel = recipeTypeRepository.GetListWithRelationships().Select(rt => mapper.Map(rt));
+            var types = recipeTypeRepository.GetListWithRelationships();
+            var viewModel = types.Select(rt => mapper.Map(rt));
+            var type = types.GetType().GetGenericArguments().First();
+            SetTypeInViewBag(type);
             return View(GET_LIST, viewModel);
         }
 
@@ -58,8 +68,9 @@ namespace KitBook.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostRecipeType(RecipeType type)
+        public IActionResult PostRecipeType(TypeViewModel viewModel)
         {
+            var type = mapper.Map<RecipeType>(viewModel);
             recipeTypeRepository.Create(type);
             return RedirectToAction(nameof(GetRecipeTypes));
         }
@@ -98,7 +109,10 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetCookingTypes()
         {
-            var viewModel = cookingTypeRepository.GetListWithRelationships().Select(ct => mapper.Map(ct));
+            var types = cookingTypeRepository.GetListWithRelationships();
+            var viewModel = types.Select(rt => mapper.Map(rt));
+            var type = types.GetType().GetGenericArguments().First();
+            SetTypeInViewBag(type);
             return View(GET_LIST, viewModel);
         }
 
@@ -110,8 +124,9 @@ namespace KitBook.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostCookingType(CookingType type)
+        public IActionResult PostCookingType(TypeViewModel viewModel)
         {
+            var type = mapper.Map<CookingType>(viewModel);
             cookingTypeRepository.Create(type);
             return RedirectToAction(nameof(GetCookingTypes));
         }
@@ -150,7 +165,10 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetDishTypes()
         {
-            var viewModel = dishTypeRepository.GetListWithRelationships().Select(dt => mapper.Map(dt));
+            var types = dishTypeRepository.GetListWithRelationships();
+            var viewModel = types.Select(rt => mapper.Map(rt));
+            var type = types.GetType().GetGenericArguments().First();
+            SetTypeInViewBag(type);
             return View(GET_LIST, viewModel);
         }
 
@@ -162,8 +180,9 @@ namespace KitBook.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostDishType(DishType type)
+        public IActionResult PostDishType(TypeViewModel viewModel)
         {
+            var type = mapper.Map<DishType>(viewModel);
             dishTypeRepository.Create(type);
             return RedirectToAction(nameof(GetDishTypes));
         }
@@ -202,7 +221,10 @@ namespace KitBook.Controllers
         [HttpGet]
         public IActionResult GetIngredientTypes()
         {
-            var viewModel = ingredientTypeRepository.GetListWithRelationships().Select(it => mapper.Map(it));
+            var types = ingredientTypeRepository.GetListWithRelationships();
+            var viewModel = types.Select(rt => mapper.Map(rt));
+            var type = types.GetType().GetGenericArguments().First();
+            SetTypeInViewBag(type);
             return View(GET_LIST, viewModel);
         }
 
@@ -256,7 +278,11 @@ namespace KitBook.Controllers
         {
             return new TypeViewModel
             {
-                KindOfType = typeof(T).Name
+                KindOfType = typeof(T).Name,
+                KindOfTypeTranslated = (Attribute.GetCustomAttribute(
+                    typeof(T),
+                    typeof(TranslationAttribute)) as TranslationAttribute)
+                    .Translation
             };
         }
     }

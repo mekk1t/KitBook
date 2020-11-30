@@ -94,7 +94,7 @@ namespace KitBook.Mappers
 
             if (model.Thumbnail != null)
             {
-                GetThumbnail(model.Thumbnail);
+                recipe.Thumbnail = GetThumbnail(model.Thumbnail);
             }
             return recipe;
         }
