@@ -14,12 +14,12 @@ namespace KitBook.Controllers
     {
         private readonly IIngredientMapper mapper;
         private readonly IIngredientService service;
-        private readonly IRepository<IngredientType> ingredientTypeRepository;
+        private readonly IRepositoryAdvanced<IngredientType> ingredientTypeRepository;
 
         public IngredientController(
             IIngredientService service,
             IIngredientMapper mapper,
-            IRepository<IngredientType> ingredientTypeRepository)
+            IRepositoryAdvanced<IngredientType> ingredientTypeRepository)
         {
             this.mapper = mapper;
             this.service = service;

@@ -11,6 +11,25 @@ a.navbar-brand {
     display: none;
 }
 
+.disabled-link:hover{
+    text-decoration: none;
+}
+.disabled-link:active{
+    text-decoration: none;
+}
+
+.equal {
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
 .little {
     height:5%;
     width:5%;
