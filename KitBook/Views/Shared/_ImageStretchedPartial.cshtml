@@ -1,0 +1,10 @@
+﻿@model KitBook.Models.ViewModels.ImageViewModel
+
+@if (Model?.Base64 != null && Model?.Extension != null)
+{
+    <img class="img-stretched" src="data:image/@(Model.Extension);base64,@(Model.Base64)" alt="stretched image" />
+}
+else
+{
+    <img class="img-stretched" src="~/images/placeholder.png" alt="placeholder image" />
+}
