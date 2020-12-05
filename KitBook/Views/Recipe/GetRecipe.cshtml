@@ -58,9 +58,8 @@ else
                             await Html.RenderPartialAsync("_ImageStretchedPartial", Model.Stages[i].Image);
                         }
                     </div>
-                    <div class="col-8 text-center">
-                        <p>
-                            @Model.Stages[i].Index. @Model.Stages[i].Description
+                    <div class="col-8 text-left">
+                        <p>@Model.Stages[i].Description
                         </p>
                     </div>
                 </div>

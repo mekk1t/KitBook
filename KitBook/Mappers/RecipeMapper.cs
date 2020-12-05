@@ -89,7 +89,7 @@ namespace KitBook.Mappers
                 DishTypeId = model.DishTypeId,
                 RecipeTypeId = model.RecipeTypeId,
                 Stages = model.Stages?.Select(s => stageMapper.Map(s)).ToList(),
-                Ingredients = model.Ingredients?.Select(i => ingredientMapper.Map(i))
+                Ingredients = model.Ingredients?.Select(i => ingredientMapper.Map(i)).ToList()
             };
 
             if (model.Thumbnail != null)
@@ -112,7 +112,7 @@ namespace KitBook.Mappers
                 DishTypeId = model.DishTypeId,
                 RecipeTypeId = model.RecipeTypeId,
                 Stages = model.Stages?.Select(s => stageMapper.Map(s)).ToList(),
-                Ingredients = model.Ingredients?.Select(i => ingredientMapper.Map(i))
+                Ingredients = model.Ingredients?.Select(i => ingredientMapper.Map(i)).ToList()
             };
 
             if (model.Thumbnail != null)

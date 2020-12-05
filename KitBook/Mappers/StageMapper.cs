@@ -49,7 +49,7 @@ namespace KitBook.Mappers
 
             if (model.Image != null)
             {
-                GetImage(stage, model.Image);
+                stage.Image = GetImage(stage, model.Image);
             }
 
             return stage;
