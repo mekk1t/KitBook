@@ -43,6 +43,13 @@ namespace KitBook.Controllers
             ViewBag.Ingredients = new SelectList(ingredientRepository.GetList(), "Id", "Name");
         }
 
+        public IActionResult GetRecipesAdmin()
+        {
+            var recipes = service.GetRecipes();
+            var viewModel = recipes.Select(r => mapper.Map(r));
+            return View(nameof(GetRecipesAdmin), viewModel);
+        }
+
         [HttpGet]
         public IActionResult GetRecipes()
         {

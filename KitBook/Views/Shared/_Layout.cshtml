@@ -9,45 +9,38 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar justify-content-between navbar-light">
             <a class="navbar-brand" href="/">
-                    <img src="~/icons/cookbook.png" class="d-inline-block little mr-5" alt="Kitbook Logo" />
-                    <span class="h3">Живые традиции</span>
+                <img width="30" height="30" class="d-inline-block align-top" src="~/icons/cookbook.png"/>
             </a>
-            <div class="container">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Рецепты
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="Recipe" asp-action="GetRecipes">Общий список</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Праздничные</a>
-                                <a class="dropdown-item" href="#">Без сахара</a>
-                                <a class="dropdown-item" href="#">На скорую руку</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Ingredient" asp-action="GetIngredients">Ингредиенты</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Recipe" asp-action="PostRecipe">+ Рецепт</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Ingredient" asp-action="PostIngredient">+ Ингредиент</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Types" asp-action="Index">Категории</a>
-                        </li>
-                    </ul>
+            <a class="disabled-link text-dark" href="/">
+                <span class="h3">Живые традиции</span>
+            </a>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <strong>Администрирование</strong>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" asp-controller="Recipe" asp-action="GetRecipesAdmin">Рецепты</a>
+                    <a class="dropdown-item" asp-controller="Ingredient" asp-action="GetIngredientsAdmin">Ингредиенты</a>
+                    <a class="dropdown-item dropdown-toggle" id="nestedDropdown" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Категории
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="nestedDropdown">
+                        <a class="dropdown-item" asp-controller="Types" asp-action="GetRecipeTypes">Типы рецептов</a>
+                        <a class="dropdown-item" asp-controller="Types" asp-action="GetCookingTypes">Способы приготовления</a>
+                        <a class="dropdown-item" asp-controller="Types" asp-action="GetDishTypes">Типы блюд</a>
+                        <a class="dropdown-item" asp-controller="Types" asp-action="GetIngredientTypes">Виды ингредиентов</a>
+                    </div>
+
                 </div>
             </div>
+            <form asp-controller="Search" asp-action="SearchRecipes" class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Найти рецепт" aria-label="Поисковик" />
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Искать</button>
+            </form>
         </nav>
     </header>
     <div class="container">

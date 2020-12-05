@@ -50,7 +50,7 @@ function appendStageToContainer(i, container) {
 
     var imageInput = document.createElement("input");
     imageInput.setAttribute("type", "file");
-    imageInput.setAttribute("class", "form-control");
+    imageInput.setAttribute("class", "form-control-file");
     imageInput.setAttribute("name", currentStage.concat(".Image"));
 
     var recipeIdInput = document.createElement("input");

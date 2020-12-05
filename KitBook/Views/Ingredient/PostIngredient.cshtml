@@ -4,7 +4,7 @@
     ViewData["Title"] = "NEW";
 }
 
-<h1>Создание нового ингредиента</h1>
+<h1>Новый ингредиент</h1>
 
 <hr />
 <div class="row">
@@ -16,17 +16,17 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
+            <div class="form-group form-check form-check-inline">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsSpicy" /> @Html.DisplayNameFor(model => model.IsSpicy)
                 </label>
             </div>
-            <div class="form-group form-check">
+            <div class="form-group form-check form-check-inline">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsSugary" /> @Html.DisplayNameFor(model => model.IsSugary)
                 </label>
             </div>
-            <div class="form-group form-check">
+            <div class="form-group form-check form-check-inline">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsSour" /> @Html.DisplayNameFor(model => model.IsSour)
                 </label>
@@ -37,7 +37,7 @@
                 <span asp-validation-for="IngredientTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Создать" class="btn btn-outline-success" />
             </div>
         </form>
     </div>

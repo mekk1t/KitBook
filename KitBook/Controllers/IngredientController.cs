@@ -26,16 +26,18 @@ namespace KitBook.Controllers
             this.ingredientTypeRepository = ingredientTypeRepository;
         }
 
-        private void FillViewBagWithIngredientTypes()
-        {
-            ViewBag.IngredientTypes = new SelectList(ingredientTypeRepository.GetList(), "Id", "Name");
-        }
-
         public IActionResult GetIngredient(Guid id)
         {
             var ingredient = service.GetIngredientById(id);
             var viewModel = mapper.Map(ingredient);
             return View(nameof(GetIngredient), viewModel);
+        }
+
+        public IActionResult GetIngredientsAdmin()
+        {
+            var ingredients = service.GetIngredients();
+            var viewModel = ingredients.Select(i => mapper.Map(i));
+            return View(nameof(GetIngredientsAdmin), viewModel);
         }
 
         public IActionResult GetIngredients()
@@ -99,6 +101,11 @@ namespace KitBook.Controllers
             }
 
             return options;
+        }
+
+        private void FillViewBagWithIngredientTypes()
+        {
+            ViewBag.IngredientTypes = new SelectList(ingredientTypeRepository.GetList(), "Id", "Name");
         }
     }
 }
