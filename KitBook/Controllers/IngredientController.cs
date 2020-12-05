@@ -33,6 +33,13 @@ namespace KitBook.Controllers
             return View(nameof(GetIngredient), viewModel);
         }
 
+        public IActionResult GetIngredientsAdmin()
+        {
+            var ingredients = service.GetIngredients();
+            var viewModel = ingredients.Select(i => mapper.Map(i));
+            return View(nameof(GetIngredientsAdmin), viewModel);
+        }
+
         public IActionResult GetIngredients()
         {
             var ingredients = service.GetIngredients();
