@@ -9,26 +9,30 @@
 <br />
 
 <div class="container">
-    <div class="row">
+    <div class="card-columns">
         @for (int i = 0; i < ModelList.Count; i++)
         {
             var recipe = ModelList[i];
-                <div class="col-sm-4 d-flex align-items-stretch">
-                    <div class="m-1 card">
-                        <div class="card-header d-flex align-items-center justify-content-center h-100">
-                            @recipe.Title
-                        </div>
-                        <a asp-action="GetRecipe" asp-route-id="@recipe.Id">
-                            @{ await Html.RenderPartialAsync("_ImageCardPartial", recipe.Thumbnail);}
-                        </a>
-                        <div class="card-body flex-column h-100">
-                            @{ RenderDescription(recipe.Description); }
-                        </div>
-                        <div class="card-footer text-center">
-                            <a target="_blank" rel="noreferrer" href="@recipe.SourceURL" class="btn btn-primary">Источник</a>
-                        </div>
-                    </div>
+            <div class="p-3 card">
+                <a asp-action="GetRecipe" asp-route-id="@recipe.Id">
+                    @{ await Html.RenderPartialAsync("_ImageCardPartial", recipe.Thumbnail);}
+                </a>
+                <div class="card-body flex-column h-100">
+                    <a class="disabled-link" asp-action="GetRecipe" asp-route-id="@recipe.Id">
+                        <h5 class="btn-outline-primary card-header">@recipe.Title</h5>
+                    </a>
+                    <p class="card-text">
+                        @{ RenderDescription(recipe.Description); }
+                    </p>
                 </div>
+                <footer class="blockquote-footer">
+                    <small class="text-muted">
+                        <a target="_blank" rel="noreferrer" href="@recipe.SourceURL">
+                            <cite>Источник</cite>
+                        </a>
+                    </small>
+                </footer>
+            </div>
         }
     </div>
 </div>
@@ -38,15 +42,11 @@
     {
         if (!string.IsNullOrEmpty(description))
         {
-            <p class="card-text">
-                @description.Split('.')[0]
-            </p>
+            @description.Split('.')[0]
         }
         else
         {
-            <p class="card-text text-muted">
-                <i>Описание не предоставлено</i>
-            </p>
+            <i>Описание не предоставлено</i>
         }
     }
 }
