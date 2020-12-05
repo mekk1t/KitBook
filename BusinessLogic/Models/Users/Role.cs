@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using KitBook.Models.Database.Entities;
 
-namespace BusinessLogic.Models.Users
+namespace BusinessLogic.Models
 {
     public class Role
     {

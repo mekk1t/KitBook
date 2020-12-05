@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BusinessLogic.Interfaces
+namespace BusinessLogic.Abstractions
 {
     /// <summary>
     /// Provides basic CRUD operations to perform on <typeparamref name="T"/> entities.

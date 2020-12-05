@@ -1,11 +1,10 @@
-﻿using System;
+﻿using BusinessLogic.Abstractions;
+using BusinessLogic.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using BusinessLogic.Interfaces;
-using KitBook.Models.Database.Entities;
-using KitBook.Models.Services.Interfaces;
 
-namespace KitBook.Models.Services
+namespace BusinessLogic.Services
 {
     public class RecipeService : IRecipeService
     {

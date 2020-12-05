@@ -1,8 +1,8 @@
-﻿using System;
+﻿using BusinessLogic.Models;
+using System;
 using System.Collections.Generic;
-using KitBook.Models.Database.Entities;
 
-namespace KitBook.Models.Services.Interfaces
+namespace BusinessLogic.Abstractions
 {
     public interface IRecipeService
     {
