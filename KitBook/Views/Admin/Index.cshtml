@@ -23,18 +23,16 @@
             </ul>
         </div>
         <div class="col">
-            <h5>Категории</h5>
-            <ul>
-                <li>
-                    <a asp-controller="Types" asp-action="PostRecipe" class="btn btn-outline-primary">
-                        Здесь надо сделать дропдаун для
-                        каждой категории ("добавить новую")
-                    </a>
-                </li>
-                <li>
-                    <a asp-action="GetTypesAdmin" class="btn btn-info">Список</a>
-                </li>
-            </ul>
+            <button id="#btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Категории
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" asp-controller="Types" asp-action="GetRecipeTypesAdmin">Типы рецептов</a>
+                <a class="dropdown-item" asp-controller="Types" asp-action="GetCookingTypesAdmin">Способы приготовления</a>
+                <a class="dropdown-item" asp-controller="Types" asp-action="GetDishTypesAdmin">Типы блюд</a>
+                <a class="dropdown-item" asp-controller="Types" asp-action="GetIngredientTypesAdmin">Виды ингредиентов</a>
+            </div>
         </div>
     </div>
 </div>
