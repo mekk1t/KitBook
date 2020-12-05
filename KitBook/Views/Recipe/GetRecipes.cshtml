@@ -1,13 +1,9 @@
 ﻿@model IEnumerable<KitBook.Models.ViewModels.RecipeViewModel>
 
 @{
-    ViewData["Title"] = "Рецепты";
+    ViewData["Title"] = "Живые традиции: Рецепты";
     var ModelList = Model.ToList();
 }
-
-<h1>Рецепты</h1>
-<br />
-
 <div class="container">
     <div class="card-columns">
         @for (int i = 0; i < ModelList.Count; i++)
