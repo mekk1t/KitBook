@@ -1,0 +1,40 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col">
+            <h5>Рецепты</h5>
+            <ul>
+                <li>
+                    <a asp-controller="Recipe" asp-action="PostRecipe" class="btn btn-outline-primary">Добавить новый</a>
+                </li>
+                <li>
+                    <a asp-action="GetRecipesAdmin" class="btn btn-info">Список</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col">
+            <h5>Ингредиенты</h5>
+            <ul>
+                <li>
+                    <a asp-controller="Ingredient" asp-action="PostIngredient" class="btn btn-outline-primary">Добавить новый</a>
+                </li>
+                <li>
+                    <a asp-action="GetIngredientsAdmin" class="btn btn-info">Список</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col">
+            <h5>Категории</h5>
+            <ul>
+                <li>
+                    <a asp-controller="Types" asp-action="PostRecipe" class="btn btn-outline-primary">
+                        Здесь надо сделать дропдаун для
+                        каждой категории ("добавить новую")
+                    </a>
+                </li>
+                <li>
+                    <a asp-action="GetTypesAdmin" class="btn btn-info">Список</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
