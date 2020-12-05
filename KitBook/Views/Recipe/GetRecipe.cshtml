@@ -19,7 +19,7 @@
 {
     <div class="text-center">
         @{
-            await Html.RenderPartialAsync("_ImagePartial", Model.Thumbnail);
+            await Html.RenderPartialAsync("_ImageStretchedPartial", Model.Thumbnail);
         }
     </div>
 }
@@ -55,7 +55,7 @@ else
                 <div class="row">
                     <div class="col-2">
                         @{
-                            await Html.RenderPartialAsync("_ImagePartial", Model.Stages[i].Image);
+                            await Html.RenderPartialAsync("_ImageStretchedPartial", Model.Stages[i].Image);
                         }
                     </div>
                     <div class="col-8 text-center">
