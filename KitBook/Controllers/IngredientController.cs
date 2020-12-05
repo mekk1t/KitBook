@@ -94,7 +94,7 @@ namespace KitBook.Controllers
         private string PopulateSelectListWithIngredients()
         {
             string options = "";
-            var ingredients = service.GetIngredients();
+            var ingredients = service.GetIngredients().OrderBy(i => i.Name);
             foreach (var ingredient in ingredients)
             {
                 options += $"<option value=\"{ingredient.Id}\">{ingredient.Name}</option>";
@@ -105,7 +105,8 @@ namespace KitBook.Controllers
 
         private void FillViewBagWithIngredientTypes()
         {
-            ViewBag.IngredientTypes = new SelectList(ingredientTypeRepository.GetList(), "Id", "Name");
+            ViewBag.IngredientTypes = new SelectList(ingredientTypeRepository.GetList()
+                .OrderBy(i => i.Name), "Id", "Name");
         }
     }
 }
