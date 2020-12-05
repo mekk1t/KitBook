@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace KitBook.Helpers.Extensions
+namespace DAL.Extensions
 {
     public static class IQueryableExtensions
     {

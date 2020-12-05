@@ -1,10 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using KitBook.Models.Database.Entities;
+﻿using BusinessLogic.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using KitBook.Models.Database.Entities.Types;
-using BusinessLogic.Models.Files;
 
-namespace KitBook.Models.Database
+namespace DAL.Database
 {
     public class CookbookDbContext : DbContext
     {

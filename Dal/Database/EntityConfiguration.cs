@@ -1,9 +1,8 @@
-﻿using KitBook.Models.Database.Entities;
-using KitBook.Models.Database.Entities.Types;
+﻿using BusinessLogic.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Dal.Database
+namespace DAL.Database
 {
     public class EntityConfiguration
     {

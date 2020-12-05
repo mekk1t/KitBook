@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace KitBook.Models.Database.Migrations
+namespace DAL.Database.Migrations
 {
     public partial class stagesImagesSupport : Migration
     {
