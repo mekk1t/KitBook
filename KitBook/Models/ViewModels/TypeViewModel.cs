@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
 
-namespace KitBook.Models.ViewModels
+namespace KitBook.ViewModels
 {
     public class TypeViewModel
     {

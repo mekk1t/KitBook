@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KitBook.Models.ViewModels.Ingredient
+namespace KitBook.ViewModels
 {
     public class IngredientRecipeReference
     {

@@ -1,4 +1,4 @@
-﻿namespace KitBook.Handlers.Interface
+﻿namespace KitBook.Utils
 {
     public interface IFileHandler<TFile>
         where TFile : class

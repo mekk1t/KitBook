@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <None Include=".txt\RepositoryMethods.txt" />
-    <None Include=".txt\TZ.txt" />
   </ItemGroup>
 
 </Project>

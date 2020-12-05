@@ -1,9 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using BusinessLogic.Models.Files;
-using BusinessLogic.Models.Users;
 
-namespace KitBook.Models.Database.Entities
+namespace BusinessLogic.Models
 {
     public class User
     {

@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using BusinessLogic.Interfaces;
-using KitBook.Handlers.Interfaces;
-using KitBook.Models.Database.Entities.Types;
+﻿using BusinessLogic.Abstractions;
+using BusinessLogic.Models;
+using System.Collections.Generic;
 
-namespace KitBook.Handlers
+namespace KitBook.Utils
 {
     public class TypeHandler : ITypeHandler
     {

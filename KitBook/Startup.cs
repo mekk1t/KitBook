@@ -1,6 +1,5 @@
-using KitBook.Handlers;
-using KitBook.Handlers.Interface;
-using KitBook.Handlers.Interfaces;
+using DAL.Database;
+using KitBook.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +21,7 @@ namespace KitBook
 
         public void Configure(IApplicationBuilder app)
         {
-            app.ApplyDatabaseMigrations();
+            app.ApplyDatabaseMigrations<CookbookDbContext>();
             app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
             app.UseStaticFiles();

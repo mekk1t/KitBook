@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
-using KitBook.Mappers.Interfaces;
-using KitBook.Models.Database.Entities;
-using KitBook.Models.ViewModels;
-using KitBook.Models.ViewModels.Ingredient;
+using BusinessLogic.Models;
+using KitBook.ViewModels;
 
 namespace KitBook.Mappers
 {

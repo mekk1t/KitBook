@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace KitBook.Models.Database.Entities
+namespace BusinessLogic.Models
 {
     public class Category
     {

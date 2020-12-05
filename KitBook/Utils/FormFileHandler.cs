@@ -1,9 +1,8 @@
 ﻿using System.IO;
 using System.Linq;
-using KitBook.Handlers.Interface;
 using Microsoft.AspNetCore.Http;
 
-namespace KitBook.Handlers
+namespace KitBook.Utils
 {
     public class FormFileHandler : IFileHandler<IFormFile>
     {

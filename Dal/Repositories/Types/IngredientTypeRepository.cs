@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BusinessLogic.Interfaces;
-using KitBook.Models.Database;
-using KitBook.Models.Database.Entities.Types;
+using BusinessLogic.Abstractions;
+using BusinessLogic.Models;
+using DAL.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace KitBook.Models.Repositories.Types
+namespace DAL.Repositories
 {
     public class IngredientTypeRepository : IRepositoryAdvanced<IngredientType>
     {

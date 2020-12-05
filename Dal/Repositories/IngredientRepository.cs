@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BusinessLogic.Interfaces;
-using KitBook.Helpers.Extensions;
-using KitBook.Models.Database;
-using KitBook.Models.Database.Entities;
+using BusinessLogic.Abstractions;
+using BusinessLogic.Models;
+using DAL.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace KitBook.Models.Repositories

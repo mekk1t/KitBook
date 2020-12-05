@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using KitBook.Models.Database.Entities.Types;
+﻿using BusinessLogic.Models;
+using System.Collections.Generic;
 
-namespace KitBook.Handlers.Interfaces
+namespace KitBook.Utils
 {
     public interface ITypeHandler
     {

@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj" />
-    <ProjectReference Include="..\Dal\Dal.csproj" />
+    <ProjectReference Include="..\Dal\DAL.csproj" />
   </ItemGroup>
 
 </Project>

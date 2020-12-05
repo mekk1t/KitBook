@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KitBook.Models.Database.Entities
+namespace BusinessLogic.Models
 {
     public class Comment
     {

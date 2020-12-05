@@ -1,10 +1,8 @@
-﻿using BusinessLogic.Models.Files;
-using KitBook.Models.Database.Entities.Types;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace KitBook.Models.Database.Entities
+namespace BusinessLogic.Models
 {
     public class Recipe
     {

@@ -1,11 +1,14 @@
-﻿using BusinessLogic.Interfaces.Mappers;
-using KitBook.Models.Database.Entities;
-using KitBook.Models.ViewModels;
-using KitBook.Models.ViewModels.Recipe;
+﻿using BusinessLogic.Models;
+using KitBook.Abstractions;
+using KitBook.ViewModels;
 
-namespace KitBook.Mappers.Interfaces
+namespace KitBook.Mappers
 {
-    public interface IRecipeMapper : IMapper<Recipe, RecipeViewModel>, IMapper<NewRecipe, Recipe>, IMapper<EditRecipe, Recipe>, IEditMapper<Recipe, EditRecipe>
+    public interface IRecipeMapper :
+        IMapper<Recipe, RecipeViewModel>,
+        IMapper<NewRecipe, Recipe>,
+        IMapper<EditRecipe, Recipe>,
+        IEditMapper<Recipe, EditRecipe>
     {
     }
 }
