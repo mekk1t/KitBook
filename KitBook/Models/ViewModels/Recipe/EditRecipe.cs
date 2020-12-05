@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using KitBook.Models.ViewModels.Stage;
 using Microsoft.AspNetCore.Http;
 
-namespace KitBook.Models.ViewModels.Recipe
+namespace KitBook.ViewModels
 {
     public class EditRecipe
     {

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
-using BusinessLogic.Interfaces;
-using KitBook.Handlers.Interfaces;
-using KitBook.Mappers.Interfaces;
-using KitBook.Models.Database.Entities;
-using KitBook.Models.Services.Interfaces;
-using KitBook.Models.ViewModels.Recipe;
+using BusinessLogic.Abstractions;
+using BusinessLogic.Models;
+using KitBook.Mappers;
+using KitBook.Utils;
+using KitBook.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 

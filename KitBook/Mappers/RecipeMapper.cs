@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Linq;
-using BusinessLogic.Models.Files;
-using KitBook.Handlers.Interface;
-using KitBook.Mappers.Interfaces;
-using KitBook.Models.Database.Entities;
-using KitBook.Models.ViewModels;
-using KitBook.Models.ViewModels.Recipe;
+using BusinessLogic.Models;
+using KitBook.Utils;
+using KitBook.ViewModels;
 using Microsoft.AspNetCore.Http;
 
 namespace KitBook.Mappers

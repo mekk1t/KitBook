@@ -1,4 +1,4 @@
-﻿namespace KitBook.Models.ViewModels
+﻿namespace KitBook.ViewModels
 {
     public class ImageViewModel
     {

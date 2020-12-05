@@ -1,9 +1,7 @@
 ﻿using System;
-using KitBook.Handlers.Interface;
-using KitBook.Mappers.Interfaces;
-using KitBook.Models.Database.Entities;
-using KitBook.Models.ViewModels;
-using KitBook.Models.ViewModels.Stage;
+using BusinessLogic.Models;
+using KitBook.Utils;
+using KitBook.ViewModels;
 using Microsoft.AspNetCore.Http;
 
 namespace KitBook.Mappers
@@ -49,7 +47,7 @@ namespace KitBook.Mappers
 
             if (model.Image != null)
             {
-                stage.Image = GetImage(stage, model.Image);
+                stage.Image = GetImage(model.Image);
             }
 
             return stage;
@@ -67,11 +65,11 @@ namespace KitBook.Mappers
 
             if (model.Image != null)
             {
-                stage.Image = GetImage(stage, model.Image);
+                stage.Image = GetImage(model.Image);
             }
             else if (model.ExistingImage != null)
             {
-                stage.Image = new BusinessLogic.Models.Files.File
+                stage.Image = new File
                 {
                     Content = Convert.FromBase64String(model.ExistingImage.Base64),
                     Extension = model.ExistingImage.Extension
@@ -103,9 +101,9 @@ namespace KitBook.Mappers
             return editStage;
         }
 
-        private BusinessLogic.Models.Files.File GetImage(Stage stage, IFormFile file)
+        private File GetImage(IFormFile file)
         {
-            return new BusinessLogic.Models.Files.File
+            return new File
             {
                 Content = fileHandler.GetBytes(file),
                 Extension = fileHandler.GetExtension(file)

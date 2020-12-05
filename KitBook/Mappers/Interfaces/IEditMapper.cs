@@ -1,4 +1,4 @@
-﻿namespace KitBook.Mappers.Interfaces
+﻿namespace KitBook.Mappers
 {
     public interface IEditMapper<in TModel, out TEditModel>
     {

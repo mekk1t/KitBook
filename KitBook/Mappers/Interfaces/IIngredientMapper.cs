@@ -1,9 +1,8 @@
-﻿using BusinessLogic.Interfaces.Mappers;
-using KitBook.Models.Database.Entities;
-using KitBook.Models.ViewModels;
-using KitBook.Models.ViewModels.Ingredient;
+﻿using BusinessLogic.Models;
+using KitBook.Abstractions;
+using KitBook.ViewModels;
 
-namespace KitBook.Mappers.Interfaces
+namespace KitBook.Mappers
 {
     public interface IIngredientMapper :
         IMapper<Ingredient, IngredientViewModel>,

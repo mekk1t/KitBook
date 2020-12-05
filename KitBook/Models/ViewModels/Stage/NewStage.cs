@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
 
-namespace KitBook.Models.ViewModels.Stage
+namespace KitBook.ViewModels
 {
     public class NewStage
     {

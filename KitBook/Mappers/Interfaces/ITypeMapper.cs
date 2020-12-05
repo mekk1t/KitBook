@@ -1,7 +1,7 @@
-﻿using BusinessLogic.Models.Types.Interface;
-using KitBook.Models.ViewModels;
+﻿using BusinessLogic.Abstractions;
+using KitBook.ViewModels;
 
-namespace KitBook.Mappers.Interfaces
+namespace KitBook.Mappers
 {
     public interface ITypeMapper
     {
