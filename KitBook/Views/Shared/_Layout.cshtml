@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,17 +29,16 @@
                         Категории
                     </a>
                     <div class="dropdown-menu" aria-labelledby="nestedDropdown">
-                        <a class="dropdown-item" asp-controller="Types" asp-action="GetRecipeTypes">Типы рецептов</a>
+                        <a class="dropdown-item" asp-controller="Types" asp-action="GetDishTypes">Блюда</a>
+                        <a class="dropdown-item" asp-controller="Types" asp-action="GetRecipeTypes">Рецепты</a>
                         <a class="dropdown-item" asp-controller="Types" asp-action="GetCookingTypes">Способы приготовления</a>
-                        <a class="dropdown-item" asp-controller="Types" asp-action="GetDishTypes">Типы блюд</a>
                         <a class="dropdown-item" asp-controller="Types" asp-action="GetIngredientTypes">Виды ингредиентов</a>
                     </div>
-
                 </div>
             </div>
             <form asp-controller="Search" asp-action="SearchRecipes" class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Найти рецепт" aria-label="Поисковик" />
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Искать</button>
+                <input class="form-control mr-sm-2" type="search" placeholder="Введите e-mail" aria-label="Поисковик" />
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Подписаться</button>
             </form>
         </nav>
     </header>
@@ -59,8 +58,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/autosize.min.js"></script>
-    <script src="~/js/ingredients.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
