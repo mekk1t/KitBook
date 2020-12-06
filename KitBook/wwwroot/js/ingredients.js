@@ -31,14 +31,6 @@ function appendIngredientToContainer(i, container) {
             "showMl(".concat(i, ")"));
     var mlButton = createSubmitButton(mlButtonValues);
 
-    var mlButton = document.createElement("button");
-    mlButton.setAttribute("class", "btn btn-outline-primary");
-    mlButton.setAttribute("value", currentIngredient.concat(".Ml"));
-    mlButton.setAttribute("id", "mlButton".concat(i));
-    mlButton.setAttribute("type", "button");
-    mlButton.innerHTML = "МЛ";
-    mlButton.setAttribute("onclick", "showMl(".concat(i, ")"));
-
     var gButton = document.createElement("button");
     gButton.setAttribute("class", "btn btn-outline-primary");
     gButton.setAttribute("value", currentIngredient.concat(".G"));
