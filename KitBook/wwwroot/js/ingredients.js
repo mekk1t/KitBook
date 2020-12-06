@@ -13,15 +13,23 @@ function appendIngredientToContainer(i, container) {
     var ingredientContainer = document.createElement("div");
     ingredientContainer.setAttribute("class", "count");
 
-    var nameLabel = document.createElement("label");
-    nameLabel.setAttribute("class", "control-label");
-    nameLabel.innerHTML = "Название";
+    let nameLabel = createLabel(new Label("control-label", "Название"));
 
     var _select = document.createElement("select");
     _select.setAttribute("class", "form-control");
     _select.setAttribute("name", currentIngredient.concat(".IngredientId"));
     _select.setAttribute("id", "ingredientsSelect".concat("_", i));
     $(_select).load(window.location.origin.concat("/Ingredient", "/IngredientsSelectList"));
+
+    var mlButtonValues =
+        new Button(
+            "btn btn-outline-primary",
+            "mlButton".concat(i),
+            "button",
+            currentIngredient.concat(".Ml"),
+            "МЛ",
+            "showMl(".concat(i, ")"));
+    var mlButton = createSubmitButton(mlButtonValues);
 
     var mlButton = document.createElement("button");
     mlButton.setAttribute("class", "btn btn-outline-primary");
