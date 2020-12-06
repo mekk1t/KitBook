@@ -1,6 +1,10 @@
-﻿function moreIngredients() {
-    var ingredientsContainer = $("#ingredients");
-    appendIngredientToContainer(ingredientsContainer.children(".count").length, ingredientsContainer);
+﻿const ingredientsId = "#ingredients";
+
+function moreIngredients() {
+    let _container = document.getElementById(ingredientsId);
+    let _childrenLength = _container.children(".ingredientsDiv").length;
+
+    appendIngredientToContainer(_childrenLength, _container);
 }
 
 function appendIngredientToContainer(i, container) {
