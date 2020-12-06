@@ -8,32 +8,22 @@ function moreIngredients() {
 }
 
 function appendIngredientToContainer(i, container) {
-    var currentIngredient = "Ingredients".concat("[", i, "]");
+    var currentIngredient = `Ingredients[${i}]`;
 
     var ingredientContainer = document.createElement("div");
-    ingredientContainer.setAttribute("class", "count");
+    ingredientContainer.className = "count";
 
     let nameLabel = createLabel(new Label("control-label", "Название"));
 
     var _select = document.createElement("select");
-    _select.setAttribute("class", "form-control");
-    _select.setAttribute("name", currentIngredient.concat(".IngredientId"));
-    _select.setAttribute("id", "ingredientsSelect".concat("_", i));
-    $(_select).load(window.location.origin.concat("/Ingredient", "/IngredientsSelectList"));
-
-    var mlButtonValues =
-        new Button(
-            "btn btn-outline-primary",
-            "mlButton".concat(i),
-            "button",
-            currentIngredient.concat(".Ml"),
-            "МЛ",
-            "showMl(".concat(i, ")"));
-    var mlButton = createSubmitButton(mlButtonValues);
+    _select.className = "form-control";
+    _select.name = currentIngredient + ".IngredientId";
+    _select.id = `ingredientsSelect_${i}`;
+    $(_select).load(window.location.origin.concat("/Ingredient/IngredientsSelectList"));
 
     var gButton = document.createElement("button");
     gButton.setAttribute("class", "btn btn-outline-primary");
-    gButton.setAttribute("value", currentIngredient.concat(".G"));
+    gButton.setAttribute("value", `${currentIngredient}.G`);
     gButton.setAttribute("id", "gButton".concat(i));
     gButton.setAttribute("type", "button");
     gButton.setAttribute("onclick", "showG(".concat(i, ")"));
