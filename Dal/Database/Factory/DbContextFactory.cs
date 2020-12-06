@@ -1,8 +1,7 @@
-﻿using KitBook.Models.Database;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace Dal.Database.Factory
+namespace DAL.Database
 {
     public class DbContextFactory : IDesignTimeDbContextFactory<CookbookDbContext>
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace KitBook.Models.ViewModels
+namespace KitBook.ViewModels
 {
     public class RecipeViewModel
     {

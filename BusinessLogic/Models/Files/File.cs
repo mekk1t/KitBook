@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BusinessLogic.Models.Files
+namespace BusinessLogic.Models
 {
     public class File
     {

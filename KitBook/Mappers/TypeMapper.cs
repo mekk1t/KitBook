@@ -1,9 +1,8 @@
 ﻿using System;
+using BusinessLogic.Abstractions;
 using BusinessLogic.Attributes;
-using BusinessLogic.Models.Types.Interface;
-using KitBook.Handlers.Interface;
-using KitBook.Mappers.Interfaces;
-using KitBook.Models.ViewModels;
+using KitBook.Utils;
+using KitBook.ViewModels;
 using Microsoft.AspNetCore.Http;
 
 namespace KitBook.Mappers
@@ -26,7 +25,7 @@ namespace KitBook.Mappers
                 ? Guid.NewGuid()
                 : viewModel.Id,
                 Name = viewModel.Name,
-                Icon = new BusinessLogic.Models.Files.File
+                Icon = new BusinessLogic.Models.File
                 {
                     Extension = fileHandler.GetExtension(viewModel.Icon),
                     Content = fileHandler.GetBytes(viewModel.Icon)

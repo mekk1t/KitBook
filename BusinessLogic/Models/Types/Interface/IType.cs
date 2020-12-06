@@ -1,7 +1,7 @@
-﻿using System;
-using BusinessLogic.Models.Files;
+﻿using BusinessLogic.Models;
+using System;
 
-namespace BusinessLogic.Models.Types.Interface
+namespace BusinessLogic.Abstractions
 {
     public interface IType
     {

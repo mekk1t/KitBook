@@ -1,9 +1,8 @@
 ﻿using System;
+using BusinessLogic.Abstractions;
 using BusinessLogic.Attributes;
-using BusinessLogic.Models.Files;
-using BusinessLogic.Models.Types.Interface;
 
-namespace KitBook.Models.Database.Entities.Types
+namespace BusinessLogic.Models
 {
     [Translation("Тип ингредиента")]
     public class IngredientType : IType

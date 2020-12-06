@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace KitBook.Models.ViewModels.Ingredient
+namespace KitBook.ViewModels
 {
     public class EditIngredient
     {

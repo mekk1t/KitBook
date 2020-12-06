@@ -5,9 +5,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using KitBook.Models.Database;
 
-namespace KitBook.Models.Database.Migrations
+namespace DAL.Database.Migrations
 {
     [DbContext(typeof(CookbookDbContext))]
     [Migration("20200905094922_FixImageKeys")]

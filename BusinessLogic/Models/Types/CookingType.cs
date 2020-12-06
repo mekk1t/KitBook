@@ -1,10 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using BusinessLogic.Abstractions;
 using BusinessLogic.Attributes;
-using BusinessLogic.Models.Files;
-using BusinessLogic.Models.Types.Interface;
 
-namespace KitBook.Models.Database.Entities.Types
+namespace BusinessLogic.Models
 {
     [Translation("Способ приготовления")]
     public class CookingType : IType

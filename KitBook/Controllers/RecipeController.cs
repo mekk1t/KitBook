@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
-using BusinessLogic.Interfaces;
-using KitBook.Handlers.Interfaces;
-using KitBook.Mappers.Interfaces;
-using KitBook.Models.Database.Entities;
-using KitBook.Models.Services.Interfaces;
-using KitBook.Models.ViewModels.Recipe;
+using BusinessLogic.Abstractions;
+using BusinessLogic.Models;
+using KitBook.Mappers;
+using KitBook.Utils;
+using KitBook.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -32,15 +31,15 @@ namespace KitBook.Controllers
 
         private void FillViewBagWithTypes()
         {
-            ViewBag.RecipeTypes = new SelectList(typeHandler.GetRecipeTypes(), "Id", "Name");
-            ViewBag.CookingTypes = new SelectList(typeHandler.GetCookingTypes(), "Id", "Name");
-            ViewBag.DishTypes = new SelectList(typeHandler.GetDishTypes(), "Id", "Name");
-            ViewBag.IngredientTypes = new SelectList(typeHandler.GetIngredientTypes(), "Id", "Name");
+            ViewBag.RecipeTypes = new SelectList(typeHandler.GetRecipeTypes().OrderBy(t => t.Name), "Id", "Name");
+            ViewBag.CookingTypes = new SelectList(typeHandler.GetCookingTypes().OrderBy(t => t.Name), "Id", "Name");
+            ViewBag.DishTypes = new SelectList(typeHandler.GetDishTypes().OrderBy(t => t.Name), "Id", "Name");
+            ViewBag.IngredientTypes = new SelectList(typeHandler.GetIngredientTypes().OrderBy(t => t.Name), "Id", "Name");
         }
 
         private void FillViewBagWithIngredients()
         {
-            ViewBag.Ingredients = new SelectList(ingredientRepository.GetList(), "Id", "Name");
+            ViewBag.Ingredients = new SelectList(ingredientRepository.GetList().OrderBy(t => t.Name), "Id", "Name");
         }
 
         public IActionResult GetRecipesAdmin()

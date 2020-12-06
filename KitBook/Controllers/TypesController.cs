@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic.Attributes;
-using BusinessLogic.Interfaces;
-using BusinessLogic.Models.Types.Interface;
-using KitBook.Mappers.Interfaces;
-using KitBook.Models.Database.Entities.Types;
-using KitBook.Models.ViewModels;
+using KitBook.Mappers;
+using KitBook.ViewModels;
+using BusinessLogic.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using BusinessLogic.Models;
 
 namespace KitBook.Controllers
 {
@@ -42,11 +40,6 @@ namespace KitBook.Controllers
         private void SetTypeInViewBag(Type type)
         {
             ViewBag.Type = type.Name;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
         }
 
         #region RecipeType

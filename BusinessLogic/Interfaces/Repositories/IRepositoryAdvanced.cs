@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BusinessLogic.Interfaces
+namespace BusinessLogic.Abstractions
 {
     /// <summary>
     /// Provides extra methods for repositories such as filtering, searching, relationships operations.

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using BusinessLogic.Models.Files;
 
-namespace KitBook.Models.Database.Entities
+namespace BusinessLogic.Models
 {
     public class Stage
     {

@@ -1,13 +1,10 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.Abstractions;
+using BusinessLogic.Models;
+using BusinessLogic.Services;
+using DAL.Database;
+using DAL.Repositories;
 using KitBook.Mappers;
-using KitBook.Mappers.Interfaces;
-using KitBook.Models.Database;
-using KitBook.Models.Database.Entities;
-using KitBook.Models.Database.Entities.Types;
 using KitBook.Models.Repositories;
-using KitBook.Models.Repositories.Types;
-using KitBook.Models.Services;
-using KitBook.Models.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection

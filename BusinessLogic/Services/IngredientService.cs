@@ -1,10 +1,9 @@
-﻿using System;
+﻿using BusinessLogic.Abstractions;
+using BusinessLogic.Models;
+using System;
 using System.Collections.Generic;
-using BusinessLogic.Interfaces;
-using KitBook.Models.Database.Entities;
-using KitBook.Models.Services.Interfaces;
 
-namespace KitBook.Models.Services
+namespace BusinessLogic.Services
 {
     public class IngredientService : IIngredientService
     {

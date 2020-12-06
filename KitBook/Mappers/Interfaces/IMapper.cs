@@ -1,4 +1,4 @@
-﻿namespace BusinessLogic.Interfaces.Mappers
+﻿namespace KitBook.Abstractions
 {
     public interface IMapper<in TIn, out TOut>
     {
