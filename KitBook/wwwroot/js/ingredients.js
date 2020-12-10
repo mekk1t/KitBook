@@ -1,19 +1,23 @@
-﻿const ingredientsId = "#ingredients";
+﻿function moreIngredients() {
+    let container = document.getElementById("ingredients");
+    let childrenLength = container.childElementCount;
 
-function moreIngredients() {
-    let _container = document.getElementById(ingredientsId);
-    let _childrenLength = _container.children(".ingredientsDiv").length;
-
-    appendIngredientToContainer(_childrenLength, _container);
+    appendIngredientToContainer(childrenLength, container);
 }
 
 function appendIngredientToContainer(i, container) {
+    const amount = "Amount";
+    const ml = "Ml";
+    const g = "G";
+
     var currentIngredient = `Ingredients[${i}]`;
 
     var ingredientContainer = document.createElement("div");
-    ingredientContainer.className = "count";
+    ingredientContainer.className = "ingredient";
 
-    let nameLabel = createLabel(new Label("control-label", "Название"));
+    let nameLabel = document.createElement("label");
+    nameLabel.className = "control-label";
+    nameLabel.innerHTML = "Название";
 
     var _select = document.createElement("select");
     _select.className = "form-control";
@@ -21,111 +25,88 @@ function appendIngredientToContainer(i, container) {
     _select.id = `ingredientsSelect_${i}`;
     $(_select).load(window.location.origin.concat("/Ingredient/IngredientsSelectList"));
 
-    var gButton = document.createElement("button");
-    gButton.setAttribute("class", "btn btn-outline-primary");
-    gButton.setAttribute("value", `${currentIngredient}.G`);
-    gButton.setAttribute("id", "gButton".concat(i));
-    gButton.setAttribute("type", "button");
-    gButton.setAttribute("onclick", "showG(".concat(i, ")"));
-    gButton.innerHTML = "В граммах";
-
-    var aButton = document.createElement("button");
-    aButton.setAttribute("class", "btn btn-outline-primary");
-    aButton.setAttribute("value", currentIngredient.concat(".Amount"));
-    aButton.setAttribute("id", "aButton".concat(i));
-    aButton.setAttribute("type", "button");
-    aButton.setAttribute("onclick", "showAmount(".concat(i, ")"));
-    aButton.innerHTML = "Поштучно";
-
     var recipeIdInput = document.createElement("input");
     recipeIdInput.setAttribute("class", "invisible");
     recipeIdInput.setAttribute("name", currentIngredient.concat(".RecipeId"));
     recipeIdInput.setAttribute("value", $("#Id").val())
 
-    ingredientContainer.appendChild(nameLabel);
-    ingredientContainer.appendChild(_select);
-    appendMl(mlButton, ingredientContainer, i);
-    appendG(gButton, ingredientContainer, i);
-    appendAmount(aButton, ingredientContainer, i);
-    ingredientContainer.appendChild(gButton);
-    ingredientContainer.appendChild(mlButton);
-    ingredientContainer.appendChild(aButton);
-    ingredientContainer.appendChild(recipeIdInput);
+    ingredientContainer.append(nameLabel);
+    ingredientContainer.append(_select);
+
+    var elements = createMetricsElements(amount, i, "Шт.", currentIngredient, ingredientContainer);
+
+    ingredientContainer.append(elements[0]);
+    ingredientContainer.append(elements[1]);
+
+    elements = createMetricsElements(g, i, "Грамм", currentIngredient, ingredientContainer);
+
+    ingredientContainer.append(elements[0]);
+    ingredientContainer.append(elements[1]);
+
+    elements = createMetricsElements(ml, i, "Мл", currentIngredient, ingredientContainer);
+    ingredientContainer.append(elements[0]);
+    ingredientContainer.append(elements[1]);
+
+    ingredientContainer.append(createMetricButton(amount, "Шт"));
+    ingredientContainer.append(createMetricButton(ml, "Мл"));
+    ingredientContainer.append(createMetricButton(g, "Грамм"));
+    ingredientContainer.append(recipeIdInput);
 
     container.append(ingredientContainer);
 }
 
-function showMl(i) {
-    $("#mlLabel".concat(i)).show();
-    $("#mlInput".concat(i)).show();
-    $("#mlButton".concat(i)).hide();
-    $("#gButton".concat(i)).hide();
-    $("#aButton".concat(i)).hide();
+/**
+ * Shows the metric's label and input.
+ * Hides other metrics' buttons.
+ * @param {string} metricClassName
+ */
+function activateMetric(metricClassName) {
+    $(".metric-radio-button").hide();
+    var elements = document.getElementsByClassName(metricClassName).length;
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].style.display = "normal";
+    }
 }
 
-function showG(i) {
-    $("#gLabel".concat(i)).show();
-    $("#gInput".concat(i)).show();
-    $("#mlButton".concat(i)).hide();
-    $("#gButton".concat(i)).hide();
-    $("#aButton".concat(i)).hide();
+/**
+ * Creates a button specific to the provided metric.
+ * @param {string} metricName The name of the metric e.g. "Amount".
+ * @param {string} buttonText The text to display on the button.
+ */
+function createMetricButton(metricName, buttonText) {
+    var button = document.createElement("button");
+
+    button.setAttribute("class", "btn btn-outline-primary metric-radio-button");
+    button.setAttribute("type", "button");
+    button.setAttribute("onclick",`activateMetric(${metricName})`);
+    button.innerHTML = buttonText;
+
+    return button;
 }
 
-function showAmount(i) {
-    $("#aLabel".concat(i)).show();
-    $("#aInput".concat(i)).show();
-    $("#mlButton".concat(i)).hide();
-    $("#gButton".concat(i)).hide();
-    $("#aButton".concat(i)).hide();
-}
+/**
+ * Creates two elements: a label and an input with the provided name as a class attribute.
+ * @param {string} name Name of the Ingredient view model property.
+ * @param {number} index Index of the current ingredient.
+ * @param {string} labelHtml HTML to be displayed as a label.
+ * @returns Array of two elements: label and input.
+ */
+function createMetricsElements(name, index, labelHtml) {
+    let current = `Ingredients[${index}]`;
+    let label = document.createElement("label");
+    label.setAttribute("class", `control-label ${name}`);
+    label.setAttribute("id", `${name}Label${index}`);
+    label.innerHTML = labelHtml;
+    label.style.display = "none";
 
-function appendMl(button, container, i) {
-    var mlLabel = document.createElement("label");
-    mlLabel.setAttribute("class", "control-label");
-    mlLabel.style.display = "none";
-    mlLabel.setAttribute("id", "mlLabel".concat(i));
-    mlLabel.innerHTML = "Объем (в мл.)";
-    var mlInput = document.createElement("input");
-    mlInput.setAttribute("class", "form-control");
-    mlInput.setAttribute("id", "mlInput".concat(i));
-    mlInput.style.display = "none";
-    mlInput.setAttribute("type", "number");
-    mlInput.setAttribute("name", $(button).val());
+    let input = document.createElement("input");
+    input.setAttribute("class", `form-control ${name}`);
+    input.setAttribute("type", "number");
+    input.setAttribute("id", `${name}Input${index}`);
+    input.setAttribute("name", `${current}.${name}`);
+    input.style.display = "none";
 
-    container.appendChild(mlLabel);
-    container.appendChild(mlInput);
-}
+    let elements = [label, input];
 
-function appendG(button, container, i) {
-    var gLabel = document.createElement("label");
-    gLabel.setAttribute("class", "control-label");
-    gLabel.style.display = "none";
-    gLabel.setAttribute("id", "gLabel".concat(i));
-    gLabel.innerHTML = "Грамм";
-    var gInput = document.createElement("input");
-    gInput.setAttribute("class", "form-control");
-    gInput.style.display = "none";
-    gInput.setAttribute("type", "number");
-    gInput.setAttribute("id", "gInput".concat(i));
-    gInput.setAttribute("name", $(button).val());
-
-    container.appendChild(gLabel);
-    container.appendChild(gInput);
-}
-
-function appendAmount(button, container, i) {
-    var aLabel = document.createElement("label");
-    aLabel.setAttribute("class", "control-label");
-    aLabel.style.display = "none";
-    aLabel.setAttribute("id", "aLabel".concat(i));
-    aLabel.innerHTML = "Штук";
-    var aInput = document.createElement("input");
-    aInput.setAttribute("class", "form-control");
-    aInput.style.display = "none";
-    aInput.setAttribute("type", "number");
-    aInput.setAttribute("id", "aInput".concat(i));
-    aInput.setAttribute("name", $(button).val());
-
-    container.appendChild(aLabel);
-    container.appendChild(aInput);
+    return elements;
 }
