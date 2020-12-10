@@ -10,27 +10,26 @@ function moreIngredients() {
 }
 
 function appendIngredientToContainer(i, container) {
-
     var currentIngredient = `Ingredients[${i}]`;
 
     let amountClassName = amount.concat(i);
     let mlClassName = ml.concat(i);
     let gClassName = g.concat(i);
 
-    var ingredientContainer = document.createElement("div");
+    let ingredientContainer = document.createElement("div");
     ingredientContainer.className = "ingredient";
 
     let nameLabel = document.createElement("label");
     nameLabel.className = "control-label";
     nameLabel.innerHTML = "Название";
 
-    var _select = document.createElement("select");
+    let _select = document.createElement("select");
     _select.className = "form-control";
     _select.name = currentIngredient + ".IngredientId";
     _select.id = `ingredientsSelect_${i}`;
     $(_select).load(window.location.origin.concat("/Ingredient/IngredientsSelectList"));
 
-    var recipeIdInput = document.createElement("input");
+    let recipeIdInput = document.createElement("input");
     recipeIdInput.setAttribute("class", "invisible");
     recipeIdInput.setAttribute("name", currentIngredient.concat(".RecipeId"));
     recipeIdInput.setAttribute("value", $("#Id").val())
@@ -38,21 +37,14 @@ function appendIngredientToContainer(i, container) {
     ingredientContainer.append(nameLabel);
     ingredientContainer.append(_select);
 
-    var divContainer = document.createElement("div");
-    var elements = createMetricsElements(amount, i, "Шт.", currentIngredient, ingredientContainer);
-    appendElements(elements, divContainer);
-    ingredientContainer.append(divContainer);
+    let elements = createMetricsElements(amount, i, "Шт.", currentIngredient, ingredientContainer);
+    appendElements(elements, ingredientContainer);
 
-    divContainer = document.createElement("div");
     elements = createMetricsElements(g, i, "Грамм", currentIngredient, ingredientContainer);
-    appendElements(elements, divContainer);
-    ingredientContainer.append(divContainer);
+    appendElements(elements, ingredientContainer);
 
-    divContainer = document.createElement("div");
     elements = createMetricsElements(ml, i, "Мл", currentIngredient, ingredientContainer);
-    appendElements(elements, divContainer);
-    ingredientContainer.append(divContainer);
-
+    appendElements(elements, ingredientContainer);
 
     ingredientContainer.append(createMetricButton(amountClassName, "Шт"));
     ingredientContainer.append(createMetricButton(mlClassName, "Мл"));

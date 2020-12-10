@@ -31,9 +31,6 @@ function initStagesLabel(container) {
  * @param {HTMLDivElement} container Container to append the stage elements to.
  */
 function appendStageToContainer(i, container) {
-
-    let elements = new Array();
-
     const current = `Stages[${i}]`;
 
     let stageContainer = document.createElement("div");
@@ -72,7 +69,6 @@ function appendStageToContainer(i, container) {
     recipeId.setAttribute("class", "invisible");
     recipeId.setAttribute("name", current.concat(".RecipeId"));
     recipeId.setAttribute("value", $("#Id").val())
-
 
     stageContainer.append(indexLabel);
     stageContainer.append(indexInput);
