@@ -1,4 +1,8 @@
-﻿function moreIngredients() {
+﻿const amount = "Amount";
+const ml = "Ml";
+const g = "G";
+
+function moreIngredients() {
     let container = document.getElementById("ingredients");
     let childrenLength = container.childElementCount;
 
@@ -6,11 +10,12 @@
 }
 
 function appendIngredientToContainer(i, container) {
-    const amount = "Amount";
-    const ml = "Ml";
-    const g = "G";
 
     var currentIngredient = `Ingredients[${i}]`;
+
+    let amountClassName = amount.concat(i);
+    let mlClassName = ml.concat(i);
+    let gClassName = g.concat(i);
 
     var ingredientContainer = document.createElement("div");
     ingredientContainer.className = "ingredient";
@@ -33,26 +38,34 @@ function appendIngredientToContainer(i, container) {
     ingredientContainer.append(nameLabel);
     ingredientContainer.append(_select);
 
+    var divContainer = document.createElement("div");
     var elements = createMetricsElements(amount, i, "Шт.", currentIngredient, ingredientContainer);
+    appendElements(elements, divContainer);
+    ingredientContainer.append(divContainer);
 
-    ingredientContainer.append(elements[0]);
-    ingredientContainer.append(elements[1]);
-
+    divContainer = document.createElement("div");
     elements = createMetricsElements(g, i, "Грамм", currentIngredient, ingredientContainer);
+    appendElements(elements, divContainer);
+    ingredientContainer.append(divContainer);
 
-    ingredientContainer.append(elements[0]);
-    ingredientContainer.append(elements[1]);
-
+    divContainer = document.createElement("div");
     elements = createMetricsElements(ml, i, "Мл", currentIngredient, ingredientContainer);
-    ingredientContainer.append(elements[0]);
-    ingredientContainer.append(elements[1]);
+    appendElements(elements, divContainer);
+    ingredientContainer.append(divContainer);
 
-    ingredientContainer.append(createMetricButton(amount, "Шт"));
-    ingredientContainer.append(createMetricButton(ml, "Мл"));
-    ingredientContainer.append(createMetricButton(g, "Грамм"));
+
+    ingredientContainer.append(createMetricButton(amountClassName, "Шт"));
+    ingredientContainer.append(createMetricButton(mlClassName, "Мл"));
+    ingredientContainer.append(createMetricButton(gClassName, "Грамм"));
     ingredientContainer.append(recipeIdInput);
 
     container.append(ingredientContainer);
+}
+
+function appendElements(elements, container) {
+    for (let j = 0; j < elements.length; j++) {
+        container.append(elements[j]);
+    }
 }
 
 /**
@@ -62,24 +75,24 @@ function appendIngredientToContainer(i, container) {
  */
 function activateMetric(metricClassName) {
     $(".metric-radio-button").hide();
-    var elements = document.getElementsByClassName(metricClassName).length;
+    var elements = document.getElementsByClassName(metricClassName);
     for (var i = 0; i < elements.length; i++) {
-        elements[i].style.display = "normal";
+        elements[i].style.display = "block";
     }
 }
 
 /**
  * Creates a button specific to the provided metric.
- * @param {string} metricName The name of the metric e.g. "Amount".
+ * @param {string} metricClassName The name of the metric class.
  * @param {string} buttonText The text to display on the button.
  */
-function createMetricButton(metricName, buttonText) {
+function createMetricButton(metricClassName, buttonText) {
     var button = document.createElement("button");
 
+    button.innerText = buttonText;
     button.setAttribute("class", "btn btn-outline-primary metric-radio-button");
     button.setAttribute("type", "button");
-    button.setAttribute("onclick",`activateMetric(${metricName})`);
-    button.innerHTML = buttonText;
+    button.addEventListener("click", function () { activateMetric(metricClassName) }, false);
 
     return button;
 }
@@ -94,13 +107,13 @@ function createMetricButton(metricName, buttonText) {
 function createMetricsElements(name, index, labelHtml) {
     let current = `Ingredients[${index}]`;
     let label = document.createElement("label");
-    label.setAttribute("class", `control-label ${name}`);
+    label.setAttribute("class", `control-label ${name.concat(index)}`);
     label.setAttribute("id", `${name}Label${index}`);
     label.innerHTML = labelHtml;
     label.style.display = "none";
 
     let input = document.createElement("input");
-    input.setAttribute("class", `form-control ${name}`);
+    input.setAttribute("class", `form-control ${name.concat(index)}`);
     input.setAttribute("type", "number");
     input.setAttribute("id", `${name}Input${index}`);
     input.setAttribute("name", `${current}.${name}`);

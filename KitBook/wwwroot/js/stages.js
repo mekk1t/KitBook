@@ -3,7 +3,7 @@
  * */
 function moreStages() {
     let stagesContainer = document.getElementById("stages");
-    let stagesCount = stagesContainer.childElementCount;
+    let stagesCount = stagesContainer.getElementsByClassName("stage").length;
 
     if (stagesCount == 0) {
         initStagesLabel(stagesContainer);
