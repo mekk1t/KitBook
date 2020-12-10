@@ -77,7 +77,7 @@
                     for (int i = 0; i < Model.Stages.Count; i++)
                     {
                         var step = i + 1;
-                        <div id="stage_@i" class="stageDiv">
+                        <div id="stage_@i" class="stage">
                             <label class="control-label" for="Stages[@i]__Index">Шаг №@step</label>
                             <input value="@step" class="invisible" type="number" name="Stages[@i].Index" /> <br />
                             <label class="control-label">Описание</label>
@@ -109,7 +109,7 @@
                 {
                     for (int i = 0; i < Model.Ingredients.Count; i++)
                     {
-                        <div class="ingredientsDiv">
+                        <div class="ingredient">
                             @{
                                 var ingredient = Model.Ingredients[i];
                             }
