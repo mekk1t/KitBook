@@ -3,10 +3,7 @@ const ml = "Ml";
 const g = "G";
 
 function moreIngredients() {
-    let container = document.getElementById("ingredients");
-    let childrenLength = container.childElementCount;
-
-    appendIngredientToContainer(childrenLength, container);
+    appendIngredientToContainer(container.childElementCount, document.getElementById("ingredients"));
 }
 
 function appendIngredientToContainer(i, container) {
