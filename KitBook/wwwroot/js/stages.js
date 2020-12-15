@@ -33,39 +33,39 @@ function initStagesLabel(container) {
 function appendStageToContainer(i, container) {
     const current = `Stages[${i}]`;
 
-    let stageContainer = document.createElement("div");
+    let stageContainer = create("div");
     stageContainer.setAttribute("id", `stages_${i}`);
     stageContainer.setAttribute("class", "stage");
 
-    let indexLabel = document.createElement("label");
-    indexLabel.innerHTML = `Шаг №${i}`;
+    let indexLabel = create("label");
+    indexLabel.innerHTML = `Шаг №${i + 1}`;
     indexLabel.setAttribute("class", "control-label");
 
-    let indexInput = document.createElement("input");
+    let indexInput = create("input");
     indexInput.setAttribute("value", i + 1);
     indexInput.setAttribute("class", "form-control invisible");
     indexInput.setAttribute("type", "number");
     indexInput.setAttribute("name", current.concat(".Index"));
 
-    let descriptionLabel = document.createElement("label");
+    let descriptionLabel = create("label");
     descriptionLabel.innerHTML = "Описание";
     descriptionLabel.setAttribute("class", "control-label");
 
-    let descriptionTextarea = document.createElement("textarea");
+    let descriptionTextarea = create("textarea");
     descriptionTextarea.setAttribute("name", current.concat(".Description"));
     descriptionTextarea.setAttribute("class", "form-control lead");
 
-    let imageLabel = document.createElement("label");
+    let imageLabel = create("label");
     imageLabel.innerHTML = "Картинка";
     imageLabel.setAttribute("class", "control-label");
     imageLabel.setAttribute("for", current.concat(".Image"));
 
-    let imageInput = document.createElement("input");
+    let imageInput = create("input");
     imageInput.setAttribute("type", "file");
     imageInput.setAttribute("class", "form-control-file");
     imageInput.setAttribute("name", current.concat(".Image"));
 
-    let recipeId = document.createElement("input");
+    let recipeId = create("input");
     recipeId.setAttribute("class", "invisible");
     recipeId.setAttribute("name", current.concat(".RecipeId"));
     recipeId.setAttribute("value", $("#Id").val())
@@ -81,4 +81,13 @@ function appendStageToContainer(i, container) {
     stageContainer.append(document.createElement("br"));
 
     container.append(stageContainer);
+}
+
+/**
+ * A shortcut to "document.createElement()" function.
+ * @param {any} tag Tag of the element to be created.
+ * @returns {HTMLElement} An HTML element with the provided tag.
+ */
+function create(tag) {
+    return document.createElement(tag);
 }
