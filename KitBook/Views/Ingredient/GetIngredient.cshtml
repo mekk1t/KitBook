@@ -49,7 +49,11 @@
         <ul>
             @foreach (var reference in Model.References)
             {
-                <li><a asp-controller="Recipe" asp-action="GetRecipe" asp-route-id="@reference.RecipeId">@reference.RecipeTitle</a></li>
+                <li>
+                    <a asp-controller="Recipe" asp-action="GetRecipe" asp-route-id="@reference.RecipeId">
+                        @reference.RecipeTitle
+                    </a>
+                </li>
             }
         </ul>
     </div>
