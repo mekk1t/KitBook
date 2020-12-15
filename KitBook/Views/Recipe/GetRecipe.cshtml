@@ -11,8 +11,8 @@
 </h1>
 <div class="m-2 h1 text-center">
     <span class="m-2 badge badge-pill badge-info">@Model.CookingType</span>
-    <span class="m-2 badge badge-pill badge-success">@Model.DishType</span>
-    <span class="m-2 badge badge-pill badge-warning">@Model.RecipeType</span>
+    <span class="m-2 badge badge-pill badge-info">@Model.DishType</span>
+    <span class="m-2 badge badge-pill badge-info">@Model.RecipeType</span>
 </div>
 <br />
 @if (Model.Thumbnail != null)
@@ -110,7 +110,5 @@ else
     }
 </div>
 <div>
-    <a asp-action="PutRecipe" asp-route-id="@Model.Id">Редактировать</a> |
-    <a asp-action="GetRecipes">К списку</a> |
-    <a asp-controller="Home" asp-action="Index">На главную</a>
+    <a asp-action="GetRecipes">На главную</a>
 </div>
